@@ -1,0 +1,91 @@
+<div id="container-instructions">
+
+
+        <!-- This is a comment and functions like a note. Below is the area where you put the instructions. -->
+        <!--If you want to start a new a paragraph, then add <p> before and </p> after the content-->
+        <!--examples are ↓↓↓ Preview in a browser-->
+             
+
+	    <script type="text/javascript">
+
+
+            var stimFolder = "/static/images/"
+
+            var stim_array = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
+
+
+             d3.select("#pairup_instruction").html('<p>Please select an avatar for yourself.</p>');
+            //stim_array = _.shuffle(stim_array);
+
+            stim1 = stim_array[0];
+            stim2 = stim_array[1];
+            stim3 = stim_array[2];
+            stim4 = stim_array[3];
+
+            function mark(el) {
+                el.style.border = "1px solid blue";
+            }
+
+
+         var show_stim = function (image1, image2, image3, image4)
+            {
+            d3.select("#ava1")
+                    .append("img")
+                    .attr("src", stimFolder + image1)
+                    .attr("id", 'pic1')
+                    .style("width", "150px")
+                    .style("height", "150px")
+
+            d3.select("#ava2")
+                .append("img") // append image
+                .attr("src", stimFolder + image2)
+                .attr("id", 'pic2')
+                .style("width", "150px")
+                .style("height", "150px")
+
+            d3.select("#ava3")
+                .append("img") // append image
+                .attr("src", stimFolder + image3)
+                .attr("id", 'pic2')
+                .style("width", "150px")
+                .style("height", "150px")
+
+            d3.select("#ava4")
+                .append("img") // append image
+                .attr("src", stimFolder + image4)
+                .attr("id", 'pic2')
+                .style("width", "150px")
+                .style("height", "150px")
+            }
+
+
+           
+
+            currentview = new show_stim(stim1, stim2, stim3, stim4);
+	        console.log('ojbk...')
+
+
+	    </script>
+
+	</div>
+
+	
+
+
+     <!--This is the layout settings of the website and nomrally we dont't have to change this -->
+
+          <div class="instructionsnav">
+
+            <div id="pairup_instruction"></div>
+             <input id="ava1" type="image" src="/static/images/1.jpg" onclick=""/>
+             <input id="ava2" type="image" src="/static/images/2.jpg" onclick=""/>
+             <input id="ava3" type="image" src="/static/images/3.jpg" onclick=""/>
+             <input id="ava4" type="image" src="/static/images/4.jpg" onclick=""/>
+
+             <div class="col-xs-4">
+                <button type="button" id="next_lobby" value="next" class="btn btn-primary btn-lg continue">
+               Comfirm 
+                </button>
+           </div>
+
+</div>

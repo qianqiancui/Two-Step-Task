@@ -1,0 +1,334 @@
+<div id="container-questionnaire">
+    <h1>Task Complete</h1>
+
+    <div id="survey-intro">
+
+    <p>You have now finished the learning and sharing game. Before you finish the study, we have a few questions for you to answer about your background and your experience today. 
+    </p>
+    <p>
+    Please answer honestly and thoughtfully; your answers are very important to us! We really appreciate the time and effort you spent completing this study.
+    </p>
+        </div>
+
+    <div class="instructions well">
+
+        <form id="postquiz" action="debrief" method="post">
+
+            <!-- beginning of a question -->
+            <div class="row question">
+                <div class="col-md-8">
+                   
+                    <h4>
+                        Did you feel that the funding resources available to compensate participants in this study were scarce or abundant?
+                        </h4>
+                        </div>
+              
+          <div class="col-md-8">
+                    <select id ="compensate participants" >
+                        <option value="7">Extremely abundant</option>
+                        <option value="6">Somewhat abundant</option>
+                        <option value="5">A little abundant, but not much different than usual</option>
+                        <option value="4">The same as usual</option>
+                        <option value="3">A little scarce, but not much different than usual</option>
+                        <option value="2">Somewhat scarce</option>
+                        <option value="1">Extremely scarce</option>
+                        <option selected disabled hidden style='display: none' value='' required></option>
+                    </select>
+               </div>
+            </div>
+             <!-- end of a question -->
+            <p>
+       
+            </p>
+
+                        <!-- beginning of a question -->
+                     <div class="row question">
+                <div class="col-md-8">
+                    <h4>
+                  To what extent did you feel that the resources available to give you a monetary bonus were more or less limited than usual?
+  </h4>
+                      
+                </div>
+                <div class="col-md-8">
+                    <div id="monetary bonus " >
+                        <select id ="compensate participants" >
+                        <option value="7">A lot less limited</option>
+                        <option value="6">Somewhat less limited</option>
+                        <option value="5">A little less limited, but not much different than usual</option>
+                        <option value="4">The same as usual</option>
+                        <option value="3">A little more limited, but not much different than usual</option>
+                        <option value="2">Somewhat more limited</option>
+                        <option value="1">A lot more limited</option>
+                        <option selected disabled hidden style='display: none' value='' required></option>
+                    </select>
+                    </div>
+  </div>
+            </div>
+             <!-- end of a question -->
+
+
+
+            <!-- beginning of a question -->            
+            <div class="row question">
+                <div class="col-md-8">
+                        <h4>
+                    How positive or negative do you feel about each issue on the scale of 0 to 100, where 0 represents very negative, and 100 represents very positive?
+  </h4>
+                            </div>
+            </div>
+
+
+<div class="slider-area">
+
+       <h4>Abortion</h4>
+        <input id="abo" style="width:200px;" name="abortion" type="range" min="0" max="100" value = "50">
+        <br />
+        Answer: <span id="abo_ans"></span>
+        <script>
+        var slider_abo = document.getElementById("abo");
+            var output_abo = document.getElementById("abo_ans");
+            output_abo.innerHTML = slider_abo.value + '%';
+
+        slider_abo.oninput = function() {
+            output_abo.innerHTML = this.value+'%';
+        }
+        
+/* END EXTERNAL SOURCE */
+/* BEGIN EXTERNAL SOURCE */
+
+        var slider_wel = document.getElementById("wel");
+            var output_wel = document.getElementById("wel_ans");
+            output_wel.innerHTML = slider_wel.value + '%';
+
+        slider_wel.oninput = function() {
+            output_wel.innerHTML = this.value+'%';
+        }
+        
+/* END EXTERNAL SOURCE */
+/* BEGIN EXTERNAL SOURCE */
+
+            var slider_limG = document.getElementById("limG");
+            var output_limG = document.getElementById("limG_ans");
+            output_limG.innerHTML = slider_wel.value + '%';
+
+            slider_limG.oninput = function() {
+                output_limG.innerHTML = this.value+'%';
+            }
+            /* END EXTERNAL SOURCE */
+            /* BEGIN EXTERNAL SOURCE */
+
+            var slider_limG = document.getElementById("limG");
+            var output_limG = document.getElementById("limG_ans");
+            output_limG.innerHTML = slider_limG.value + '%';
+
+            slider_limG.oninput = function () {
+                output_limG.innerHTML = this.value + '%';
+            }
+
+
+            /* END EXTERNAL SOURCE */
+            /* BEGIN EXTERNAL SOURCE */
+
+            var slider_mns = document.getElementById("mns");
+            var output_mns = document.getElementById("mns_ans");
+            output_mns.innerHTML = slider_mns.value + '%';
+
+            slider_mns.oninput = function () {
+                output_mns.innerHTML = this.value + '%';
+            }
+            /* END EXTERNAL SOURCE */
+            /* BEGIN EXTERNAL SOURCE */
+
+            var slider_rel = document.getElementById("rel");
+            var output_rel = document.getElementById("rel_ans");
+            output_rel.innerHTML = slider_rel.value + '%';
+
+            slider_rel.oninput = function () {
+                output_rel.innerHTML = this.value + '%';
+            }
+            /* END EXTERNAL SOURCE */
+            /* BEGIN EXTERNAL SOURCE */
+
+            var slider_gunO = document.getElementById("gunO");
+            var output_gunO = document.getElementById("gunO_ans");
+            output_gunO.innerHTML = slider_gunO.value + '%';
+
+            slider_gunO.oninput = function () {
+                output_gunO.innerHTML = this.value + '%';
+            }
+            /* END EXTERNAL SOURCE */
+            /* BEGIN EXTERNAL SOURCE */
+
+            var slider_tradM = document.getElementById("tradM");
+            var output_tradM = document.getElementById("tradM_ans");
+            output_tradM.innerHTML = slider_tradM.value + '%';
+
+            slider_tradM.oninput = function () {
+                output_tradM.innerHTML = this.value + '%';
+            }
+            /* END EXTERNAL SOURCE */
+            /* BEGIN EXTERNAL SOURCE */
+
+            var slider_tradV = document.getElementById("tradV");
+            var output_tradV = document.getElementById("tradV_ans");
+            output_tradV.innerHTML = slider_tradV.value + '%';
+
+            slider_tradV.oninput = function () {
+                output_tradV.innerHTML = this.value + '%';
+            }
+            /* END EXTERNAL SOURCE */
+            /* BEGIN EXTERNAL SOURCE */
+
+            var slider_fisR = document.getElementById("fisR");
+            var output_fisR = document.getElementById("fisR_ans");
+            output_fisR.innerHTML = slider_fisR.value + '%';
+
+            slider_fisR.oninput = function () {
+                output_fisR.innerHTML = this.value + '%';
+            }
+
+            /* END EXTERNAL SOURCE */
+            /* BEGIN EXTERNAL SOURCE */
+
+            var slider_busi = document.getElementById("busi");
+            var output_busi = document.getElementById("busi_ans");
+            output_busi.innerHTML = slider_busi.value + '%';
+
+            slider_busi.oninput = function () {
+                output_busi.innerHTML = this.value + '%';
+            }
+            /* END EXTERNAL SOURCE */
+            /* BEGIN EXTERNAL SOURCE */
+
+            var slider_pat = document.getElementById("pat");
+            var output_pat = document.getElementById("pat_ans");
+            output_pat.innerHTML = slider_pat.value + '%';
+
+            slider_pat.oninput = function () {
+                output_pat.innerHTML = this.value + '%';
+            }
+            /* END EXTERNAL SOURCE */
+            /* BEGIN EXTERNAL SOURCE */
+
+            var slider_famU = document.getElementById("famU");
+            var output_famU = document.getElementById("famU_ans");
+            output_famU.innerHTML = slider_famU.value + '%';
+
+            slider_famU.oninput = function () {
+                output_famU.innerHTML = this.value + '%';
+            }
+
+
+
+        </script>
+
+
+
+           <h4>Welfare benefits</h4>
+        <input id="wel" style="width:200px;" name="welfare_benefits" type="range" min="0" max="100" value = "50">
+        <br />
+        Answer: <span id="wel_ans"></span>
+        <script></script>
+
+
+              <h4>Limited government</h4>
+        <input id="limG" style="width:200px;" name="limited_government" type="range" min="0" max="100" value = "50">
+        <br />
+        Answer: <span id="limG_ans"></span>
+        <script></script>
+
+
+                  <h4>Military and national security</h4>
+        <input id="mns" style="width:200px;" name="military_national_securit" type="range" min="0" max="100" value = "50">
+        <br />
+        Answer: <span id="mns_ans"></span>
+        <script></script>
+
+
+
+                     <h4>Religion</h4>
+        <input id="rel" style="width:200px;" name="religion" type="range" min="0" max="100" value = "50">
+        <br />
+        Answer: <span id="rel_ans"></span>
+        <script></script>
+
+
+                     <h4>Gun ownership</h4>
+        <input id="gunO" style="width:200px;" name="gun_ownership" type="range" min="0" max="100" value = "50">
+        <br />
+        Answer: <span id="gunO_ans"></span>
+        <script></script>
+
+
+                         <h4>Traditional marriage</h4>
+        <input id="tradM" style="width:200px;" name="traditional_marriage" type="range" min="0" max="100" value = "50">
+        <br />
+        Answer: <span id="tradM_ans"></span>
+        <script></script>
+
+                             <h4>Traditional values</h4>
+        <input id="tradV" style="width:200px;" name="traditional_values" type="range" min="0" max="100" value = "50">
+        <br />
+        Answer: <span id="tradV_ans"></span>
+        <script></script>
+
+                             <h4>Fiscal responsibility</h4>
+        <input id="fisR" style="width:200px;" name="fiscal_responsibility" type="range" min="0" max="100" value = "50">
+        <br />
+        Answer: <span id="fisR_ans"></span>
+        <script></script>
+
+                             <h4>Business</h4>
+        <input id="busi" style="width:200px;" name="business" type="range" min="0" max="100" value = "50">
+        <br />
+        Answer: <span id="busi_ans"></span>
+        <script></script>
+
+                                 <h4>Patriotism</h4>
+        <input id="pat" style="width:200px;" name="patriotism" type="range" min="0" max="100" value = "50">
+        <br />
+        Answer: <span id="pat_ans"></span>
+        <script></script>
+
+                                 <h4>The family unit</h4>
+        <input id="famU" style="width:200px;" name="the_family_unit" type="range" min="0" max="100" value = "50">
+        <br />
+        Answer: <span id="famU_ans"></span>
+        <script></script>
+
+
+
+ 
+
+
+
+
+</div>
+
+
+
+
+
+
+
+        </form>
+    </div>
+
+    <hr />
+
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-7">
+            </div>
+            <div class="col-xs-3">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                    Continue <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</div>

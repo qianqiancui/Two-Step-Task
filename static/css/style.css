@@ -1,0 +1,505 @@
+
+body {
+    padding:0px;
+    margin: 0px;
+    background-color: black;
+
+    font-weight: 300; 
+    font-size: 13pt;
+   
+}
+
+
+/* text styling */
+strong {
+  font-weight: 600;         
+}
+
+.warm {
+  color: steelblue;
+  text-align: justify;
+}
+
+.cool {
+  color: #ccccff;
+}
+
+
+/* change headers here*/
+h1 {
+  /*postion*/
+  margin-top: 0px;
+  /*color*/
+  color:white;
+}
+
+
+/* these are all the same for now, but easy to modify individually */
+#container-not-an-ad, #container-error, #container-exp, #container-consent, #container-instructions, #container-questionnaire {
+    /*background color*/
+    background: black;
+     /*margin*/
+    margin: 30px;
+    /*text color*/
+    color:black;
+}
+
+/* ad.html  - the ad that people view first */
+#adlogo {
+    width: 140px;
+    padding: 2px;
+    border: 1px solid #ccc;
+    margin-right: 1em;
+}
+
+/* consent.html - the consent form */
+#consent {
+    /*position*/
+  margin: 0 auto;
+  margin-top: 0;
+  width: 800px;
+  /*font property*/
+  font-size: 100%;
+
+}
+
+.legal {
+  text-align: justify;
+  font-size: 11pt;
+  line-height: 1.1em;
+  color: black;
+
+}
+
+/*text align for partial instruction for testing pahse */
+div.left_instruction {
+  text-align: left;
+  width:49%;
+  display: inline-block;
+}
+
+div.right_instruction {
+  text-align: right;
+  width:50%;
+  display: inline-block;
+}
+
+div.test_begin {
+  text-align: center;
+}
+
+/*properties for trial display*/
+#trial {
+  padding-top:15%;
+  display: block;
+  margin: 0 auto;
+  width: 900px;
+  text-align: center;
+  background-color: black;
+}
+
+
+* {   
+  box-sizing: border-box;  
+}
+
+div.show-stimuli {
+
+  display: block;
+  background-color: black;
+}
+
+/*stimulus property*/
+
+#stim {
+  display: block;
+  /*float: left;
+  margin: 25px;
+  */
+     /*postion*/
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+#stim1 {
+  display: block;
+  /*float: left;
+  margin: 25px;
+  */
+     /*postion*/
+  position: fixed;
+  top: 40%;
+  left: 20%;
+  /* bring your own prefixes */
+  transform: translate(-20%, -50%);
+}
+
+#stim2 {
+  display: block;
+  /*dfloat: right;
+  margin: 25px;
+  */
+
+  /*postion*/
+  position: fixed;
+  top: 40%;
+  left: 80%;
+  /* bring your own prefixes */
+  transform: translate(-80%, -50%);
+}
+
+/*reward text property*/
+#reward_prompt{
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 30pt;
+  font: lighter;
+  text-align: right;
+
+  /*float: left;
+  padding-left: 23%;
+  padding-bottom: 15px;*/
+
+  display: block;
+  /*float: left;
+  margin: 25px;
+  */
+     /*postion*/
+  position: fixed;
+  top: 70%;
+  left: 39%;
+  /* bring your own prefixes */
+
+  color: white;
+}
+
+#reward_result{
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 30pt;
+  font: lighter;
+  text-align: left;
+  display: block;
+  /*float: right;
+  padding-right: 23%;
+  padding-bottom: 15px;*/
+  position: fixed;
+  top: 70%;
+  left: 55%;
+  /* bring your own prefixes */
+  color: white;
+}
+
+#stock_value{
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 30pt;
+  font: lighter;
+  text-align: left;
+  display: block;
+  /*float: right;
+  padding-right: 23%;
+  padding-bottom: 15px;*/
+  position: fixed;
+  top: 70%;
+  left: 55%;
+  /* bring your own prefixes */
+  color: white;
+}
+
+#pool_prompt{
+    display: block;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 30pt;
+  font: lighter;
+  text-align: right;
+
+
+  display: block;
+  /*float: left;
+  margin: 25px;
+  */
+     /*postion*/
+  position: fixed;
+  top: 80%;
+  left: 42%;
+  /* bring your own prefixes */
+
+  color: white;
+
+}
+
+#pool_result{
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 30pt;
+  font: lighter;
+  text-align: left;
+  display: block;
+  /*float: right;
+  padding-right: 23%;
+  padding-bottom: 15px;*/
+
+  position: fixed;
+  top: 80%;
+  left: 55%;
+  /* bring your own prefixes */
+
+
+  color: white;
+  
+}
+
+
+/*hideen, for recording only*/
+#stim1_name {
+  opacity: 0;
+  display: block;
+  float: left;
+  margin: 20px;
+}
+#stim2_name {
+  opacity: 0;
+  display: block;
+  float: right;
+  margin: 20px;
+}
+
+.clear {
+  clear: both;
+  height: 0;
+  width: 0;
+  font-size: 1px;
+  line-height: 0;
+}
+
+/*fixation cross property*/
+#fixation_cross {
+  display: block;
+
+  /*color, size, font*/
+  font-size: 50pt;
+  font:lighter;
+  color: white;
+  opacity:0.9;
+
+  /*postion*/
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+#query {
+  color: darkgray;
+}
+/* 3-second coutndown text*/
+#countdown{
+
+  /*color, size, font*/
+  color: white;
+  font-size: 40pt;
+  font: bolder;
+  float: right;
+
+  /*postion*/
+  padding-right: 50%;
+  padding-bottom: 50px;
+}
+
+#pause_instruction{
+    color: white;
+}
+
+/*'TOO SLOW' text property*/
+#warning {
+
+  display: block;
+  /*color, size, font*/
+  font-size: 30pt;
+  color: white;
+  font: bolder;
+   /*postion*/
+  position: fixed;
+  top: 70%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+#pool{
+  display: block;
+  /*color, size, font*/
+  font-size: 30pt;
+  color: white;
+  font: bolder;
+   /*postion*/
+  position: fixed;
+  top: 70%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+
+
+.question {
+  margin-bottom: 30px;
+}
+
+/* errors */
+#error img {
+  padding-right: 10px;
+  padding-top: 15px;
+}
+
+#pairup_instruction {
+
+  font-size: 18pt;
+  color: white;
+  font: bolder;
+
+}
+
+#decider_1 {
+  color: white;
+  text-align:center;
+  font-size: 25pt;
+}
+
+
+#decider_2 {
+  color: white;
+  text-align:center;
+  font-size: 25pt;
+
+}
+#decider_3 {
+  color: white;
+  text-align:center;
+  font-size: 25pt;
+
+}
+#decider_4 {
+  color: white;
+  text-align:center;
+  font-size: 25pt;
+
+}
+
+
+#dec1 {
+  display: block;
+  position: fixed;
+    top: 40%;
+  left: 20%;
+  /* bring your own prefixes */
+  transform: translate(-10%, -50%);
+
+}
+#dec2 {
+  display: block;
+  position: fixed;
+    top: 40%;
+  left: 40%;
+  /* bring your own prefixes */
+  transform: translate(-30%, -50%);
+
+}
+#dec3 {
+  display: block;
+ position: fixed;
+   top: 40%;
+  left: 60%;
+
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+
+}
+#dec4 {
+  display: block;
+  position: fixed;
+    top: 40%;
+  left: 80%;
+  /* bring your own prefixes */
+  transform: translate(-80%, -50%);
+
+}
+
+#pairup_result{
+
+  font-size: 18pt;
+  color: white;
+  font: bolder;
+  text-align:center;
+
+}
+
+#next_lobby{
+    display: block;
+  /*color, size, font*/
+
+  color: white;
+
+   /*postion*/
+  position: fixed;
+  top: 80%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -20%);
+
+}
+
+#ava1 {
+    width:60px;
+    height:60px;
+}
+
+#ava2 {
+     width:60px;
+    height:60px;
+}
+
+#ava3{
+     width:60px;
+    height:60px;
+}
+#ava4 {
+     width:60px;
+    height:60px;
+}
+
+#rec {
+color:white;
+font-size:40;
+font:boler;
+text-align: center;
+top: 55%;
+left: 70%;
+
+}
+#loading{
+    top: 60%;
+    text-align: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto ;
+  grid-gap: 10px;
+
+  padding: 10px;
+}
+
+#survey-intro{
+    color: white;
+}
+
+
+.slider-area{
+  max-width: 70%;
+}
+
+output {
+  display: block;
+}
