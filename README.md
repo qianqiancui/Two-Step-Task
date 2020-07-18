@@ -1,12 +1,3 @@
-☑️ show stock values
-
-🔲
-
-
-
-
-
-
-
-☑️ record key response
-☑️ counterbalance the position of each stimulus
+# Progress
+Practice phase A     Practice phase b      Main Trial
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤ ------------------------------------
