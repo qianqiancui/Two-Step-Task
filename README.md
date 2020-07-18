@@ -1,3 +1,3 @@
 # Progress
-Practice phase A &nbsp; &nbsp; Practice phase Bb&nbsp; &nbsp; Main Trial\
+Practice phase A &nbsp; &nbsp; Practice phase B&nbsp; &nbsp; Main Trial\
 ◢◤◢◤◢◤◢◤ -------------------------------
