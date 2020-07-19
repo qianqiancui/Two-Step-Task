@@ -75,12 +75,10 @@ var practice_phase_a = function () {
     var step_type = 'step_two';
     var stock_value;
     var stock_name;
-    var stimon, // time word is presented
-        listening = false;
 
-    var stock1 = [["stock1.jpg", 8, "stock1"], ["stock1.jpg", 9, "stock1"], ["stock1.jpg", 7, "stock1"]
+    var stock1 = [["stock1.jpg", 8, "stock1"], ["stock1.jpg", 9, "stock1"], ["stock1.jpg", 7, "stock1"],
     ["stock1.jpg", 5, "stock1"], ["stock1.jpg", 3, "stock1"]];
-    var stock2 = [["stock2.jpg", 1, "stock2"], ["stock2.jpg", 0, "stock2"], ["stock2.jpg", 2, "stock2"]
+    var stock2 = [["stock2.jpg", 1, "stock2"], ["stock2.jpg", 0, "stock2"], ["stock2.jpg", 2, "stock2"],
     ["stock2.jpg", 5, "stock1"], ["stock2.jpg", 6, "stock2"]];
     //var trials = _.shuffle([].concat(stock1).concat(stock2));
 
@@ -88,9 +86,9 @@ var practice_phase_a = function () {
     var trials = [].concat(stock1).concat(stock2);
 
     var next = function () {
-
-        /*◢◤◢◤◢◤◢◤load stimulus ◢◤◢◤◢◤◢◤*/
-
+        
+        /*◢◤◢◤◢◤◢◤ ◢◤◢◤◢◤◢◤*/
+        trial_id++;
         /*◢◤◢◤◢◤◢◤ advance to practice phase b after finishing phase a ◢◤◢◤◢◤◢◤*/
         if (trials.length === 0) {
             return psiTurk.doInstructions(testing_instruction_pages,
@@ -103,7 +101,6 @@ var practice_phase_a = function () {
             //load stock 1 & 2 (image and value)
             current_stim = trials.shift();
             show_stim(current_stim[0]);
-
             stim_on = new Date().getTime();
             listening = true;
             stock_value = current_stim[1];
@@ -113,8 +110,6 @@ var practice_phase_a = function () {
 
 
     var show_stim = function (image) {
-
-        trial_id++;
 
         d3.select("#stim")
             .append("img")
@@ -137,7 +132,6 @@ var practice_phase_a = function () {
         switch (keyCode) {
             case 32:
                 // "SPACE"
-
                 response = "space";
                 break;
             default:
@@ -145,7 +139,9 @@ var practice_phase_a = function () {
                 break;
         }
         if (response.length > 0) {
-
+            console.log(response);
+            // add yellow soild box
+            document.getElementById('stim').style.border = "5px solid yellow";
             d3.select('#stock_value').html(stock_value);
             listening = false;
             var hit = response == stim[1];
@@ -159,9 +155,13 @@ var practice_phase_a = function () {
                 'response': response,
                 'hit': hit,
                 'rt': rt
-            } );
+            });
+
+            setTimeout(function () {
             remove_stim();
-            next();
+                next();
+            }, 1500);
+
         }
     };
 
