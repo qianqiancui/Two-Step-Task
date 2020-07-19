@@ -61,6 +61,73 @@ var testing_instruction_pages = [// add as a list as many pages as you like
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 
 
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* relationship between agents & stocks *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+
+var rela_dict = {
+    "stock1": ["agent1", "agent3"],
+    "stock2": ["agent2", "agent4"]
+};
+
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* prepare stimuli on the right & on the left (in a balanced way) *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+var left_right_order = [
+    [["stock1.jpg", "1.jpg", "stock1", "agent1", "stock2.jpg", "2.jpg", "stock2", "agent2"]],
+    [["stock1.jpg", "1.jpg", "stock1", "agent1", "stock2.jpg", "4.jpg", "stock2", "agent4"]],
+    [["stock1.jpg", "3.jpg", "stock1", "agent3", "stock2.jpg", "2.jpg", "stock2", "agent2"]],
+    [["stock1.jpg", "3.jpg", "stock1", "agent3", "stock2.jpg", "4.jpg", "stock2", "agent4"]]
+];
+
+var right_left_order = [
+    [["stock2.jpg", "2.jpg", "stock2", "agent2", "stock1.jpg", "1.jpg", "stock1", "agent1"]],
+    [["stock2.jpg", "4.jpg", "stock2", "agent4", "stock1.jpg", "1.jpg", "stock1", "agent1"]],
+    [["stock2.jpg", "2.jpg", "stock2", "agent2", "stock1.jpg", "3.jpg", "stock1", "agent3"]],
+    [["stock2.jpg", "4.jpg", "stock2", "agent4", "stock1.jpg", "3.jpg", "stock1", "agent3"]]
+];
+
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* prepare balanced trials for practice phase B and main trials*
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+var balanced_trials = function (left_side, right_side, i, trial_num) {
+
+    var trial_container_1 = [];
+    var trial_container_2 = [];
+    var trial_container_3 = [];
+
+    for (var x = 0; x < trial_num / 2; x++) {
+        trial_container_1 = trial_container_1.concat(left_right_order[i]);
+    };
+    for (var y = 0; y < trial_num / 2; y++) {
+        trial_container_2 = trial_container_2.concat(right_left_order[i]);
+    };
+
+    trial_container_3 = _.shuffle([].concat(trial_container_1).concat(trial_container_2));
+    trial_container = _.shuffle(trial_container.concat(trial_container_3));
+
+    console.log(trial_container);
+    return trial_container;
+
+};
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* two step function would be used in practice phase B and main trials*
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+var two_step_func = function () {
+    var correct_judgment;
+
+
+
+
+
+
+
+}
+
+
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * PRACTICE PHASE A *
@@ -76,10 +143,10 @@ var practice_phase_a = function () {
     var stock_value;
     var stock_name;
 
-    var stock1 = [["stock1.jpg", 8, "stock1"], ["stock1.jpg", 9, "stock1"], ["stock1.jpg", 7, "stock1"],
-    ["stock1.jpg", 5, "stock1"], ["stock1.jpg", 3, "stock1"]];
-    var stock2 = [["stock2.jpg", 1, "stock2"], ["stock2.jpg", 0, "stock2"], ["stock2.jpg", 2, "stock2"],
-    ["stock2.jpg", 5, "stock1"], ["stock2.jpg", 6, "stock2"]];
+    var stock1 = [["stock1.jpg", "+8", "stock1"], ["stock1.jpg", "+9", "stock1"], ["stock1.jpg", "+7", "stock1"],
+        ["stock1.jpg", "+5", "stock1"], ["stock1.jpg", "+3", "stock1"]];
+    var stock2 = [["stock2.jpg", "+1", "stock2"], ["stock2.jpg", "+0", "stock2"], ["stock2.jpg", "+2", "stock2"],
+        ["stock2.jpg", "+5", "stock1"], ["stock2.jpg", "+6", "stock2"]];
     //var trials = _.shuffle([].concat(stock1).concat(stock2));
 
     //stock 1 & stock 2 together
@@ -139,10 +206,12 @@ var practice_phase_a = function () {
                 break;
         }
         if (response.length > 0) {
-            console.log(response);
             // add yellow soild box
             document.getElementById('stim').style.border = "5px solid yellow";
-            d3.select('#stock_value').html(stock_value);
+            setTimeout(function () {
+                d3.select('#stock_value').html(stock_value);
+            }, 500);
+
             listening = false;
             var hit = response == stim[1];
             var rt = new Date().getTime() - stim_on;
@@ -186,11 +255,15 @@ var practice_phase_a = function () {
     next();
 };
 
+
     
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * PRACTICE PHASE B *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var practice_phase_b = function () {
+
+
+
 
 };
 
