@@ -8558,3 +8558,4 @@ UnboundLocalError: local variable 'user' referenced before assignment
 [2020-07-19 00:53:48 -0400] [14319] [CRITICAL] WORKER TIMEOUT (pid:14506)
 [2020-07-19 00:53:48 -0400] [14319] [CRITICAL] WORKER TIMEOUT (pid:14508)
 [2020-07-19 00:53:48 -0400] [14319] [CRITICAL] WORKER TIMEOUT (pid:14510)
+2020-07-20 12:04:50,235 browser_type_not_allowed (1014) {'assignmentId': 'debugCLVYJV', 'hitId': 'debugFF337H', 'workerId': 'debugSWF2NO', 'mode': 'debug'}
