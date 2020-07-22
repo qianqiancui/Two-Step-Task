@@ -104,10 +104,10 @@ var balanced_trials = function (left_side, right_side,  trial_num) {
     var trial_container = [];
     // put all trials (containing stimuli information) into arrays based on desired number of trials
     for (var x = 0; x < trial_num / 2; x++) {
-        trial_container_1 = trial_container_1.concat(left_side[Math.floor((x- 1) / 4)]);
+        trial_container_1 = trial_container_1.concat(left_side[x%(trial_num/4)]);
     };
     for (var y = 0; y < trial_num / 2; y++) {
-        trial_container_2 = trial_container_2.concat(right_side[Math.floor((x - 1) / 4)]);
+        trial_container_2 = trial_container_2.concat(right_side[x%(trial_num/4)]);
     };
     //shuffle everything 
     trial_container_3 = _.shuffle([].concat(trial_container_1).concat(trial_container_2));
@@ -179,6 +179,7 @@ var step_two_practice = function () {
             /*◢◤◢◤◢◤◢◤ load practice phase a  ◢◤◢◤◢◤◢◤*/
             //load stock 1 & 2 (image and value)
             current_stim = trials.shift();
+
             show_stim(current_stim[0]);
             stim_on = new Date().getTime();
             listening = true;
@@ -269,7 +270,7 @@ var step_two_practice = function () {
 
     
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-* PRACTICE PHASE B *
+* PRACTICE STEP ONE *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
@@ -281,7 +282,9 @@ var step_one_practice = function () {
     //record trial id;
     var trial_id = 0;
 
-    var stim1, stim2, stim1_name, stim2_name;  
+    var stim1, stim2, stim1_name, stim2_name;
+    var stock1, stock2, stock1_name, stock2_name;
+
     //load trial information (image, variable name, etc) 
     var trials = balanced_trials(left_right_order, right_left_order, 16)
     console.log(trials,'preview all trials (shuffled)');
@@ -291,11 +294,10 @@ var step_one_practice = function () {
     //for (var i = 0; i < stocklist.length; i++) {
 
     //    two_step_task(stocklist[i], trials);
-    //}
+    //} 
     var next = function () {
         /*◢◤◢◤◢◤◢◤ record trial id ◢◤◢◤◢◤◢◤*/
         trial_id++;
-
         /*◢◤◢◤◢◤◢◤ go to main trials if getting 13 + judgements correct ◢◤◢◤◢◤◢◤*/
         if (correct_num >= 13 && trials.length === 0) {
             return psiTurk.doInstructions(testing_instruction_pages,
@@ -329,6 +331,12 @@ var step_one_practice = function () {
             stim1_name = current_trial[3];
             stim2_name = current_trial[7];
 
+            stock1 = current_trial[0];
+            stock2 = current_trial[4];
+
+            stock1_name = current_trial[2];
+            stock2_name = current_trial[6];
+
             show_stim(stim1, stim2);
             //two_step_task(trials);
         };
@@ -346,17 +354,34 @@ var step_one_practice = function () {
                 //target on the left
                 response = stim2_name;
                 document.getElementById('stim2').style.border = "5px solid yellow";
-                document.getElementById('stim1').style.opacity = 0.3;
+                document.getElementById('stim1').style.opacity = 0;
                 response_received = true;
+
+
+                d3.select("#stim")
+                    .append("img")
+                    .attr("src", stimFolder + stock2)
+                    .attr("id", 'pic')
+                    .style("width", "300px")
+                    .style("height", "300px");
+
                 break;
 
-            // press [J]
+            // press [J] 
             case 70:
-                //target on the RIGHT
+                //target on the RIGHT 
                 response = stim1_name;
                 document.getElementById('stim1').style.border = "5px solid yellow";
-                document.getElementById('stim2').style.opacity = 0.3;
+                document.getElementById('stim2').style.opacity = 0;
                 response_received = true;
+
+
+                d3.select("#stim")
+                    .append("img")
+                    .attr("src", stimFolder + stock1)
+                    .attr("id", 'pic')
+                    .style("width", "300px")
+                    .style("height", "300px");
                 break;
 
             default:
@@ -382,8 +407,7 @@ var step_one_practice = function () {
             setTimeout(function () {
                 remove_stim();
                 next();
-            }, 2500);
-
+            }, 1500);
         }
     };
 
@@ -406,15 +430,15 @@ var step_one_practice = function () {
             .style("width", "300px")
             .style("height", "300px")
             .style("border", "initial");
-
     };
+
 
     /*◢◤◢◤◢◤◢◤ * remove two stimuli * ◢◤◢◤◢◤◢◤*/
     var remove_stim = function () {
         //remove the previous images;
         d3.select("#pic1").remove();
         d3.select("#pic2").remove();
-
+        d3.select("#pic").remove();
         //set the border of each image to initial state; 
         document.getElementById('stim1').style.border = "initial";
         document.getElementById('stim2').style.border = "initial";
