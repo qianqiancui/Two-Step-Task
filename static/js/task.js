@@ -137,14 +137,16 @@ var balanced_trials = function (left_side, right_side,  trial_num) {
     var trial_container_2 = [];
     var trial_container_3 = [];
     var trial_container = [];
-    // put all trials (containing stimuli information) into arrays based on desired number of trials
+    // put all trials (containing stimuli information) into arrays based on desired number of trials 
     for (var x = 0; x < trial_num / 2; x++) {
-        trial_container_1 = trial_container_1.concat(left_side[x%(trial_num/4)]);
+        trial_container_1 = trial_container_1.concat(left_side[x % (trial_num / 4)]);
     };
+
     for (var y = 0; y < trial_num / 2; y++) {
-        trial_container_2 = trial_container_2.concat(right_side[x%(trial_num/4)]);
+        trial_container_2 = trial_container_2.concat(right_side[y % (trial_num / 4)]);
     };
-    //shuffle everything 
+
+    //shuffle everything
     trial_container_3 = _.shuffle([].concat(trial_container_1).concat(trial_container_2));
     trial_container = _.shuffle(trial_container.concat(trial_container_3));
 
@@ -770,7 +772,7 @@ $(window).load(function () {
     );
 });
 
-////test step_one_practice_stock1
+//test step_one_practice_stock1
 //$(window).load( function(){
 //    psiTurk.doInstructions(
 //        training_instruction_pages, // a list of pages you want to display in sequence
