@@ -376,6 +376,7 @@ var step_one_practice_stock1 = function () {
                 function () {
                     //trial_id = 0;
                     currentview = new step_one_practice_stock1();
+                    //currentview = new step_two_practice();
                 }
             );
 
@@ -453,7 +454,7 @@ var step_one_practice_stock1 = function () {
 
 
             listening = false;
-            var hit = response == stim[1];
+            var hit = response;
             var rt = new Date().getTime() - stim_on;
             psiTurk.recordTrialData({
                 'phase': "practice_b",
@@ -760,23 +761,23 @@ var currentview;
 /*******************
  * Run Task
  ******************/
-////test step_two_practice
-//$(window).load(function () {
-//    psiTurk.doInstructions(
-//        training_instruction_pages, // a list of pages you want to display in sequence
-
-//        function () { currentview = new step_two_practice(); } // what you want to do when you are done with instructions
-//    );
-//});
-
-//test step_one_practice_stock1
-$(window).load( function(){
+//test step_two_practice
+$(window).load(function () {
     psiTurk.doInstructions(
         training_instruction_pages, // a list of pages you want to display in sequence
 
-        function () { currentview = new step_one_practice_stock1(); } // what you want to do when you are done with instructions
+        function () { currentview = new step_two_practice(); } // what you want to do when you are done with instructions
     );
 });
+
+////test step_one_practice_stock1
+//$(window).load( function(){
+//    psiTurk.doInstructions(
+//        training_instruction_pages, // a list of pages you want to display in sequence
+
+//        function () { currentview = new step_one_practice_stock1(); } // what you want to do when you are done with instructions
+//    );
+//});
 
 
 //$(window).load(function () {
