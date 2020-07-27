@@ -33,7 +33,8 @@ var pages = [
 
     "instructions/instruct-ready.html",
     "stage.html",
-    "instructions/ansInstruct-ready.html"
+    "instructions/ansInstruct-ready.html",
+        "postquestionnaire1.html"
 ];
 
 psiTurk.preloadPages(pages);
@@ -71,7 +72,7 @@ var rela_dict = {
 
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-* decide which stock should be stock1/stock2 in a randomized way *
+* decide which stock should be stock1/stock2 randomly *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var decider = Math.random();
 
@@ -97,6 +98,7 @@ var stock1_img, stock2_img;
 var stock1, stock2;
 var stim1, stim2, stim1_name, stim2_name;
 var current_step;
+var response_deadline = 3000;
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * prepare stimuli on the right & on the left (in a balanced way) *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
@@ -319,9 +321,9 @@ var remove_stim = function () {
     //opacity of each stimulus (0: transparent; 1: solid);
     document.getElementById('stim1').style.opacity = 1;
     document.getElementById('stim2').style.opacity = 1;
+
+    d3.select('#warning').html('');
 };
-
-
 
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
@@ -638,13 +640,12 @@ var step_one_practice_stock2 = function () {
 * Main Trials *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var main_trials = function(){
-
     var stim_on, // time stimulus is presented
         listening = false;
 
     //record trial id; 
     var trial_id = 1;
-
+    var response_step2;
 /*◢◤◢◤◢◤◢◤ prepare necessary information for each trial ◢◤◢◤◢◤◢◤*/
 /*◢◤◢◤◢◤◢◤ change trial number here ◢◤◢◤◢◤◢◤*/
     /* per the request, 4 pairs x 13 
@@ -658,30 +659,48 @@ var main_trials = function(){
 
     console.log(pre_1st_break_trials, post_1st_break_trials, trials);
 
+
+
+    var timer = setTimeout(function () {
+        d3.select('#warning').html('TOO SLOW!');
+        warning = true; setTimeout(function () {
+            remove_stim();
+            next();
+        }, 500);
+    }, response_deadline);
+   
     /*◢◤◢◤◢◤◢◤ load elemments per trial ◢◤◢◤◢◤◢◤*/
     var next = function () {
+
+
+
         /*◢◤◢◤◢◤◢◤ trial interval: 500ms  ◢◤◢◤◢◤◢◤*/
         setTimeout(function () {
 
-            //if (document.getElementById('stim1').style.opacity === 0 || document.getElementById('stim2').style.opacity === 0) {
-            //    current_step = "two";
-            //}
-            //else {
-            //    current_step = "one";
-            //}
-           
+            if (document.getElementById('stim1').style.opacity === 0 || document.getElementById('stim2').style.opacity === 0) {
+                current_step = "two";
+            }
+            else {
+                current_step = "one";
+            }
+
+            
+
+
+
+
             /*◢◤◢◤◢◤◢◤ record trial id ◢◤◢◤◢◤◢◤*/
             trial_id++;
             console.log(trials.length);
 
+
             /*◢◤◢◤◢◤◢◤ go to main trials if getting 13 + judgements correct ◢◤◢◤◢◤◢◤*/
-            if (trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
-                    function () {
-                        currentview = new Questionnaire1();
-                    }
-                );
+            if (trials.length === 151) {
+                finish();
             } else {
+
+
+            
                 /*◢◤◢◤◢◤◢◤ start practice ◢◤◢◤◢◤◢◤*/
                 stim_on = new Date().getTime();
                 listening = true;
@@ -697,9 +716,23 @@ var main_trials = function(){
                 stim1_name = current_trial[3];
                 stim2_name = current_trial[7];
                 show_stim(stim1, stim2);
+
+
+
+                timer;
+
+            //    if (timer && current_step === "two") {
+            //    // cancel existing timer if exist;
+            //    clearTimeout(timer);
+            //}
+                console.log(current_step, timer);
+
+
             };
         }, 500);
     };
+
+
 
     /*◢◤◢◤◢◤◢◤ record response ◢◤◢◤◢◤◢◤*/
     var response_handler = function (e) {
@@ -710,18 +743,21 @@ var main_trials = function(){
         switch (keyCode) {
             // press [F]
             case 74:
-                //target on the left
-                response = stim2_name;
-                document.getElementById('stim2').style.border = "5px solid yellow";
+                if (current_step === "one") {
+                    //target on the left
+                    response = stim2_name;
+                    document.getElementById('stim2').style.border = "5px solid yellow";
 
-                $("#stim2").animate({ top: '-=20%', left: '-=22.5%' }, 300);
+                    $("#stim2").animate({ top: '-=20%', left: '-=22.5%' }, 300);
 
-                document.getElementById('stim1').style.opacity = 0;
-                response_received = true;
+                    document.getElementById('stim1').style.opacity = 0;
+                    response_received = true;
+                }
                 break;
             // press [J]  
             case 70:
-                //target on the RIGHT 
+                //target on the RIGHT
+                if (current_step === "one") {
                 response = stim1_name;
                 document.getElementById('stim1').style.border = "5px solid yellow";
 
@@ -729,8 +765,17 @@ var main_trials = function(){
 
                 document.getElementById('stim2').style.opacity = 0;
 
-                response_received = true;
+                    response_received = true;
+                }
                 break;
+
+            //case 32:
+            //    if (current_step === "two") {
+            //        response = "space";
+            //        response_step2 = "space";
+            //        document.getElementById('stim').style.border = "5px solid yellow";
+            //    }
+            //    break;
             //if do not press anything
             default:
                 response = "";
@@ -739,10 +784,7 @@ var main_trials = function(){
         }
         if (response.length > 0) {
 
-            //setTimeout(function () {
-            //    //d3.select('#stock_value').html(stock_value);
-            //}, 500);
-
+            current_step = "two";
             if (response === "agent1" || response === "agent3") {
                 d3.select("#stim")
                     .append("img")
@@ -759,8 +801,10 @@ var main_trials = function(){
                     .attr("id", 'pic')
                     .style("width", "300px")
                     .style("height", "300px");
-                correct_num++;
             }
+
+            console.log(current_step, response_step2);
+
 
 
             listening = false;
@@ -773,18 +817,47 @@ var main_trials = function(){
                 'rt': rt,
                 'stock1_name': stock1,
                 'stock2_name': stock2,
-                'correct_num': correct_num
 
             });
 
-            console.log(stock1, 'stock1', stock2, 'stock2', correct_num, 'correct', response);
+            console.log(stock1, 'stock1', stock2, 'stock2', response, response_step2);
+
+
+            if (timer) {
+                // cancel existing timer if exist;
+                clearTimeout(timer);
+            }
 
             setTimeout(function () {
                 remove_stim();
                 next();
             }, 1500);
-        }
+        };
     };
+
+    //document.addEventListener("keypress", myFunction);
+
+    //function myFunction(e) {
+    //    if (e.keyCode == 32 && current_step === "two") {
+    //        document.getElementById('stim').style.border = "5px solid yellow";
+    //        response_step2 = "space";
+
+    //        setTimeout(function () {
+    //            remove_stim();
+    //            next();
+
+    //            psiTurk.recordTrialData({
+    //                'test': "test",
+
+    //            });
+    //        }, 1500);
+    //    }
+
+    //}
+
+
+
+
 
    
     /*◢◤◢◤◢◤◢◤ prepare the page for practice phase B ◢◤◢◤◢◤◢◤*/
@@ -794,8 +867,18 @@ var main_trials = function(){
     // key down events.
     $("body").focus().keydown(response_handler);
     // start the first trial
-    next();
+    next()
+
+
+
+
+    // finsh the training pahse;
+    var finish = function () {
+        $("body").unbind("keydown", response_handler); // Unbind keys
+        currentview = new Questionnaire1();
+    };
 };
+
 
 
 /****************

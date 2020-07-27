@@ -2,6 +2,9 @@
 Step Two Practice &nbsp; &nbsp; Step One Practice B&nbsp; &nbsp; Main Trial\
 |◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤------| 70%
 
+
+### Features:
+![two step practice](/two_step_pratice.gif)
 ### Big Updates:
 <<<<<<< HEAD
 * Fixed the bug in Step One Practice. Right now Step One Practice can be completed for infinite times if the accuracy is below 13/16 (update on Jul 25, 2020)
