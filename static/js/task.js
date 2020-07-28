@@ -99,6 +99,7 @@ var stock1, stock2;
 var stim1, stim2, stim1_name, stim2_name;
 var current_step;
 var response_deadline = 3000;
+var warning = false;
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * prepare stimuli on the right & on the left (in a balanced way) *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
@@ -645,7 +646,7 @@ var main_trials = function(){
 
     //record trial id; 
     var trial_id = 1;
-    var response_step2;
+    //var response_step2 = "";
 /*◢◤◢◤◢◤◢◤ prepare necessary information for each trial ◢◤◢◤◢◤◢◤*/
 /*◢◤◢◤◢◤◢◤ change trial number here ◢◤◢◤◢◤◢◤*/
     /* per the request, 4 pairs x 13 
@@ -660,18 +661,12 @@ var main_trials = function(){
     console.log(pre_1st_break_trials, post_1st_break_trials, trials);
 
 
+    var timer;
+    var space_pressed = false;
 
-    var timer = setTimeout(function () {
-        d3.select('#warning').html('TOO SLOW!');
-        warning = true; setTimeout(function () {
-            remove_stim();
-            next();
-        }, 500);
-    }, response_deadline);
-   
+
     /*◢◤◢◤◢◤◢◤ load elemments per trial ◢◤◢◤◢◤◢◤*/
     var next = function () {
-
 
 
         /*◢◤◢◤◢◤◢◤ trial interval: 500ms  ◢◤◢◤◢◤◢◤*/
@@ -683,22 +678,62 @@ var main_trials = function(){
             else {
                 current_step = "one";
             }
-
-            
-
-
-
-
-            /*◢◤◢◤◢◤◢◤ record trial id ◢◤◢◤◢◤◢◤*/
-            trial_id++;
-            console.log(trials.length);
-
-
             /*◢◤◢◤◢◤◢◤ go to main trials if getting 13 + judgements correct ◢◤◢◤◢◤◢◤*/
             if (trials.length === 151) {
                 finish();
-            } else {
+            } else if (trial_id === 2) {
+                var timeleft = 5;
+                /*◢◤◢◤◢◤◢◤ break sessions  ◢◤◢◤◢◤◢◤*/
+                var pause_timer = setInterval(function () {
+                    console.log('break session');
+                    d3.select("#pause_instruction").html('<p>You have finished a round of this task.</p><p>You will now take a break for 10 seconds.</p> <p>A 3 - second countdown will signal the start of the next round.</p>');
+                    timeleft -= 1;
+                    if (timeleft < 5) {
+                        //d3.select("#fixation_cross").html("");
+                        d3.select("#countdown").html(timeleft);
+                    };
+                    if (timeleft <= 0) {
+                        clearInterval(pause_timer);
+                        d3.select("#countdown").html('');
+                        d3.select("#pause_instruction").html('');
+                        /*◢◤◢◤◢◤◢◤ start practice ◢◤◢◤◢◤◢◤*/
+                        stim_on = new Date().getTime();
+                        listening = true;
+                        var current_trial = trials.shift();
+                        //console.log('shift', current_trial);
 
+                        //for debug purpose; 
+                        //console.log(trials, 'trials', trial_id);
+                        //console.log(current_trial, 'current', trial_id);
+
+                        /*◢◤◢◤◢◤◢◤ record trial id ◢◤◢◤◢◤◢◤*/
+                        trial_id++;
+                        console.log(trials.length);
+                        /*◢◤◢◤◢◤◢◤ get stim image ◢◤◢◤◢◤◢◤*/
+                        stim1 = current_trial[1];
+                        stim2 = current_trial[5];
+                        /*◢◤◢◤◢◤◢◤ get stim name ◢◤◢◤◢◤◢◤*/
+                        stim1_name = current_trial[3];
+                        stim2_name = current_trial[7];
+                        stim2 = current_trial[5];
+                        /*◢◤◢◤◢◤◢◤ display images for current trial ◢◤◢◤◢◤◢◤*/
+                        show_stim(stim1, stim2);
+
+
+                        timer = setTimeout(function () {
+                            //var timer = setTimeout(function () {
+                            d3.select('#warning').html('TOO SLOW!');
+                            warning = true;
+                            setTimeout(function () {
+                                remove_stim();
+                                next();
+                            }, 500);
+                        }, response_deadline);
+
+                    }
+                }, 500);
+
+            }else{
 
             
                 /*◢◤◢◤◢◤◢◤ start practice ◢◤◢◤◢◤◢◤*/
@@ -711,26 +746,47 @@ var main_trials = function(){
                 //console.log(trials, 'trials', trial_id);
                 //console.log(current_trial, 'current', trial_id);
 
+            /*◢◤◢◤◢◤◢◤ record trial id ◢◤◢◤◢◤◢◤*/
+                trial_id++;
+                console.log(trials.length);
+            /*◢◤◢◤◢◤◢◤ get stim image ◢◤◢◤◢◤◢◤*/
                 stim1 = current_trial[1];
                 stim2 = current_trial[5];
+            /*◢◤◢◤◢◤◢◤ get stim name ◢◤◢◤◢◤◢◤*/
                 stim1_name = current_trial[3];
                 stim2_name = current_trial[7];
+                stim2 = current_trial[5];
+            /*◢◤◢◤◢◤◢◤ display images for current trial ◢◤◢◤◢◤◢◤*/
                 show_stim(stim1, stim2);
 
 
+                timer = setTimeout(function () {
+                //var timer = setTimeout(function () {
+                    d3.select('#warning').html('TOO SLOW!');
+                    warning = true;
+                    setTimeout(function () {
+                        remove_stim();
+                        next();
+                    }, 500);
+                }, response_deadline);
 
-                timer;
+                space_pressed = false;
+                //timer;
 
             //    if (timer && current_step === "two") {
             //    // cancel existing timer if exist;
             //    clearTimeout(timer);
             //}
-                console.log(current_step, timer);
+                //console.log(current_step, warning);
 
+  
 
             };
         }, 500);
     };
+
+
+
 
 
 
@@ -740,10 +796,13 @@ var main_trials = function(){
 
         var keyCode = e.keyCode,
             response;
-        switch (keyCode) {
-            // press [F]
-            case 74:
-                if (current_step === "one") {
+        //var response_step2;
+
+
+            switch (keyCode) {
+                // press [F]
+                case 74:
+                    if (current_step === "one") {
                     //target on the left
                     response = stim2_name;
                     document.getElementById('stim2').style.border = "5px solid yellow";
@@ -752,36 +811,53 @@ var main_trials = function(){
 
                     document.getElementById('stim1').style.opacity = 0;
                     response_received = true;
-                }
-                break;
-            // press [J]  
-            case 70:
-                //target on the RIGHT
-                if (current_step === "one") {
-                response = stim1_name;
-                document.getElementById('stim1').style.border = "5px solid yellow";
+                    }
+                    break;
+                // press [J]  
+                case 70:
+                    //target on the RIGHT
+                    if (current_step === "one") {
+                    response = stim1_name;
+                    document.getElementById('stim1').style.border = "5px solid yellow";
 
-                $("#stim1").animate({ top: '-=20%', left: '+=22.5%' }, 300);
+                    $("#stim1").animate({ top: '-=20%', left: '+=22.5%' }, 300);
 
-                document.getElementById('stim2').style.opacity = 0;
+                    document.getElementById('stim2').style.opacity = 0;
 
                     response_received = true;
-                }
-                break;
+                    }
+                    break;
 
-            //case 32:
-            //    if (current_step === "two") {
-            //        response = "space";
-            //        response_step2 = "space";
-            //        document.getElementById('stim').style.border = "5px solid yellow";
-            //    }
-            //    break;
-            //if do not press anything
-            default:
-                response = "";
-                break;
+                case 32:
+                    if (current_step === "two") {
+                        response = "space";
+                        response_step2 = "space";
+                        document.getElementById('stim').style.border = "5px solid yellow";
+                        break;
+                    }
+                default:
+                    response = "";
+                    //response_step2 = "";
+                    break;
+            }
 
-        }
+        //if (current_step === "two") {
+        //switch (keyCode) {
+        //    case 32:
+        //        //response = "space";
+        //        response_step2 = "space";
+        //        document.getElementById('stim').style.border = "5px solid yellow";
+        //        break;
+        //    //if do not press anything
+        //    default:
+        //        response_step2 = "";
+        //        break;
+        //}
+
+        //    }
+
+ 
+
         if (response.length > 0) {
 
             current_step = "two";
@@ -803,9 +879,18 @@ var main_trials = function(){
                     .style("height", "300px");
             }
 
-            console.log(current_step, response_step2);
+            $("body").focus().keydown(function (e) {
+                if (e.keyCode == 32) {
+                    document.getElementById('stim').style.border = "5px solid yellow";
+                    response_step2 = "space";
 
+                    space_pressed = true;
 
+                    console.log(current_step, response_step2);
+
+                }
+            });
+            console.log(current_step, space_pressed);
 
             listening = false;
             var hit = response;
@@ -820,44 +905,65 @@ var main_trials = function(){
 
             });
 
-            console.log(stock1, 'stock1', stock2, 'stock2', response, response_step2);
 
+            if (space_pressed) {
+                //document.getElementById('stim').style.border = "5px solid yellow";
+                console.log('response_step2 === "space"');
+                if (timer) {
+                    // cancel existing timer if exist;
+                    clearTimeout(timer);
+                    warning = false;
+                }
+                setTimeout(function () {
+                    remove_stim();
+                    next();
+                    psiTurk.recordTrialData({
+                        'test': "test",
 
-            if (timer) {
-                // cancel existing timer if exist;
-                clearTimeout(timer);
+                    });
+                }, 1500);
             }
 
-            setTimeout(function () {
-                remove_stim();
-                next();
-            }, 1500);
-        };
+            //console.log(stock1, 'stock1', stock2, 'stock2', response, response_step2, warning);
+
+            //setTimeout(function () {
+            //    remove_stim();
+            //    next();
+            //}, 1500);
+
+
+
+
+            //document.addEventListener("keypress", myFunction);
+            //function myFunction(e) {
+            //    if (e.keyCode == 32 && current_step === "two") {
+            //        document.getElementById('stim').style.border = "5px solid yellow";
+            //        response_step2 = "space";
+
+            //        if (timer) {
+            //            // cancel existing timer;
+            //            clearTimeout(timer);
+            //            warning = false;
+            //        }
+
+            //        setTimeout(function () {
+            //            remove_stim();
+            //            next();
+            //            psiTurk.recordTrialData({
+            //                'test': "test",
+
+            //            });
+            //        }, 1500);
+            //    }
+            //};
+
+
+
     };
 
-    //document.addEventListener("keypress", myFunction);
-
-    //function myFunction(e) {
-    //    if (e.keyCode == 32 && current_step === "two") {
-    //        document.getElementById('stim').style.border = "5px solid yellow";
-    //        response_step2 = "space";
-
-    //        setTimeout(function () {
-    //            remove_stim();
-    //            next();
-
-    //            psiTurk.recordTrialData({
-    //                'test': "test",
-
-    //            });
-    //        }, 1500);
-    //    }
-
-    //}
 
 
-
-
+    }
 
    
     /*◢◤◢◤◢◤◢◤ prepare the page for practice phase B ◢◤◢◤◢◤◢◤*/
@@ -867,10 +973,7 @@ var main_trials = function(){
     // key down events.
     $("body").focus().keydown(response_handler);
     // start the first trial
-    next()
-
-
-
+    next();
 
     // finsh the training pahse;
     var finish = function () {
