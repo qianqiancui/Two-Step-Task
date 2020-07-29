@@ -48,7 +48,6 @@ var pages = [
 psiTurk.preloadPages(pages);
 
 var step_two_prac_stock1_pages = [ // add as a list as many pages as you like
-
     "instructions/step_two_prac_stock1.html"
 ];
 var step_two_prac_stock2_pages = [ // add as a list as many pages as you like
@@ -78,16 +77,13 @@ var main_trials_pages = [ // add as a list as many pages as you like
 
     "instructions/main_trials.html"
 ];
-var training_instruction_pages = [ // add as a list as many pages as you like
 
-	"instructions/instruct-ready.html"
-];
-
-
-var testing_instruction_pages = [// add as a list as many pages as you like
-   
-    "instructions/ansInstruct-ready.html"
-];
+//var training_instruction_pages = [ // add as a list as many pages as you like
+//	"instructions/instruct-ready.html"
+//];
+//var testing_instruction_pages = [// add as a list as many pages as you like 
+//    "instructions/ansInstruct-ready.html"
+//];
 
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
@@ -123,6 +119,9 @@ var step_two_practice_stock1_list, step_two_practice_stock2_list;
 /*◢◤◢◤◢◤◢◤ * variables for step one practice * ◢◤◢◤◢◤◢◤*/
 var left_target, right_target, chosen_target, chosen_stock;
 var stock1_img, stock2_img, stock1, stock2, stim1, stim2, stim1_name, stim2_name;
+
+var s1_a1, s1_a2, s2_a1, s2_a2;
+var s1_a1_img, s1_a2_img, s2_a1_img, s2_a2_img;
 
 var step_one_practice_trial_num = 16;
 var main_tirals_before_1st_break = 52;
@@ -168,6 +167,17 @@ if (decider <= 0.5) {
     stock2_img = "zephyr.jpg";
     step_two_practice_stock1_list = axiom_values;
     step_two_practice_stock2_list = zephyr__values;
+
+    s1_a1 = "a1";
+    s1_a1_img = "1.jpg";
+    s1_a2 = "a3";
+    s1_a2_img = "3.jpg"
+
+    s2_a1 = "a2";
+    s2_a1_img = "2.jpg";
+    s2_a2 = "a4";
+    s2_a2_img = "4.jpg"
+
 } else {
     stock2 = "axiom";
     stock2_img = "axiom.jpg";
@@ -176,6 +186,19 @@ if (decider <= 0.5) {
 
     step_two_practice_stock2_list = axiom_values;
     step_two_practice_stock1_list = zephyr__values;
+
+
+
+    s2_a1 = "a1";
+    s2_a1_img = "1.jpg";
+    s2_a2 = "a3";
+    s2_a2_img = "3.jpg"
+
+    s1_a1 = "a2";
+    s1_a1_img = "2.jpg";
+    s1_a2 = "a4";
+    s1_a2_img = "4.jpg"
+
 }
 console.log("stock1", stock1, "stock2", stock2);
 
@@ -183,19 +206,35 @@ console.log("stock1", stock1, "stock2", stock2);
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * prepare stimulus on both sides of the screen (in a balanced way) *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+//var left_right_order = [
+//    [[stock1_img, "1.jpg", stock1, "agent1", stock2_img, "2.jpg", stock2, "agent2"]],
+//    [[stock1_img, "1.jpg", stock1, "agent1", stock2_img, "4.jpg", stock2, "agent4"]],
+//    [[stock1_img, "3.jpg", stock1, "agent3", stock2_img, "2.jpg", stock2, "agent2"]],
+//    [[stock1_img, "3.jpg", stock1, "agent3", stock2_img, "4.jpg", stock2, "agent4"]]
+//];
+
+//var right_left_order = [
+//    [[stock2_img, "2.jpg", stock2, "agent2", stock1_img, "1.jpg", stock1, "agent1"]],
+//    [[stock2_img, "4.jpg", stock2, "agent4", stock1_img, "1.jpg", stock1, "agent1"]],
+//    [[stock2_img, "2.jpg", stock2, "agent2", stock1_img, "3.jpg", stock1, "agent3"]],
+//    [[stock2_img, "4.jpg", stock2, "agent4", stock1_img, "3.jpg", stock1, "agent3"]]
+//];
+
+
 var left_right_order = [
-    [[stock1_img, "1.jpg", stock1, "agent1", stock2_img, "2.jpg", stock2, "agent2"]],
-    [[stock1_img, "1.jpg", stock1, "agent1", stock2_img, "4.jpg", stock2, "agent4"]],
-    [[stock1_img, "3.jpg", stock1, "agent3", stock2_img, "2.jpg", stock2, "agent2"]],
-    [[stock1_img, "3.jpg", stock1, "agent3", stock2_img, "4.jpg", stock2, "agent4"]]
+    [[stock1_img, s1_a1_img, stock1, s1_a1, stock2_img, s2_a1_img, stock2, s2_a1]],
+    [[stock1_img, s1_a1_img, stock1, s1_a1, stock2_img, s2_a2_img, stock2, s2_a2]],
+    [[stock1_img, s1_a2_img, stock1, s1_a2, stock2_img, s2_a1_img, stock2, s2_a1]],
+    [[stock1_img, s1_a2_img, stock1, s1_a2, stock2_img, s2_a2_img, stock2, s2_a2]]
 ];
 
 var right_left_order = [
-    [[stock2_img, "2.jpg", stock2, "agent2", stock1_img, "1.jpg", stock1, "agent1"]],
-    [[stock2_img, "4.jpg", stock2, "agent4", stock1_img, "1.jpg", stock1, "agent1"]],
-    [[stock2_img, "2.jpg", stock2, "agent2", stock1_img, "3.jpg", stock1, "agent3"]],
-    [[stock2_img, "4.jpg", stock2, "agent4", stock1_img, "3.jpg", stock1, "agent3"]]
+    [[stock2_img, s2_a1_img, stock2, s2_a1, stock1_img, s1_a1_img, stock1, s1_a1]],
+    [[stock2_img, s2_a2_img, stock2, s2_a2, stock1_img, s1_a1_img, stock1, s1_a1]],
+    [[stock2_img, s2_a1_img, stock2, s2_a1, stock1_img, s1_a2_img, stock1, s1_a2]],
+    [[stock2_img, s2_a2_img, stock2, s2_a2, stock1_img, s1_a2_img, stock1, s1_a2]]
 ];
+
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * prepare balanced trials for step one tasks (practice & main trials) *
@@ -346,8 +385,13 @@ var response_handler = function (e) {
     if (!listening) return
 
 /*◢◤◢◤◢◤◢◤ record key pressing event & display animation effect ◢◤◢◤◢◤◢◤*/
-    var keyCode = e.keyCode,
-        response;
+    //var keyCode = e.keyCode,
+    //    response;
+    var response = -1; // reset response function
+    if (e === undefined) keyCode = 0;  // When this is a timeout, e will be undefined.
+
+    else keyCode = e.keyCode;
+
     switch (keyCode) {
         /*◢◤◢◤◢◤◢◤ press [J]; target on the RIGHT ◢◤◢◤◢◤◢◤*/
         case 74:
@@ -401,14 +445,18 @@ var response_handler = function (e) {
              }
             break;
 
+        case 0:
+            response = 'none';
+            break;
+
         //if do not press anything
         default:
-            response = "";
+            response = -1;
             break;
 
     }
-/*◢◤◢◤◢◤◢◤ record if length of the response > 0 ◢◤◢◤◢◤◢◤*/
-    if ((response.length > 0)) {
+/*◢◤◢◤◢◤◢◤ record if responding or too slow warning ◢◤◢◤◢◤◢◤*/
+    if ((response.length != -1)) {
 
     /*◢◤◢◤◢◤◢◤ record responses for step two practice ◢◤◢◤◢◤◢◤*/
         if (phase === "step_two_practice_stock1" || phase === "step_two_practice_stock2") {
@@ -465,11 +513,11 @@ var response_handler = function (e) {
         current_step = "two";
 
     /*◢◤◢◤◢◤◢◤ display stocks based on the chosen target ◢◤◢◤◢◤◢◤*/
-        if (chosen_target === "agent1" || chosen_target === "agent3") {
+        if (chosen_target === "a1" || chosen_target === "a3") {
             setTimeout(function () {
                d3.select("#stim")
                     .append("img")
-                    .attr("src", stimFolder + stock1_img)
+                    .attr("src", stimFolder + "axiom.jpg")
                     .attr("id", 'pic')
                     .style("width", "300px")
                     .style("height", "300px");
@@ -480,11 +528,11 @@ var response_handler = function (e) {
             if (phase === "step_one_practice_stock1") {
                 correct_num++;
             }
-        } else if (chosen_target === "agent2" || chosen_target === "agent4") {
+        } else if (chosen_target === "a2" || chosen_target === "a4") {
             setTimeout(function () {
                 d3.select("#stim")
                     .append("img")
-                    .attr("src", stimFolder + stock2_img)
+                    .attr("src", stimFolder + "zephyr.jpg")
                     .attr("id", 'pic')
                     .style("width", "300px")
                     .style("height", "300px");
@@ -1013,7 +1061,7 @@ var currentview;
 
 //$(window).load(function () {
 //    psiTurk.doInstructions(
-//        testing_instruction_pages, // a list of pages you want to display in sequence
+//         main_trials_pages,// a list of pages you want to display in sequence
 //        function () { currentview = new Questionnaire1(); } // what you want to do when you are done with instructions
 //    );
 //});
