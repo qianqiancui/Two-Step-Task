@@ -70,18 +70,12 @@ var rela_dict = {
     "stock2": ["agent2", "agent4"]
 };
 
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-◢◤                                                                                                                                ◢◤
-◢◤                                                    * Global Variables *                                                        ◢◤
-◢◤                                                                                                                                ◢◤
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* variables *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var stimFolder = "/static/images/";
-
-/*◢◤◢◤◢◤◢◤ * variables for step two practice * ◢◤◢◤◢◤◢◤*/
-var stock_value, stock_name;
-var step_two_practice_stock1_list, step_two_practice_stock2_list;
-
-/*◢◤◢◤◢◤◢◤ * variables for step one practice * ◢◤◢◤◢◤◢◤*/
 var left_target, right_target, chosen_target, chosen_stock;
 var stock1_img, stock2_img, stock1, stock2, stim1, stim2, stim1_name, stim2_name;
 
@@ -100,22 +94,16 @@ var phase, trials, current_trial;
 var trial_id;
 var timer_step1, timer_step2, timer_break; // (1), (2) → timer for "too slow" warning in step 1 & step; (3) → timer for break session;
 
-var axiom_reward, zephyr_reward;
+/*◢◤◢◤◢◤◢◤ * variables for step twp practice * ◢◤◢◤◢◤◢◤*/
+
+var stock_value, stock_name;
+var step_two_practice_stock1_list, step_two_practice_stock2_list;
 
 
-
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-◢◤                                                                                                                                ◢◤
-◢◤                                         * Elements for Building the Entire T ask *                                              ◢◤
-◢◤                                                                                                                                ◢◤
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
-
-/*◢◤◢◤◢◤◢◤ stock value lists for step two practice ◢◤◢◤◢◤◢◤*/
 var axiom_values = [["axiom.jpg", "+8", "axiom"], ["axiom.jpg", "+9", "axiom"], ["axiom.jpg", "+7", "axiom"],
 ["axiom.jpg", "+5", "axiom"], ["axiom.jpg", "+3", "axiom"]];
 var zephyr__values = [["zephyr.jpg", "+1", "zephyr"], ["zephyr.jpg", "+0", "zephyr"], ["zephyr.jpg", "+2", "zephyr"],
     ["zephyr.jpg", "+5", "zephyr"], ["zephyr.jpg", "+6", "zephyr"]];
-
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * decide which stock should be stock1/stock2 randomly *
@@ -141,9 +129,13 @@ if (decider <= 0.5) {
 console.log("stock1", stock1, "stock2", stock2);
 
 
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-* prepare stimulus on both sides of the screen (in a balanced way) *
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+
+
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+ * ◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* prepare stimuli on the right & on the left (in a balanced way) *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var left_right_order = [
     [[stock1_img, "1.jpg", stock1, "agent1", stock2_img, "2.jpg", stock2, "agent2"]],
     [[stock1_img, "1.jpg", stock1, "agent1", stock2_img, "4.jpg", stock2, "agent4"]],
@@ -182,6 +174,49 @@ var balanced_trials = function (left_side, right_side,  trial_num) {
     console.log(trial_container, 'preview all trials');
     return trial_container;
 
+};
+
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* PRACTICE STEP TWO - STOCK 1 *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+var step_two_practice_stock1 = function () {
+
+    phase = "step_two_practice_stock1";
+    trial_id = 1;
+
+
+    trials = step_two_practice_stock1_list;
+    // Load the stage.html snippet into the body of the page
+    psiTurk.showPage('stage.html');
+
+    // Register the response handler that is defined above to handle any
+    // key down events. 
+    $("body").focus().keydown(response_handler);
+
+    // Start practice phase A
+    next();
+};
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* PRACTICE STEP TWO - STOCK 2 *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+var step_two_practice_stock2 = function () {
+
+    phase = "step_two_practice_stock2";
+    trial_id = 1;
+
+
+    trials = step_two_practice_stock2_list;
+    // Load the stage.html snippet into the body of the page
+    psiTurk.showPage('stage.html');
+
+    // Register the response handler that is defined above to handle any
+    // key down events. 
+    $("body").focus().keydown(response_handler);
+
+    // Start practice phase A
+    next();
 };
 
 
@@ -507,7 +542,106 @@ var response_handler = function (e) {
 };
 
 
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* next() → Trial Structure *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+var next = function () {
+    switch (phase) {
 
+        case "step_two_practice_stock1":
+            /*◢◤◢◤◢◤◢◤ advance to practice phase b after finishing phase a ◢◤◢◤◢◤◢◤*/
+            if (trials.length === 0) {
+                return psiTurk.doInstructions(testing_instruction_pages,
+                    function () {
+
+                        currentview = new step_two_practice_stock2();
+                    }
+                );
+            } else {
+                load_trial();
+            }
+            break;
+
+        case "step_two_practice_stock2":
+            /*◢◤◢◤◢◤◢◤ advance to practice phase b after finishing phase a ◢◤◢◤◢◤◢◤*/
+            if (trials.length === 0) {
+                return psiTurk.doInstructions(testing_instruction_pages,
+                    function () {
+                        currentview = new step_one_practice_stock1();
+                    }
+                );
+            } else {
+                load_trial();
+            }
+            break;
+    /*◢◤◢◤◢◤◢◤ step_one_practice_stock1 ◢◤◢◤◢◤◢◤*/
+         case "step_one_practice_stock1":
+             /*◢◤◢◤◢◤◢◤ go to next phase if accuracy is >= 13/16 ◢◤◢◤◢◤◢◤*/
+            if (correct_num >= 13 && trials.length === 0) {
+                return psiTurk.doInstructions(testing_instruction_pages,
+                    function () {
+                         console.log('go to stock2 practice');
+                         currentview = new step_one_practice_stock2();
+                    });
+            /*◢◤◢◤◢◤◢◤  keep doing the same phase if accuracy is <= 13/16◢◤◢◤◢◤◢◤*/
+             } else if (correct_num < 13 && trials.length === 0) {
+                 return psiTurk.doInstructions(testing_instruction_pages,
+                     function () {
+                         console.log('keep doing stock1 practice');
+                         currentview = new step_one_practice_stock1();
+                     });
+            /*◢◤◢◤◢◤◢◤  begin the phase ◢◤◢◤◢◤◢◤*/
+             } else {
+                 load_trial();
+             };
+             break;
+    /*◢◤◢◤◢◤◢◤ step_one_practice_stock2 ◢◤◢◤◢◤◢◤*/
+        case "step_one_practice_stock2":
+        /*◢◤◢◤◢◤◢◤ go to next phase if accuracy is >= 13/16 ◢◤◢◤◢◤◢◤*/
+            if (correct_num >= 13 && trials.length === 0) {
+                return psiTurk.doInstructions(testing_instruction_pages,
+                    function () {
+                        console.log('go to main trials');
+                        currentview = new main_trials();
+                    });
+            /*◢◤◢◤◢◤◢◤  keep doing the same phase if accuracy is <= 13/16◢◤◢◤◢◤◢◤*/
+            } else if (correct_num < 13 && trials.length === 0) {
+                return psiTurk.doInstructions(testing_instruction_pages,
+                    function () {
+                        console.log('keep doing stock2 practice');
+                        currentview = new step_one_practice_stock2();
+                    });
+            /*◢◤◢◤◢◤◢◤  begin the phase ◢◤◢◤◢◤◢◤*/
+            } else {
+                load_trial();
+            };
+            break;
+    /*◢◤◢◤◢◤◢◤ main_trials ◢◤◢◤◢◤◢◤*/
+        case "main_trials":
+        /*◢◤◢◤◢◤◢◤ end the task if complete all the trials in this phase ◢◤◢◤◢◤◢◤*/
+            if (trials.length === 0) {
+                finish();
+            /*◢◤◢◤◢◤◢◤ break session @ trial #52 ◢◤◢◤◢◤◢◤*/
+            } else if (trial_id === 52) {
+                break_session();
+            } else {
+            /*◢◤◢◤◢◤◢◤  begin the phase ◢◤◢◤◢◤◢◤*/
+                load_trial();
+            /*◢◤◢◤◢◤◢◤ "too slow" warning for step 1 per trial ◢◤◢◤◢◤◢◤*/
+                timer_step1 = setTimeout(function () {
+                    d3.select('#warning').html('TOO SLOW!');
+                    warning = true;
+                /*◢◤◢◤◢◤◢◤ go to next trial after "too slow" warning ◢◤◢◤◢◤◢◤*/
+                    setTimeout(function () {
+                        remove_stim();
+                        next();
+                    }, 500);
+                }, response_deadline);
+
+            };
+            break;
+    };
+};
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * break session *
@@ -595,159 +729,6 @@ var calculate_reward = function () {
 
 
 
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
- ◢◤                                                                                                                                           ◢◤
- ◢◤                                                   * "Central Executive" *                                                                 ◢◤
- ◢◤                                                                                                                                           ◢◤
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-* decide next trial & link to different phases *
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
-var next = function () {
-    switch (phase) {
-
-        case "step_two_practice_stock1":
-            /*◢◤◢◤◢◤◢◤ advance to practice phase b after finishing phase a ◢◤◢◤◢◤◢◤*/
-            if (trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
-                    function () {
-                        currentview = new step_two_practice_stock2();
-                    }
-                );
-            } else {
-                load_trial();
-            }
-            break;
-
-        case "step_two_practice_stock2":
-            /*◢◤◢◤◢◤◢◤ advance to practice phase b after finishing phase a ◢◤◢◤◢◤◢◤*/
-            if (trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
-                    function () {
-                        currentview = new step_one_practice_stock1();
-                    }
-                );
-            } else {
-                load_trial();
-            }
-            break;
-        /*◢◤◢◤◢◤◢◤ step_one_practice_stock1 ◢◤◢◤◢◤◢◤*/
-        case "step_one_practice_stock1":
-            /*◢◤◢◤◢◤◢◤ go to next phase if accuracy is >= 13/16 ◢◤◢◤◢◤◢◤*/
-            if (correct_num >= 13 && trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
-                    function () {
-                        console.log('go to stock2 practice');
-                        currentview = new step_one_practice_stock2();
-                    });
-                /*◢◤◢◤◢◤◢◤  keep doing the same phase if accuracy is <= 13/16◢◤◢◤◢◤◢◤*/
-            } else if (correct_num < 13 && trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
-                    function () {
-                        console.log('keep doing stock1 practice');
-                        currentview = new step_one_practice_stock1();
-                    });
-                /*◢◤◢◤◢◤◢◤  begin the phase ◢◤◢◤◢◤◢◤*/
-            } else {
-                load_trial();
-            };
-            break;
-        /*◢◤◢◤◢◤◢◤ step_one_practice_stock2 ◢◤◢◤◢◤◢◤*/
-        case "step_one_practice_stock2":
-            /*◢◤◢◤◢◤◢◤ go to next phase if accuracy is >= 13/16 ◢◤◢◤◢◤◢◤*/
-            if (correct_num >= 13 && trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
-                    function () {
-                        console.log('go to main trials');
-                        currentview = new main_trials();
-                    });
-                /*◢◤◢◤◢◤◢◤  keep doing the same phase if accuracy is <= 13/16◢◤◢◤◢◤◢◤*/
-            } else if (correct_num < 13 && trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
-                    function () {
-                        console.log('keep doing stock2 practice');
-                        currentview = new step_one_practice_stock2();
-                    });
-                /*◢◤◢◤◢◤◢◤  begin the phase ◢◤◢◤◢◤◢◤*/
-            } else {
-                load_trial();
-            };
-            break;
-        /*◢◤◢◤◢◤◢◤ main_trials ◢◤◢◤◢◤◢◤*/
-        case "main_trials":
-            /*◢◤◢◤◢◤◢◤ end the task if complete all the trials in this phase ◢◤◢◤◢◤◢◤*/
-            if (trials.length === 0) {
-                finish();
-                /*◢◤◢◤◢◤◢◤ break session @ trial #52 ◢◤◢◤◢◤◢◤*/
-            } else if (trial_id === 52) {
-                break_session();
-            } else {
-                /*◢◤◢◤◢◤◢◤  begin the phase ◢◤◢◤◢◤◢◤*/
-                load_trial();
-                /*◢◤◢◤◢◤◢◤ "too slow" warning for step 1 per trial ◢◤◢◤◢◤◢◤*/
-                timer_step1 = setTimeout(function () {
-                    d3.select('#warning').html('TOO SLOW!');
-                    warning = true;
-                    /*◢◤◢◤◢◤◢◤ go to next trial after "too slow" warning ◢◤◢◤◢◤◢◤*/
-                    setTimeout(function () {
-                        remove_stim();
-                        next();
-                    }, 500);
-                }, response_deadline);
-
-            };
-            break;
-    };
-};
-
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
- ◢◤                                                                                                                                           ◢◤
- ◢◤                                                         * Task Phases *                                                                   ◢◤
- ◢◤                                                                                                                                           ◢◤
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
-
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-* PRACTICE STEP TWO - STOCK 1 *
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
-var step_two_practice_stock1 = function () {
-
-    phase = "step_two_practice_stock1";
-    trial_id = 1;
-
-
-    trials = step_two_practice_stock1_list;
-    // Load the stage.html snippet into the body of the page
-    psiTurk.showPage('stage.html');
-
-    // Register the response handler that is defined above to handle any
-    // key down events. 
-    $("body").focus().keydown(response_handler);
-
-    // Start practice phase A
-    next();
-};
-
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-* PRACTICE STEP TWO - STOCK 2 *
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
-var step_two_practice_stock2 = function () {
-
-    phase = "step_two_practice_stock2";
-    trial_id = 1;
-
-
-    trials = step_two_practice_stock2_list;
-    // Load the stage.html snippet into the body of the page
-    psiTurk.showPage('stage.html');
-
-    // Register the response handler that is defined above to handle any
-    // key down events. 
-    $("body").focus().keydown(response_handler);
-
-    // Start practice phase A
-    next();
-};
-
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * PRACTICE STEP ONE - STOCK 1 *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
@@ -760,7 +741,7 @@ var step_one_practice_stock1 = function () {
     correct_num = 0;
     //record trial id; 
     trial_id = 1;
-
+/*◢◤◢◤◢◤◢◤ prepare the page for practice phase B ◢◤◢◤◢◤◢◤*/
     // Load the stage.html snippet into the body of the page
     psiTurk.showPage('stage.html');
     // Register the response handler that is defined above to handle any
@@ -945,14 +926,14 @@ var currentview;
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
  * Run Task *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
-////test step_two_practice
-//$(window).load(function () {
-//    psiTurk.doInstructions(
-//        training_instruction_pages, // a list of pages you want to display in sequence
+//test step_two_practice
+$(window).load(function () {
+    psiTurk.doInstructions(
+        training_instruction_pages, // a list of pages you want to display in sequence
 
-//        function () { currentview = new step_two_practice_stock1(); } // what you want to do when you are done with instructions
-//    );
-//});
+        function () { currentview = new step_two_practice_stock1(); } // what you want to do when you are done with instructions
+    );
+});
 
 //////test step_one_practice_stock1
 //$(window).load( function(){
@@ -983,12 +964,12 @@ var currentview;
 
 
 
-///***for testing only.
-// * If you want to skip the training phase and test how the testing phase works, comment out the lines above and uncomment the lines below
-// ***/
-$(window).load(function () {
-    psiTurk.doInstructions(
-        testing_instruction_pages, // a list of pages you want to display in sequence
-        function () { currentview = new main_trials(); } // what you want to do when you are done with instructions
-    );
-});
+/////***for testing only.
+//// * If you want to skip the training phase and test how the testing phase works, comment out the lines above and uncomment the lines below
+//// ***/
+//$(window).load(function () {
+//    psiTurk.doInstructions(
+//        testing_instruction_pages, // a list of pages you want to display in sequence
+//        function () { currentview = new main_trials(); } // what you want to do when you are done with instructions
+//    );
+//});
