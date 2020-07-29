@@ -495,14 +495,15 @@ var response_handler = function (e) {
 
     /*◢◤◢◤◢◤◢◤ set up step 2 "too slow" warning ◢◤◢◤◢◤◢◤*/
         if (phase === "main_trials") {
-            timer_step2 = setTimeout(function () {
-                d3.select( '#warning').html('TOO SLOW!');
-                warning = true;
-                setTimeout(function () {
-                    remove_stim();
-                    next();
-                }, 500);
-            }, response_deadline);
+
+            //timer_step2 = setTimeout(function () {
+            //    d3.select( '#warning').html('TOO SLOW!');
+            //    warning = true;
+            //    setTimeout(function () {
+            //        remove_stim();
+            //        next();
+            //    }, 500);
+            //}, response_deadline);
 
             correct_num = "null";
         };
@@ -577,11 +578,11 @@ var response_handler = function (e) {
             if (response === "space") {
 
             /*◢◤◢◤◢◤◢◤ cancel the step 2 "too slow" warning if press [SPACE] bar before the response deadline ◢◤◢◤◢◤◢◤*/
-                if (timer_step2) {
-                    // cancel existing timer if exist;
-                    clearTimeout(timer_step2);
-                    warning = false;
-                };
+                //if (timer_step2) {
+                //    // cancel existing timer if exist;
+                //    clearTimeout(timer_step2);
+                //    warning = false;
+                //};
 
                 setTimeout(function () {
                     remove_stim();
