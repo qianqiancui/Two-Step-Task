@@ -130,6 +130,9 @@ div.show-stimuli {
   margin: 25px;
   */
      /*postion*/
+  height:300px;
+  width:300px;
+
   position: fixed;
   top: 40%;
   left: 20%;
@@ -142,6 +145,8 @@ div.show-stimuli {
   /*dfloat: right;
   margin: 25px;
   */
+    height:300px;
+  width:300px;
 
   /*postion*/
   position: fixed;

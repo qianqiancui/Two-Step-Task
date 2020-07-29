@@ -89,6 +89,8 @@ if (decider <= 0.5) {
 }
 
 
+
+
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * variables *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
@@ -97,10 +99,17 @@ var left_target, right_target;
 var stock1_img, stock2_img;
 var stock1, stock2;
 var stim1, stim2, stim1_name, stim2_name;
-var current_step;
 var response_deadline = 3000;
 var warning = false;
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+var listening = false;
+var correct_num;
+var stim_on; // time stimulus is presented
+var current_step;
+var phase, trials, current_trial;
+var trial_id;
+var timer_step1, timer_step2, timer_break;
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+ * ◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * prepare stimuli on the right & on the left (in a balanced way) *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var left_right_order = [
@@ -287,8 +296,8 @@ var show_stim = function (image1, image2) {
         .append("img")
         .attr("src", stimFolder + image1)
         .attr("id", 'pic1')
-        .style("width", "250px")
-        .style("height", "250px")
+        .style("width", "100%")
+        .style("height", "100%")
         .style("border", "initial")
         .style("top", "40%");
     //load image1 (on the right)
@@ -296,8 +305,8 @@ var show_stim = function (image1, image2) {
         .append("img") // append image
         .attr("src", stimFolder + image2)
         .attr("id", 'pic2')
-        .style("width", "250px")
-        .style("height", "250px")
+        .style("width", "100%")
+        .style("height", "100%")
         .style("border", "initial")
         .style("top", "40%");
 };
@@ -319,6 +328,11 @@ var remove_stim = function () {
     document.getElementById('stim1').style.left = "20%";
     document.getElementById('stim2').style.left = "80%";
 
+    document.getElementById('stim1').style.width = "";
+    document.getElementById('stim1').style.height = "";
+    document.getElementById('stim2').style.width = "";
+    document.getElementById('stim2').style.height= "";
+
     //opacity of each stimulus (0: transparent; 1: solid);
     document.getElementById('stim1').style.opacity = 1;
     document.getElementById('stim2').style.opacity = 1;
@@ -326,147 +340,292 @@ var remove_stim = function () {
     d3.select('#warning').html('');
 };
 
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* load necessary information for a single trial *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+var load_trial = function () {
+    /*◢◤◢◤◢◤◢◤ trial interval: 500ms  ◢◤◢◤◢◤◢◤*/
+    setTimeout(function () {
+        /*◢◤◢◤◢◤◢◤ record trial id ◢◤◢◤◢◤◢◤*/
+
+        /*◢◤◢◤◢◤◢◤ start practice ◢◤◢◤◢◤◢◤*/
+        stim_on = new Date().getTime();
+        listening = true;
+        console.log("trial id", trial_id);
+
+        current_trial = trials.shift();
+        //console.log('shift', current_trial);
+
+        //for debug purpose; 
+        //console.log(trials, 'trials', trial_id);
+        //console.log(current_trial, 'current', trial_id);
+
+        stim1 = current_trial[1];
+        stim2 = current_trial[5];
+        stim1_name = current_trial[3];
+        stim2_name = current_trial[7];
+        show_stim(stim1, stim2);
+
+        trial_id++;
+        current_step = "one";
+
+    }, 500);
+};
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-* PRACTICE STEP ONE - STOCK 1 *
+* record response *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
-var step_one_practice_stock1 = function () {
-    var stim_on, // time stimulus is presented
-        listening = false;
+var response_handler = function (e) {
+    if (!listening) return;
 
-    //record accuracy; 
-    var correct_num = 0;
-    //record trial id; 
-    var trial_id = 1;
-
-    //load trial information (image, variable name, etc)
-    var trials = balanced_trials(left_right_order, right_left_order, 16)
-    //console.log(trials,'preview all trials (shuffled)');
-    console.log(decider, 'decider', stock1, stock2);
-
-/*◢◤◢◤◢◤◢◤ load elemments per trial ◢◤◢◤◢◤◢◤*/
-    var next = function () {
-        /*◢◤◢◤◢◤◢◤ trial interval: 500ms  ◢◤◢◤◢◤◢◤*/
-        setTimeout(function () {
-            /*◢◤◢◤◢◤◢◤ record trial id ◢◤◢◤◢◤◢◤*/
-            trial_id++;
-            console.log(trials.length);
-
-            /*◢◤◢◤◢◤◢◤ go to main trials if getting 13 + judgements correct ◢◤◢◤◢◤◢◤*/
-            if (correct_num >= 13 && trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
-                    function () {
-                        currentview = new step_one_practice_stock2();
-                    }
-                );
-            } else if (correct_num < 13 && trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
-                    function () {
-                        console.log('keep doing stock2 test');
-                        currentview = new step_one_practice_stock1();
-                    }
-                );
-            } else {
-                /*◢◤◢◤◢◤◢◤ start practice ◢◤◢◤◢◤◢◤*/
-                stim_on = new Date().getTime();
-                listening = true;
-                var current_trial = trials.shift();
-                //console.log('shift', current_trial);
-
-                //for debug purpose; 
-                //console.log(trials, 'trials', trial_id);
-                //console.log(current_trial, 'current', trial_id);
-
-                stim1 = current_trial[1];
-                stim2 = current_trial[5];
-                stim1_name = current_trial[3];
-                stim2_name = current_trial[7];
-                show_stim(stim1, stim2);
-            };
-        }, 500);
-    };
-
-/*◢◤◢◤◢◤◢◤ record response ◢◤◢◤◢◤◢◤*/
-    /*◢◤◢◤◢◤◢◤ record response ◢◤◢◤◢◤◢◤*/
-    var response_handler = function (e) {
-        if (!listening) return;
-
-        var keyCode = e.keyCode,
-            response;
-        switch (keyCode) {
+    var keyCode = e.keyCode,
+        response;
+    switch (keyCode) {
         /*◢◤◢◤◢◤◢◤ press [F]; target on the left ◢◤◢◤◢◤◢◤*/
-            case 74:
+        case 74:
+            if (current_step === "one") {
                 response = stim2_name;
                 document.getElementById('stim2').style.border = "5px solid yellow";
 
-            /*◢◤◢◤◢◤◢◤ JQuery move image ◢◤◢◤◢◤◢◤*/
-                $("#stim2").animate({ top: '-=20%', left: '-=22.5%' }, 300);
+                /*◢◤◢◤◢◤◢◤ JQuery move image ◢◤◢◤◢◤◢◤*/
+                //$("#stim2").animate({ top: '-=20%', left: '-=25.5%', width: '-=11%', height: '-=15%' }, 300);
+                $("#stim2").animate({ top: '-=20%', left: '-=24.6%', width: '-=11%', height: '-=15%' }, 300);
 
                 document.getElementById('stim1').style.opacity = 0;
                 response_received = true;
-                break;
+            }
+            break;
         /*◢◤◢◤◢◤◢◤ press [J]; target on the RIGHT ◢◤◢◤◢◤◢◤*/
-            case 70:            
+        case 70:
+            if (current_step === "one") {
                 response = stim1_name;
                 document.getElementById('stim1').style.border = "5px solid yellow";
-            /*◢◤◢◤◢◤◢◤ JQuery move image ◢◤◢◤◢◤◢◤*/
-                $("#stim1").animate({ top: '-=20%', left: '+=22.5%' }, 300);
+                /*◢◤◢◤◢◤◢◤ JQuery move image ◢◤◢◤◢◤◢◤*/
+                //$("#stim1").animate({ top: '-=20%', left: '+=25.5%', width: '-=11%', height: '-=15%' }, 300);
+
+                $("#stim1").animate({ top: '-=20%', left: '+=24.6%', width: '-=11%', height: '-=15%' }, 300);
                 document.getElementById('stim2').style.opacity = 0;
                 response_received = true;
+            }
+            break;
+        //if do not press anything
+        case 32:
+            if (current_step === "two") {
+                response = "space";
+                response_step2 = "space";
+                document.getElementById('stim').style.border = "5px solid yellow";
+            }
                 break;
-            //if do not press anything
-            default:
-                response = "";
-                break;
+        default:
+            response = "";
+            break;
 
-        }
-        if (response.length > 0) {
+    }
+    if (response.length > 0) {
 
-            //setTimeout(function () {
-            //    //d3.select('#stock_value').html(stock_value);
-            //}, 500);
 
-            if (response === "agent1" || response === "agent3") {
-                d3.select("#stim")
+        if (timer_step1) {
+            // cancel existing timer if exist;
+            clearTimeout(timer_step1);
+            warning = false;
+        };
+
+        timer_step2 = setTimeout(function () {
+            d3.select('#warning').html('TOO SLOW!');
+            warning = true;
+            setTimeout(function () {
+                remove_stim();
+                next();
+            }, 500);
+        }, response_deadline);
+
+        //setTimeout(function () {
+        //    //d3.select('#stock_value').html(stock_value);
+        //}, 500);
+        current_step = "two";
+
+        if (response === "agent1" || response === "agent3") {
+            setTimeout(function (){
+           d3.select("#stim")
                     .append("img")
                     .attr("src", stimFolder + stock1_img)
                     .attr("id", 'pic')
                     .style("width", "300px")
                     .style("height", "300px");
+            }, 500);
+
+
+            if (phase === "step_one_practice_stock1") {
                 correct_num++;
             }
-            else if (response === "agent2" || response === "agent4") {
+        } else if (response === "agent2" || response === "agent4") {
+            setTimeout(function () {
                 d3.select("#stim")
                     .append("img")
                     .attr("src", stimFolder + stock2_img)
                     .attr("id", 'pic')
                     .style("width", "300px")
                     .style("height", "300px");
-            }
+            }, 500);
+
+            if (phase === "step_one_practice_stock2") {
+                correct_num++;
+            };
+
+        listening = false;
+        var hit = response;
+        var rt = new Date().getTime() - stim_on;
+        psiTurk.recordTrialData({
+            'phase': "step_one_practice",
+            'response': response,
+            'hit': hit,
+            'rt': rt,
+            'sto_step2ck1_name': stock1,
+            'stock2_name': stock2,
+            'correct_num': correct_num
+        });
+
+        console.log(stock1, 'stock1', stock2, 'stock2', correct_num, 'correct', response, current_step);
 
 
-            listening = false;
-            var hit = response;
-            var rt = new Date().getTime() - stim_on;
-            psiTurk.recordTrialData({
-                'phase': "step_one_practice",
-                'response': response,
-                'hit': hit,
-                'rt': rt,
-                'stock1_name': stock1,
-                'stock2_name': stock2,
-                'correct_num': correct_num
 
-            });
-
-            console.log(stock1,'stock1', stock2, 'stock2',correct_num, 'correct', response);
-
+        if (phase === "step_one_practice_stock1" || phase === "step_one_practice_stock2") {
             setTimeout(function () {
                 remove_stim();
                 next();
             }, 1500);
-        }
+        } else if (phase === "main_trials") {
+            if (response === "space") {
+               
+                if (timer_step2) {
+                    // cancel existing timer if exist;
+                    clearTimeout(timer_step2);
+                    warning = false;
+                };
+
+                setTimeout(function () {
+                    remove_stim();
+                    next();
+                }, 1500);
+            };
+        };
     };
+};
+
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* Trial Structure *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+var next = function () {
+    switch (phase) {
+    /*◢◤◢◤◢◤◢◤ step_one_practice_stock1 ◢◤◢◤◢◤◢◤*/
+         case "step_one_practice_stock1":
+             /*◢◤◢◤◢◤◢◤ go to main trials if getting 13 + judgements correct ◢◤◢◤◢◤◢◤*/
+            if (correct_num >= 13 && trials.length === 0) {
+                return psiTurk.doInstructions(testing_instruction_pages,
+                    function () {
+                         console.log('go to stock2 practice');
+                         currentview = new step_one_practice_stock2();
+                     });
+             } else if (correct_num < 13 && trials.length === 0) {
+                 return psiTurk.doInstructions(testing_instruction_pages,
+                     function () {
+                         console.log('keep doing stock1 practice');
+                         currentview = new step_one_practice_stock1();
+                     });
+             } else {
+                 load_trial();
+             };
+             break;
+    /*◢◤◢◤◢◤◢◤ step_one_practice_stock2 ◢◤◢◤◢◤◢◤*/
+        case "step_one_practice_stock2":
+            if (correct_num >= 13 && trials.length === 0) {
+                return psiTurk.doInstructions(testing_instruction_pages,
+                    function () {
+                        console.log('go to main trials');
+                        currentview = new main_trials();
+                    });
+            } else if (correct_num < 13 && trials.length === 0) {
+                return psiTurk.doInstructions(testing_instruction_pages,
+                    function () {
+                        console.log('keep doing stock2 practice');
+                        currentview = new step_one_practice_stock2();
+                    });
+            } else {
+                load_trial();
+            };
+            break;
+    /*◢◤◢◤◢◤◢◤ main_trials ◢◤◢◤◢◤◢◤*/
+        case "main_trials":
+            if (trials.length === 151) {
+                finish();
+            } else if (trial_id === 52) {
+                break_session();
+            } else {
+                load_trial();
+            /*◢◤◢◤◢◤◢◤ "too slow" warning for step 1 per trial ◢◤◢◤◢◤◢◤*/
+                timer_step1 = setTimeout(function () {
+                    d3.select('#warning').html('TOO SLOW!');
+                    warning = true;
+
+                    setTimeout(function () {
+                        remove_stim();
+                        next();
+                    }, 500);
+                }, response_deadline);
+
+            };
+            break;
+    };
+};
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* break session  *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+var break_session = function () {
+    var timeleft = 15;
+    /*◢◤◢◤◢◤◢◤ break sessions  ◢◤◢◤◢◤◢◤*/
+    timer_break = setInterval(function () {
+        console.log('break session');
+        d3.select("#pause_instruction").html('<p>You have finished a round of this task.</p><p>You will now take a break for 15 seconds.</p> <p>A 3 - second countdown will signal the start of the next round.</p>');
+        timeleft -= 1;
+        if (timeleft < 5) {
+            //d3.select("#fixation_cross").html("");
+            d3.select("#countdown").html(timeleft);
+        };
+        if (timeleft <= 0) {
+            clearInterval(timer_break);
+            d3.select("#countdown").html('');
+            d3.select("#pause_instruction").html('');
+            load_trial();
+
+            timer_step1 = setTimeout(function () {
+                d3.select('#warning').html('TOO SLOW!');
+                warning = true;
+                setTimeout(function () {
+                    remove_stim();
+                    next();
+                }, 500);
+            }, response_deadline);
+
+        }
+    }, 500);
+
+
+};
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* PRACTICE STEP ONE - STOCK 1 *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+var step_one_practice_stock1 = function () {
+    phase = "step_one_practice_stock1";
+    trials = balanced_trials(left_right_order, right_left_order, 16);
+    //record accuracy; 
+    //var correct_num = 0;
+
+    correct_num = 0;
+    //record trial id; 
+    trial_id = 1;
 /*◢◤◢◤◢◤◢◤ prepare the page for practice phase B ◢◤◢◤◢◤◢◤*/
     // Load the stage.html snippet into the body of the page
     psiTurk.showPage('stage.html');
@@ -482,148 +641,11 @@ var step_one_practice_stock1 = function () {
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var step_one_practice_stock2 = function () {
 
-    var stim_on, // time stimulus is presented
-        listening = false;
+    phase = "step_one_practice_stock2";
+    trials = balanced_trials(left_right_order, right_left_order, 16);
 
-    //record accuracy; 
-    var correct_num = 0;
-    //record trial id; 
-    var trial_id = 1;
-
-    //var stim1, stim2, stim1_name, stim2_name;
-
-
-    //load trial information (image, variable name, etc)
-    var trials = balanced_trials(left_right_order, right_left_order, 16)
-    //console.log(trials,'preview all trials (shuffled)');
-    console.log(decider, 'decider', stock1, stock2);
-
-    /*◢◤◢◤◢◤◢◤ load elemments per trial ◢◤◢◤◢◤◢◤*/
-    var next = function () {
-
-        setTimeout(function () {
-        /*◢◤◢◤◢◤◢◤ record trial id ◢◤◢◤◢◤◢◤*/
-        trial_id++;
-        console.log(trials.length);
-
-        /*◢◤◢◤◢◤◢◤ go to main trials if getting 13 + judgements correct ◢◤◢◤◢◤◢◤*/
-        if (correct_num >= 13 && trials.length === 0) {
-            return psiTurk.doInstructions(testing_instruction_pages,
-                function () {
-                    currentview = new main_trials();
-                }
-            );
-        } else if (correct_num < 13 && trials.length === 0) {
-            return psiTurk.doInstructions(testing_instruction_pages,
-                function () {
-                    console.log('keep doing stock2 test');
-                    currentview = new step_one_practice_stock2();
-                }
-            );
-        } else {
-            /*◢◤◢◤◢◤◢◤ start practice ◢◤◢◤◢◤◢◤*/
-            stim_on = new Date().getTime();
-            listening = true;
-            var current_trial = trials.shift();
-            //console.log('shift', current_trial);
-
-            //for debug purpose; 
-            //console.log(trials, 'trials', trial_id);
-            //console.log(current_trial, 'current', trial_id);
-
-            stim1 = current_trial[1];
-            stim2 = current_trial[5];
-            stim1_name = current_trial[3];
-            stim2_name = current_trial[7];
-            show_stim(stim1, stim2);
-        }
-        }, 500);
-    }
-
-    /*◢◤◢◤◢◤◢◤ record response ◢◤◢◤◢◤◢◤*/
-    var response_handler = function (e) {
-        if (!listening) return;
-
-        var keyCode = e.keyCode,
-            response;
-        switch (keyCode) {
-            // press [F]
-            case 74:
-                //target on the left
-                response = stim2_name;
-                document.getElementById('stim2').style.border = "5px solid yellow";
-
-                $("#stim2").animate({ top: '-=20%', left: '-=22.5%'}, 300);
-
-                document.getElementById('stim1').style.opacity = 0;
-                response_received = true;
-                break;
-            // press [J]  
-            case 70:
-                //target on the RIGHT 
-                response = stim1_name;
-                document.getElementById('stim1').style.border = "5px solid yellow";
-
-                $("#stim1").animate({ top: '-=20%', left: '+=22.5%' }, 300);
-
-                document.getElementById('stim2').style.opacity = 0;
-
-                response_received = true;
-                break;
-            //if do not press anything
-            default:
-                response = "";
-                break;
-
-        }
-        if (response.length > 0) {
-
-            //setTimeout(function () {
-            //    //d3.select('#stock_value').html(stock_value);
-            //}, 500);
-
-            if (response === "agent1" || response === "agent3") {
-                d3.select("#stim")
-                    .append("img")
-                    .attr("src", stimFolder + stock1_img)
-                    .attr("id", 'pic')
-                    .style("width", "300px")
-                    .style("height", "300px");
-
-            }
-            else if (response === "agent2" || response === "agent4") {
-                d3.select("#stim")
-                    .append("img")
-                    .attr("src", stimFolder + stock2_img)
-                    .attr("id", 'pic')
-                    .style("width", "300px")
-                    .style("height", "300px");
-                correct_num++;
-            }
-
-
-            listening = false;
-            var hit = response;
-            var rt = new Date().getTime() - stim_on;
-            psiTurk.recordTrialData({
-                'phase': "step_one_practice",
-                'response': response,
-                'hit': hit,
-                'rt': rt,
-                'stock1_name': stock1,
-                'stock2_name': stock2,
-                'correct_num': correct_num
-
-            });
-
-            console.log(stock1, 'stock1', stock2, 'stock2', correct_num, 'correct', response);
-
-            setTimeout(function () {
-                remove_stim();
-                next();
-            }, 1500);
-        }
-    };
+    correct_num = 0;
+    trial_id = 1;
 
     /*◢◤◢◤◢◤◢◤ prepare the page for practice phase B ◢◤◢◤◢◤◢◤*/
     // Load the stage.html snippet into the body of the page
@@ -631,7 +653,7 @@ var step_one_practice_stock2 = function () {
     // Register the response handler that is defined above to handle any
     // key down events.
     $("body").focus().keydown(response_handler);
-    // start the first trial
+    // srt the first trial
     next();
 };
 
@@ -639,331 +661,14 @@ var step_one_practice_stock2 = function () {
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * Main Trials *
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
-var main_trials = function(){
-    var stim_on, // time stimulus is presented
-        listening = false;
-
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤         main_trials = function(){   pha = "mai        
     //record trial id; 
-    var trial_id = 1;
-    //var response_step2 = "";
-/*◢◤◢◤◢◤◢◤ prepare necessary information for each trial ◢◤◢◤◢◤◢◤*/
-/*◢◤◢◤◢◤◢◤ change trial number here ◢◤◢◤◢◤◢◤*/
-    /* per the request, 4 pairs x 13 
-     *
-     * */
-
-    var pre_1st_break_trials = balanced_trials(left_right_order, right_left_order, 52);
+  tst_break_trials = balanced_trials(left_right_order, right_left_order, 52);
     var post_1st_break_trials = balanced_trials(left_right_order, right_left_order, 104);
 
-    var trials = pre_1st_break_trials.concat(post_1st_break_trials);
+    trials = pre_1st_break_trials.concat(post_1st_break_trials);
 
     console.log(pre_1st_break_trials, post_1st_break_trials, trials);
-
-
-    var timer;
-    var space_pressed = false;
-
-
-    /*◢◤◢◤◢◤◢◤ load elemments per trial ◢◤◢◤◢◤◢◤*/
-    var next = function () {
-
-
-        /*◢◤◢◤◢◤◢◤ trial interval: 500ms  ◢◤◢◤◢◤◢◤*/
-        setTimeout(function () {
-
-            if (document.getElementById('stim1').style.opacity === 0 || document.getElementById('stim2').style.opacity === 0) {
-                current_step = "two";
-            }
-            else {
-                current_step = "one";
-            }
-            /*◢◤◢◤◢◤◢◤ go to main trials if getting 13 + judgements correct ◢◤◢◤◢◤◢◤*/
-            if (trials.length === 151) {
-                finish();
-            } else if (trial_id === 2) {
-                var timeleft = 5;
-                /*◢◤◢◤◢◤◢◤ break sessions  ◢◤◢◤◢◤◢◤*/
-                var pause_timer = setInterval(function () {
-                    console.log('break session');
-                    d3.select("#pause_instruction").html('<p>You have finished a round of this task.</p><p>You will now take a break for 10 seconds.</p> <p>A 3 - second countdown will signal the start of the next round.</p>');
-                    timeleft -= 1;
-                    if (timeleft < 5) {
-                        //d3.select("#fixation_cross").html("");
-                        d3.select("#countdown").html(timeleft);
-                    };
-                    if (timeleft <= 0) {
-                        clearInterval(pause_timer);
-                        d3.select("#countdown").html('');
-                        d3.select("#pause_instruction").html('');
-                        /*◢◤◢◤◢◤◢◤ start practice ◢◤◢◤◢◤◢◤*/
-                        stim_on = new Date().getTime();
-                        listening = true;
-                        var current_trial = trials.shift();
-                        //console.log('shift', current_trial);
-
-                        //for debug purpose; 
-                        //console.log(trials, 'trials', trial_id);
-                        //console.log(current_trial, 'current', trial_id);
-
-                        /*◢◤◢◤◢◤◢◤ record trial id ◢◤◢◤◢◤◢◤*/
-                        trial_id++;
-                        console.log(trials.length);
-                        /*◢◤◢◤◢◤◢◤ get stim image ◢◤◢◤◢◤◢◤*/
-                        stim1 = current_trial[1];
-                        stim2 = current_trial[5];
-                        /*◢◤◢◤◢◤◢◤ get stim name ◢◤◢◤◢◤◢◤*/
-                        stim1_name = current_trial[3];
-                        stim2_name = current_trial[7];
-                        stim2 = current_trial[5];
-                        /*◢◤◢◤◢◤◢◤ display images for current trial ◢◤◢◤◢◤◢◤*/
-                        show_stim(stim1, stim2);
-
-
-                        timer = setTimeout(function () {
-                            //var timer = setTimeout(function () {
-                            d3.select('#warning').html('TOO SLOW!');
-                            warning = true;
-                            setTimeout(function () {
-                                remove_stim();
-                                next();
-                            }, 500);
-                        }, response_deadline);
-
-                    }
-                }, 500);
-
-            }else{
-
-            
-                /*◢◤◢◤◢◤◢◤ start practice ◢◤◢◤◢◤◢◤*/
-                stim_on = new Date().getTime();
-                listening = true;
-                var current_trial = trials.shift();
-                //console.log('shift', current_trial);
-
-                //for debug purpose; 
-                //console.log(trials, 'trials', trial_id);
-                //console.log(current_trial, 'current', trial_id);
-
-            /*◢◤◢◤◢◤◢◤ record trial id ◢◤◢◤◢◤◢◤*/
-                trial_id++;
-                console.log(trials.length);
-            /*◢◤◢◤◢◤◢◤ get stim image ◢◤◢◤◢◤◢◤*/
-                stim1 = current_trial[1];
-                stim2 = current_trial[5];
-            /*◢◤◢◤◢◤◢◤ get stim name ◢◤◢◤◢◤◢◤*/
-                stim1_name = current_trial[3];
-                stim2_name = current_trial[7];
-                stim2 = current_trial[5];
-            /*◢◤◢◤◢◤◢◤ display images for current trial ◢◤◢◤◢◤◢◤*/
-                show_stim(stim1, stim2);
-
-
-                timer = setTimeout(function () {
-                //var timer = setTimeout(function () {
-                    d3.select('#warning').html('TOO SLOW!');
-                    warning = true;
-                    setTimeout(function () {
-                        remove_stim();
-                        next();
-                    }, 500);
-                }, response_deadline);
-
-                space_pressed = false;
-                //timer;
-
-            //    if (timer && current_step === "two") {
-            //    // cancel existing timer if exist;
-            //    clearTimeout(timer);
-            //}
-                //console.log(current_step, warning);
-
-  
-
-            };
-        }, 500);
-    };
-
-
-
-
-
-
-    /*◢◤◢◤◢◤◢◤ record response ◢◤◢◤◢◤◢◤*/
-    var response_handler = function (e) {
-        if (!listening) return;
-
-        var keyCode = e.keyCode,
-            response;
-        //var response_step2;
-
-
-            switch (keyCode) {
-                // press [F]
-                case 74:
-                    if (current_step === "one") {
-                    //target on the left
-                    response = stim2_name;
-                    document.getElementById('stim2').style.border = "5px solid yellow";
-
-                    $("#stim2").animate({ top: '-=20%', left: '-=22.5%' }, 300);
-
-                    document.getElementById('stim1').style.opacity = 0;
-                    response_received = true;
-                    }
-                    break;
-                // press [J]  
-                case 70:
-                    //target on the RIGHT
-                    if (current_step === "one") {
-                    response = stim1_name;
-                    document.getElementById('stim1').style.border = "5px solid yellow";
-
-                    $("#stim1").animate({ top: '-=20%', left: '+=22.5%' }, 300);
-
-                    document.getElementById('stim2').style.opacity = 0;
-
-                    response_received = true;
-                    }
-                    break;
-
-                case 32:
-                    if (current_step === "two") {
-                        response = "space";
-                        response_step2 = "space";
-                        document.getElementById('stim').style.border = "5px solid yellow";
-                        break;
-                    }
-                default:
-                    response = "";
-                    //response_step2 = "";
-                    break;
-            }
-
-        //if (current_step === "two") {
-        //switch (keyCode) {
-        //    case 32:
-        //        //response = "space";
-        //        response_step2 = "space";
-        //        document.getElementById('stim').style.border = "5px solid yellow";
-        //        break;
-        //    //if do not press anything
-        //    default:
-        //        response_step2 = "";
-        //        break;
-        //}
-
-        //    }
-
- 
-
-        if (response.length > 0) {
-
-            current_step = "two";
-            if (response === "agent1" || response === "agent3") {
-                d3.select("#stim")
-                    .append("img")
-                    .attr("src", stimFolder + stock1_img)
-                    .attr("id", 'pic')
-                    .style("width", "300px")
-                    .style("height", "300px");
-
-            }
-            else if (response === "agent2" || response === "agent4") {
-                d3.select("#stim")
-                    .append("img")
-                    .attr("src", stimFolder + stock2_img)
-                    .attr("id", 'pic')
-                    .style("width", "300px")
-                    .style("height", "300px");
-            }
-
-            $("body").focus().keydown(function (e) {
-                if (e.keyCode == 32) {
-                    document.getElementById('stim').style.border = "5px solid yellow";
-                    response_step2 = "space";
-
-                    space_pressed = true;
-
-                    console.log(current_step, response_step2);
-
-                }
-            });
-            console.log(current_step, space_pressed);
-
-            listening = false;
-            var hit = response;
-            var rt = new Date().getTime() - stim_on;
-            psiTurk.recordTrialData({
-                'phase': "step_one_practice",
-                'response': response,
-                'hit': hit,
-                'rt': rt,
-                'stock1_name': stock1,
-                'stock2_name': stock2,
-
-            });
-
-
-            if (space_pressed) {
-                //document.getElementById('stim').style.border = "5px solid yellow";
-                console.log('response_step2 === "space"');
-                if (timer) {
-                    // cancel existing timer if exist;
-                    clearTimeout(timer);
-                    warning = false;
-                }
-                setTimeout(function () {
-                    remove_stim();
-                    next();
-                    psiTurk.recordTrialData({
-                        'test': "test",
-
-                    });
-                }, 1500);
-            }
-
-            //console.log(stock1, 'stock1', stock2, 'stock2', response, response_step2, warning);
-
-            //setTimeout(function () {
-            //    remove_stim();
-            //    next();
-            //}, 1500);
-
-
-
-
-            //document.addEventListener("keypress", myFunction);
-            //function myFunction(e) {
-            //    if (e.keyCode == 32 && current_step === "two") {
-            //        document.getElementById('stim').style.border = "5px solid yellow";
-            //        response_step2 = "space";
-
-            //        if (timer) {
-            //            // cancel existing timer;
-            //            clearTimeout(timer);
-            //            warning = false;
-            //        }
-
-            //        setTimeout(function () {
-            //            remove_stim();
-            //            next();
-            //            psiTurk.recordTrialData({
-            //                'test': "test",
-
-            //            });
-            //        }, 1500);
-            //    }
-            //};
-
-
-
-    };
-
-
-
-    }
 
    
     /*◢◤◢◤◢◤◢◤ prepare the page for practice phase B ◢◤◢◤◢◤◢◤*/
@@ -975,14 +680,16 @@ var main_trials = function(){
     // start the first trial
     next();
 
-    // finsh the training pahse;
-    var finish = function () {
-        $("body").unbind("keydown", response_handler); // Unbind keys
-        currentview = new Questionnaire1();
-    };
 };
 
 
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* Finish all the trials *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+var finish = function () {
+    $("body").unbind("keydown", response_handler); // Unbind keys
+    currentview = new Questionnaire1();
+};
 
 /****************
 * Questionnaire 1 *
@@ -1118,6 +825,16 @@ var currentview;
 //    );
 //});
 
+////test step_one_practice_stock2
+//$(window).load(function () {
+//    psiTurk.doInstructions(
+//        training_instruction_pages, // a list of pages you want to display in sequence
+
+//        function () { currentview = new step_one_practice_stock2(); } // what you want to do when you are done with instructions
+//    );
+//});
+
+
 
 //$(window).load(function () {
 //    psiTurk.doInstructions(
@@ -1130,7 +847,7 @@ var currentview;
 
 /***for testing only.
  * If you want to skip the training phase and test how the testing phase works, comment out the lines above and uncomment the lines below
- ***/
+// ***/
 $(window).load(function () {
     psiTurk.doInstructions(
         testing_instruction_pages, // a list of pages you want to display in sequence
