@@ -34,11 +34,50 @@ var pages = [
     "instructions/instruct-ready.html",
     "stage.html",
     "instructions/ansInstruct-ready.html",
-        "postquestionnaire1.html"
+    "postquestionnaire1.html",
+
+    "instructions/step_two_prac_stock1.html",
+    "instructions/step_two_prac_stock2.html",
+    "instructions/step_one_prac_stock1_reminder.html",
+    "instructions/step_one_prac_stock2_reminder.html",
+    "instructions/step_one_prac_stock1.html",
+    "instructions/step_one_prac_stock2.html",
+    "instructions/main_trials.html"
 ];
 
 psiTurk.preloadPages(pages);
 
+var step_two_prac_stock1_pages = [ // add as a list as many pages as you like
+
+    "instructions/step_two_prac_stock1.html"
+];
+var step_two_prac_stock2_pages = [ // add as a list as many pages as you like
+
+    "instructions/step_two_prac_stock2.html"
+];
+
+var step_one_prac_stock1_reminder_pages = [ // add as a list as many pages as you like
+
+    "instructions/step_one_prac_stock1_reminder.html"
+];
+var step_one_prac_stock2_reminder_pages = [ // add as a list as many pages as you like
+
+    "instructions/step_one_prac_stock2_reminder.html"
+];
+
+var step_one_prac_stock1_pages = [ // add as a list as many pages as you like
+
+    "instructions/step_one_prac_stock1.html"
+];
+var step_one_prac_stock2_pages = [ // add as a list as many pages as you like
+
+    "instructions/step_one_prac_stock2.html"
+];
+
+var main_trials_pages = [ // add as a list as many pages as you like
+
+    "instructions/main_trials.html"
+];
 var training_instruction_pages = [ // add as a list as many pages as you like
 
 	"instructions/instruct-ready.html"
@@ -159,7 +198,7 @@ var right_left_order = [
 ];
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-* prepare balanced trials for STEP ONE TASKS (practice & main trials) *
+* prepare balanced trials for step one tasks (practice & main trials) *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var balanced_trials = function (left_side, right_side,  trial_num) {
     var trial_container_1 = [];
@@ -347,10 +386,9 @@ var response_handler = function (e) {
                 $("#stim1").animate({ top: '-=20%', left: '+=24.6%', width: '-=11%', height: '-=15%' }, 300);
 
                 // stimulus becomes around 60% of its orignal size
-               //$("#stim1").animate({ top: '-=20%', left: '+=25.5%', width: '-=11%', height: '-=15%' }, 300);
+                //$("#stim1").animate({ top: '-=20%', left: '+=25.5%', width: '-=11%', height: '-=15%' }, 300);
                 //hide the other stimulus
                 document.getElementById('stim2').style.opacity = 0;
-
             }
             break;
 
@@ -551,10 +589,10 @@ var break_session = function () {
 
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-* prepare reward *
+  * Gaussian stuff *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 // return random number from Gaussian distribution (mean = 0) with specified standard deviation
-function return_Gaussian_withSD(mean, std_dev) {
+var return_Gaussian_withSD = function (mean, std_dev) {
     return mean + (return_Gaussian() * std_dev);
 }
 
@@ -562,7 +600,7 @@ function return_Gaussian_withSD(mean, std_dev) {
 // ~95% of numbers returned should fall between -2 and 2
 // uses Box-Muller transform to convert from uniform distribution to Gaussian distribution
 // taken from https://stackoverflow.com/questions/25582882/javascript-math-random-normal-distribution-gaussian-bell-curve
-function return_Gaussian() {
+var return_Gaussian = function () {
     var u = 0, v = 0;
     while (u === 0) u = Math.random(); //Converting [0,1) to (0,1)
     while (v === 0) v = Math.random();
@@ -573,12 +611,11 @@ function return_Gaussian() {
 // the value is no lower than the min (or the next integer greater than min
 // if min isn't an integer) and no greater than the max (or the next integer
 // lower than max if max isn't an integer)
-function getRandomInt(min, max) {
+var getRandomInt = function (min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
 
     // one stock should start between +0 and +4 points; other stock should start between +5 and +9 points
     // then each fluctuate according to a Gaussian random walk with SD = 2
@@ -605,29 +642,29 @@ var calculate_reward = function () {
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var next = function () {
     switch (phase) {
-
         case "step_two_practice_stock1":
-            /*◢◤◢◤◢◤◢◤ advance to practice phase b after finishing phase a ◢◤◢◤◢◤◢◤*/
+            /*◢◤◢◤◢◤◢◤ go to next phase if finshing all trials for current phase ◢◤◢◤◢◤◢◤*/
             if (trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
+                return psiTurk.doInstructions(step_two_prac_stock2_pages,
                     function () {
                         currentview = new step_two_practice_stock2();
                     }
                 );
             } else {
+            /*◢◤◢◤◢◤◢◤  begin the phase ◢◤◢◤◢◤◢◤*/
                 load_trial();
             }
             break;
-
         case "step_two_practice_stock2":
-            /*◢◤◢◤◢◤◢◤ advance to practice phase b after finishing phase a ◢◤◢◤◢◤◢◤*/
+        /*◢◤◢◤◢◤◢◤ go to next phase if finshing all trials for current phase ◢◤◢◤◢◤◢◤*/
             if (trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
+                return psiTurk.doInstructions(step_one_prac_stock1_pages,
                     function () {
                         currentview = new step_one_practice_stock1();
                     }
                 );
             } else {
+            /*◢◤◢◤◢◤◢◤  begin the phase ◢◤◢◤◢◤◢◤*/
                 load_trial();
             }
             break;
@@ -635,14 +672,14 @@ var next = function () {
         case "step_one_practice_stock1":
             /*◢◤◢◤◢◤◢◤ go to next phase if accuracy is >= 13/16 ◢◤◢◤◢◤◢◤*/
             if (correct_num >= 13 && trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
+                return psiTurk.doInstructions(step_one_prac_stock2_pages,
                     function () {
                         console.log('go to stock2 practice');
                         currentview = new step_one_practice_stock2();
                     });
                 /*◢◤◢◤◢◤◢◤  keep doing the same phase if accuracy is <= 13/16◢◤◢◤◢◤◢◤*/
             } else if (correct_num < 13 && trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
+                return psiTurk.doInstructions(step_one_prac_stock1_reminder_pages,
                     function () {
                         console.log('keep doing stock1 practice');
                         currentview = new step_one_practice_stock1();
@@ -656,14 +693,14 @@ var next = function () {
         case "step_one_practice_stock2":
             /*◢◤◢◤◢◤◢◤ go to next phase if accuracy is >= 13/16 ◢◤◢◤◢◤◢◤*/
             if (correct_num >= 13 && trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
+                return psiTurk.doInstructions(main_trials_pages,
                     function () {
                         console.log('go to main trials');
                         currentview = new main_trials();
                     });
                 /*◢◤◢◤◢◤◢◤  keep doing the same phase if accuracy is <= 13/16◢◤◢◤◢◤◢◤*/
             } else if (correct_num < 13 && trials.length === 0) {
-                return psiTurk.doInstructions(testing_instruction_pages,
+                return psiTurk.doInstructions(step_one_prac_stock2_reminder_pages,
                     function () {
                         console.log('keep doing stock2 practice');
                         currentview = new step_one_practice_stock2();
@@ -948,7 +985,7 @@ var currentview;
 ////test step_two_practice
 //$(window).load(function () {
 //    psiTurk.doInstructions(
-//        training_instruction_pages, // a list of pages you want to display in sequence
+//        step_two_prac_stock1_pages, // a list of pages you want to display in sequence
 
 //        function () { currentview = new step_two_practice_stock1(); } // what you want to do when you are done with instructions
 //    );
@@ -957,7 +994,7 @@ var currentview;
 //////test step_one_practice_stock1
 //$(window).load( function(){
 //    psiTurk.doInstructions(
-//        training_instruction_pages, // a list of pages you want to display in sequence
+//        step_one_prac_stock1_pages, // a list of pages you want to display in sequence
 
 //        function () { currentview = new step_one_practice_stock1(); } // what you want to do when you are done with instructions
 //    );
@@ -966,7 +1003,7 @@ var currentview;
 ////test step_one_practice_stock2
 //$(window).load(function () {
 //    psiTurk.doInstructions(
-//        training_instruction_pages, // a list of pages you want to display in sequence
+//        step_one_prac_stock2_pages, // a list of pages you want to display in sequence
 
 //        function () { currentview = new step_one_practice_stock2(); } // what you want to do when you are done with instructions
 //    );
@@ -988,7 +1025,7 @@ var currentview;
 // ***/
 $(window).load(function () {
     psiTurk.doInstructions(
-        testing_instruction_pages, // a list of pages you want to display in sequence
+        main_trials_pages, // a list of pages you want to display in sequence
         function () { currentview = new main_trials(); } // what you want to do when you are done with instructions
     );
 });
