@@ -51,7 +51,7 @@ var testing_instruction_pages = [// add as a list as many pages as you like
 ];
 
 
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * HTML manipulation
 *
 * All HTML files in the templates directory are requested 
@@ -131,10 +131,9 @@ var right_left_order = [
     [[stock2_img, "4.jpg", stock2, "agent4", stock1_img, "3.jpg", stock1, "agent3"]]
 ];
 
-
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-* prepare balanced trials for  STEP ONE TASKS (practice & main trials)
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* prepare balanced trials for STEP ONE TASKS (practice & main trials) *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var balanced_trials = function (left_side, right_side,  trial_num) {
     var trial_container_1 = [];
     var trial_container_2 = [];
@@ -159,9 +158,9 @@ var balanced_trials = function (left_side, right_side,  trial_num) {
 };
 
 
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * PRACTICE STEP TWO*
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var step_two_practice = function () {
     /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤variable list ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
     var stim_on, // time stimulus is presented
@@ -327,12 +326,13 @@ var remove_stim = function () {
     document.getElementById('stim1').style.border = "initial";
     document.getElementById('stim2').style.border = "initial";
 
+    //back to original positions
     document.getElementById('stim1').style.top = "40%";
     document.getElementById('stim2').style.top = "40%";
 
     document.getElementById('stim1').style.left = "20%";
     document.getElementById('stim2').style.left = "80%";
-
+    // back to orignial size
     document.getElementById('stim1').style.width = "";
     document.getElementById('stim1').style.height = "";
     document.getElementById('stim2').style.width = "";
@@ -342,6 +342,7 @@ var remove_stim = function () {
     document.getElementById('stim1').style.opacity = 1;
     document.getElementById('stim2').style.opacity = 1;
 
+    //clear "too slow" text
     d3.select('#warning').html('');
 };
 
@@ -359,11 +360,12 @@ var load_trial = function () {
         console.log("trial id", trial_id);
 
         current_trial = trials.shift();
-        //console.log('shift', current_trial);
+
 
         //for debug purpose; 
         //console.log(trials, 'trials', trial_id);
         //console.log(current_trial, 'current', trial_id);
+        //console.log('shift', current_trial);
 
         //find path & name of the image
         stim1 = current_trial[1];
@@ -636,7 +638,7 @@ var next = function () {
 };
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-* break session  *
+* break session *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var break_session = function () {
 /*◢◤◢◤◢◤◢◤ main_trials ◢◤◢◤◢◤◢◤*/
@@ -674,9 +676,56 @@ var break_session = function () {
 
 };
 
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* prepare reward *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+// return random number from Gaussian distribution (mean = 0) with specified standard deviation
+function return_Gaussian_withSD(mean, std_dev) {
+    return mean + (return_Gaussian() * std_dev);
+}
+
+// returns random number from Gaussian distribution (mean = 0, SD = 1)
+// ~95% of numbers returned should fall between -2 and 2
+// uses Box-Muller transform to convert from uniform distribution to Gaussian distribution
+// taken from https://stackoverflow.com/questions/25582882/javascript-math-random-normal-distribution-gaussian-bell-curve
+function return_Gaussian() {
+    var u = 0, v = 0;
+    while (u === 0) u = Math.random(); //Converting [0,1) to (0,1)
+    while (v === 0) v = Math.random();
+    return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+}
+
+// returns a random integer between min (inclusive) and max (inclusive)
+// the value is no lower than the min (or the next integer greater than min
+// if min isn't an integer) and no greater than the max (or the next integer
+// lower than max if max isn't an integer)
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+    // one stock should start between +0 and +4 points; other stock should start between +5 and +9 points
+    // then each fluctuate according to a Gaussian random walk with SD = 2
+    // with bounds at +0 and +9
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* reward calculator *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+var calculate_reward = function () {
+
+    
+
+};
+
+
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * PRACTICE STEP ONE - STOCK 1 *
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var step_one_practice_stock1 = function () {
     phase = "step_one_practice_stock1";
     trials = balanced_trials(left_right_order, right_left_order, step_one_practice_trial_num);
@@ -696,9 +745,9 @@ var step_one_practice_stock1 = function () {
     next();
 };
 
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * PRACTICE STEP ONE - STOCK 2 *
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var step_one_practice_stock2 = function () {
 
     phase = "step_one_practice_stock2";
@@ -880,14 +929,14 @@ var currentview;
 //    );
 //});
 
-//////test step_one_practice_stock1
-//$(window).load( function(){
-//    psiTurk.doInstructions(
-//        training_instruction_pages, // a list of pages you want to display in sequence
+////test step_one_practice_stock1
+$(window).load( function(){
+    psiTurk.doInstructions(
+        training_instruction_pages, // a list of pages you want to display in sequence
 
-//        function () { currentview = new step_one_practice_stock1(); } // what you want to do when you are done with instructions
-//    );
-//});
+        function () { currentview = new step_one_practice_stock1(); } // what you want to do when you are done with instructions
+    );
+});
 
 ////test step_one_practice_stock2
 //$(window).load(function () {
@@ -909,12 +958,12 @@ var currentview;
 
 
 
-///***for testing only.
-// * If you want to skip the training phase and test how the testing phase works, comment out the lines above and uncomment the lines below
-// ***/
-$(window).load(function () {
-    psiTurk.doInstructions(
-        testing_instruction_pages, // a list of pages you want to display in sequence
-        function () { currentview = new main_trials(); } // what you want to do when you are done with instructions
-    );
-});
+/////***for testing only.
+//// * If you want to skip the training phase and test how the testing phase works, comment out the lines above and uncomment the lines below
+//// ***/
+//$(window).load(function () {
+//    psiTurk.doInstructions(
+//        testing_instruction_pages, // a list of pages you want to display in sequence
+//        function () { currentview = new main_trials(); } // what you want to do when you are done with instructions
+//    );
+//});

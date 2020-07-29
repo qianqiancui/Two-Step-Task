@@ -5,7 +5,7 @@ Step Two Practice &nbsp; &nbsp; Step One Practice B&nbsp; &nbsp; Main Trial\
 
 ### Features:
 * example of animation effect after options being selected
-![two step practice](https://raw.githubusercontent.com/qianqiancui/Two-Step-Task/master/two_step_practice.gif)
+![two step practice](https://raw.githubusercontent.com/qianqiancui/Two-Step-Task/master/new_animation.gif)
 * example of break session & "too slow" warning
 ![break & too slow](https://raw.githubusercontent.com/qianqiancui/Two-Step-Task/master/break&too_slow.gif)
 
