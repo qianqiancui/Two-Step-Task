@@ -429,15 +429,16 @@ var response_handler = function (e) {
             clearTimeout(timer_step1);
             warning = false;
         };
-
-        timer_step2 = setTimeout(function () {
-            d3.select('#warning').html('TOO SLOW!');
-            warning = true;
-            setTimeout(function () {
-                remove_stim();
-                next();
-            }, 500);
-        }, response_deadline);
+        if (phase === "main_trials"){
+            timer_step2 = setTimeout(function () {
+                d3.select('#warning').html('TOO SLOW!');
+                warning = true;
+                setTimeout(function () {
+                    remove_stim();
+                    next();
+                }, 500);
+            }, response_deadline);
+        };
 
         //setTimeout(function () {
         //    //d3.select('#stock_value').html(stock_value);
@@ -445,8 +446,8 @@ var response_handler = function (e) {
         current_step = "two";
 
         if (response === "agent1" || response === "agent3") {
-            setTimeout(function (){
-           d3.select("#stim")
+            setTimeout(function () {
+               d3.select("#stim")
                     .append("img")
                     .attr("src", stimFolder + stock1_img)
                     .attr("id", 'pic')
@@ -471,6 +472,7 @@ var response_handler = function (e) {
             if (phase === "step_one_practice_stock2") {
                 correct_num++;
             };
+        };
 
         listening = false;
         var hit = response;
@@ -661,9 +663,12 @@ var step_one_practice_stock2 = function () {
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * Main Trials *
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤         main_trials = function(){   pha = "mai        
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+
+var main_trials = function () {
+    phase = "main_trials";
     //record trial id; 
-  tst_break_trials = balanced_trials(left_right_order, right_left_order, 52);
+    var pre_1st_break_trials = balanced_trials(left_right_order, right_left_order, 52);
     var post_1st_break_trials = balanced_trials(left_right_order, right_left_order, 104);
 
     trials = pre_1st_break_trials.concat(post_1st_break_trials);
@@ -679,7 +684,6 @@ var step_one_practice_stock2 = function () {
     $("body").focus().keydown(response_handler);
     // start the first trial
     next();
-
 };
 
 
@@ -816,7 +820,7 @@ var currentview;
 //    );
 //});
 
-////test step_one_practice_stock1
+//////test step_one_practice_stock1
 //$(window).load( function(){
 //    psiTurk.doInstructions(
 //        training_instruction_pages, // a list of pages you want to display in sequence
@@ -845,12 +849,12 @@ var currentview;
 
 
 
-/***for testing only.
- * If you want to skip the training phase and test how the testing phase works, comment out the lines above and uncomment the lines below
-// ***/
-$(window).load(function () {
-    psiTurk.doInstructions(
-        testing_instruction_pages, // a list of pages you want to display in sequence
-        function () { currentview = new main_trials(); } // what you want to do when you are done with instructions
-    );
-});
+///***for testing only.
+// * If you want to skip the training phase and test how the testing phase works, comment out the lines above and uncomment the lines below
+//// ***/
+//$(window).load(function () {
+//    psiTurk.doInstructions(
+//        testing_instruction_pages, // a list of pages you want to display in sequence
+//        function () { currentview = new main_trials(); } // what you want to do when you are done with instructions
+//    );
+//});
