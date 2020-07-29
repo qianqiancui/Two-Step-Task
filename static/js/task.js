@@ -95,10 +95,10 @@ if (decider <= 0.5) {
 * variables *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var stimFolder = "/static/images/";
-var left_target, right_target;
-var stock1_img, stock2_img;
-var stock1, stock2;
-var stim1, stim2, stim1_name, stim2_name;
+var left_target, right_target, chosen_target;
+var stock1_img, stock2_img, stock1, stock2, stim1, stim2, stim1_name, stim2_name;
+
+
 var response_deadline = 3000;
 var warning = false;
 var listening = false;
@@ -108,6 +108,7 @@ var current_step;
 var phase, trials, current_trial;
 var trial_id;
 var timer_step1, timer_step2, timer_break;
+
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
  * ◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * prepare stimuli on the right & on the left (in a balanced way) *
@@ -366,6 +367,9 @@ var load_trial = function () {
         stim2_name = current_trial[7];
         show_stim(stim1, stim2);
 
+        left_target = stim1_name;
+        right_target = stim2_name;
+
         trial_id++;
         current_step = "one";
 
@@ -381,31 +385,39 @@ var response_handler = function (e) {
     var keyCode = e.keyCode,
         response;
     switch (keyCode) {
-        /*◢◤◢◤◢◤◢◤ press [F]; target on the left ◢◤◢◤◢◤◢◤*/
+        /*◢◤◢◤◢◤◢◤ press [J]; target on the RIGHT ◢◤◢◤◢◤◢◤*/
         case 74:
             if (current_step === "one") {
-                response = stim2_name;
+            /*◢◤◢◤◢◤◢◤ record resoponse ◢◤◢◤◢◤◢◤*/
+                response = "right";
+                chosen_target = stim2_name;
+            /*◢◤◢◤◢◤◢◤ display animation effect ◢◤◢◤◢◤◢◤*/
+                //add solid box
                 document.getElementById('stim2').style.border = "5px solid yellow";
-
-                /*◢◤◢◤◢◤◢◤ JQuery move image ◢◤◢◤◢◤◢◤*/
+                // move to the left & top
                 //$("#stim2").animate({ top: '-=20%', left: '-=25.5%', width: '-=11%', height: '-=15%' }, 300);
                 $("#stim2").animate({ top: '-=20%', left: '-=24.6%', width: '-=11%', height: '-=15%' }, 300);
-
+                //hide the other stimulus
                 document.getElementById('stim1').style.opacity = 0;
-                response_received = true;
+ 
             }
             break;
-        /*◢◤◢◤◢◤◢◤ press [J]; target on the RIGHT ◢◤◢◤◢◤◢◤*/
+        /*◢◤◢◤◢◤◢◤ press [F]; target on the LEFT ◢◤◢◤◢◤◢◤*/
         case 70:
             if (current_step === "one") {
-                response = stim1_name;
-                document.getElementById('stim1').style.border = "5px solid yellow";
-                /*◢◤◢◤◢◤◢◤ JQuery move image ◢◤◢◤◢◤◢◤*/
-                //$("#stim1").animate({ top: '-=20%', left: '+=25.5%', width: '-=11%', height: '-=15%' }, 300);
+            /*◢◤◢◤◢◤◢◤ record resoponse ◢◤◢◤◢◤◢◤*/
+                response = "left";
 
+                chosen_target = stim1_name;
+            /*◢◤◢◤◢◤◢◤ display animation effect ◢◤◢◤◢◤◢◤*/
+                //add solid box
+                document.getElementById('stim1').style.border = "5px solid yellow";
+                // move to the left & top
+                //$("#stim1").animate({ top: '-=20%', left: '+=25.5%', width: '-=11%', height: '-=15%' }, 300);
                 $("#stim1").animate({ top: '-=20%', left: '+=24.6%', width: '-=11%', height: '-=15%' }, 300);
+                //hide the other stimulus
                 document.getElementById('stim2').style.opacity = 0;
-                response_received = true;
+
             }
             break;
         //if do not press anything
@@ -431,7 +443,7 @@ var response_handler = function (e) {
         };
         if (phase === "main_trials"){
             timer_step2 = setTimeout(function () {
-                d3.select('#warning').html('TOO SLOW!');
+                d3.select( '#warning').html('TOO SLOW!');
                 warning = true;
                 setTimeout(function () {
                     remove_stim();
@@ -445,7 +457,7 @@ var response_handler = function (e) {
         //}, 500);
         current_step = "two";
 
-        if (response === "agent1" || response === "agent3") {
+        if (chosen_target === "agent1" || chosen_target === "agent3") {
             setTimeout(function () {
                d3.select("#stim")
                     .append("img")
@@ -454,12 +466,10 @@ var response_handler = function (e) {
                     .style("width", "300px")
                     .style("height", "300px");
             }, 500);
-
-
             if (phase === "step_one_practice_stock1") {
                 correct_num++;
             }
-        } else if (response === "agent2" || response === "agent4") {
+        } else if (chosen_target === "agent2" || chosen_target === "agent4") {
             setTimeout(function () {
                 d3.select("#stim")
                     .append("img")
@@ -475,19 +485,21 @@ var response_handler = function (e) {
         };
 
         listening = false;
-        var hit = response;
+
         var rt = new Date().getTime() - stim_on;
         psiTurk.recordTrialData({
-            'phase': "step_one_practice",
+            'phase': phase,
             'response': response,
-            'hit': hit,
+            'left_target': left_target,
+            'right_target': right_target,
+            'chosen_target': chosen_target,
             'rt': rt,
-            'sto_step2ck1_name': stock1,
+            'stock1_name': stock1,
             'stock2_name': stock2,
             'correct_num': correct_num
         });
 
-        console.log(stock1, 'stock1', stock2, 'stock2', correct_num, 'correct', response, current_step);
+        console.log(stock1, 'stock1', stock2, 'stock2', correct_num, 'correct', response, current_step, rt, 'left',left_target, 'chosen', chosen_target, response);
 
 
 
@@ -516,7 +528,7 @@ var response_handler = function (e) {
 
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-* Trial Structure *
+* next() → Trial Structure *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 var next = function () {
     switch (phase) {
@@ -849,12 +861,12 @@ var currentview;
 
 
 
-///***for testing only.
-// * If you want to skip the training phase and test how the testing phase works, comment out the lines above and uncomment the lines below
-//// ***/
-//$(window).load(function () {
-//    psiTurk.doInstructions(
-//        testing_instruction_pages, // a list of pages you want to display in sequence
-//        function () { currentview = new main_trials(); } // what you want to do when you are done with instructions
-//    );
-//});
+/***for testing only.
+ * If you want to skip the training phase and test how the testing phase works, comment out the lines above and uncomment the lines below
+// ***/
+$(window).load(function () {
+    psiTurk.doInstructions(
+        testing_instruction_pages, // a list of pages you want to display in sequence
+        function () { currentview = new main_trials(); } // what you want to do when you are done with instructions
+    );
+});
