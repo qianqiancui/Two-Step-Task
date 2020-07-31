@@ -16,9 +16,10 @@
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
                              * Attention*
-*   to quickly test a certain phase (e.g., step two practice, main trials, etc)
-*   scroll down to the very end of this script (run task section) and follow
-*   the insturctions
+ *   to quickly test a certain phase (e.g., step two practice, main trials, etc)
+ *   scroll down to the very end of this script (run task section) and follow
+ *   the insturctions
+ *   part of the code looks terrible, but it somehow works ...
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 
 
@@ -846,10 +847,11 @@ var calculate_reward = function (start_min, start_max, std_dev, lower_bound, hig
 // fluctuare with bounds between 0~9 (lower_bound = 0; higher_bound = 9);
 //list_length = 156
 stock1_reward = calculate_reward(0, 4, 2, 0, 9, 156);
+
 // start between +5 and +9 points (start_min = 0, start_max = 4);
 // Gaussian random walk with sd =2 (std_dev=2);
 // fluctuare with bounds between 0~9 (lower_bound = 0; higher_bound = 9);
-//list_length = 156
+//list_length = 156 
 stock2_reward = calculate_reward(5, 9, 2, 0, 9, 156);
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
