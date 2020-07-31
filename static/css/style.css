@@ -89,6 +89,7 @@ div.test_begin {
 }
 
 /*properties for trial display*/
+/* psiturk default*/
 #trial {
   padding-top:15%;
   display: block;
@@ -109,26 +110,24 @@ div.show-stimuli {
   background-color: black;
 }
 
-/*stimulus property*/
-
+/*stock image property*/
 #stim {
   display: block;
-  /*float: left;
-  margin: 25px;
-  */
+
+    height:260px;
+  width:300px;
      /*postion*/
   position: fixed;
-  top: 60%;
+  top: 70%;
   left: 50%;
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
 }
 
+/*left agent image property*/
 #stim1 {
   display: block;
-  /*float: left;
-  margin: 25px;
-  */
+
      /*postion*/
   height:300px;
   width:300px;
@@ -140,6 +139,7 @@ div.show-stimuli {
   transform: translate(-20%, -50%);
 }
 
+/*right agent image property*/
 #stim2 {
   display: block;
   /*dfloat: right;
@@ -156,119 +156,25 @@ div.show-stimuli {
   transform: translate(-80%, -50%);
 }
 
-/*reward text property*/
-#reward_prompt{
-  font-family:Arial, Helvetica, sans-serif;
-  font-size: 30pt;
-  font: lighter;
-  text-align: right;
-
-  /*float: left;
-  padding-left: 23%;
-  padding-bottom: 15px;*/
-
-  display: block;
-  /*float: left;
-  margin: 25px;
-  */
-     /*postion*/
-  position: fixed;
-  top: 70%;
-  left: 39%;
-  /* bring your own prefixes */
-
-  color: white;
-}
-
-#reward_result{
-  font-family:Arial, Helvetica, sans-serif;
-  font-size: 30pt;
-  font: lighter;
-  text-align: left;
-  display: block;
-  /*float: right;
-  padding-right: 23%;
-  padding-bottom: 15px;*/
-  position: fixed;
-  top: 70%;
-  left: 55%;
-  /* bring your own prefixes */
-  color: white;
-}
-
+/*stock value property*/
 #stock_value{
   font-family:Arial, Helvetica, sans-serif;
   font-size: 50pt;
-  font: lighter;
+  font: bolder;
   text-align: left;
   display: block;
   /*float: right;
   padding-right: 23%;
   padding-bottom: 15px;*/
   position: fixed;
-  top: 20%;
-  left: 47%;
+  top: 40%;
+  left: 46%;
   /* bring your own prefixes */
   color: white;
 }
 
-#pool_prompt{
-    display: block;
-  font-family:Arial, Helvetica, sans-serif;
-  font-size: 30pt;
-  font: lighter;
-  text-align: right;
 
-
-  display: block;
-  /*float: left;
-  margin: 25px;
-  */
-     /*postion*/
-  position: fixed;
-  top: 80%;
-  left: 42%;
-  /* bring your own prefixes */
-
-  color: white;
-
-}
-
-#pool_result{
-  font-family:Arial, Helvetica, sans-serif;
-  font-size: 30pt;
-  font: lighter;
-  text-align: left;
-  display: block;
-  /*float: right;
-  padding-right: 23%;
-  padding-bottom: 15px;*/
-
-  position: fixed;
-  top: 80%;
-  left: 55%;
-  /* bring your own prefixes */
-
-
-  color: white;
-  
-}
-
-
-/*hideen, for recording only*/
-#stim1_name {
-  opacity: 0;
-  display: block;
-  float: left;
-  margin: 20px;
-}
-#stim2_name {
-  opacity: 0;
-  display: block;
-  float: right;
-  margin: 20px;
-}
-
+/*'psiturk default*/
 .clear {
   clear: both;
   height: 0;
@@ -277,27 +183,7 @@ div.show-stimuli {
   line-height: 0;
 }
 
-/*fixation cross property*/
-#fixation_cross {
-  display: block;
 
-  /*color, size, font*/
-  font-size: 50pt;
-  font:lighter;
-  color: white;
-  opacity:0.9;
-
-  /*postion*/
-  position: fixed;
-  top: 40%;
-  left: 50%;
-  /* bring your own prefixes */
-  transform: translate(-50%, -50%);
-}
-
-#query {
-  color: darkgray;
-}
 /* 3-second coutndown text*/
 #countdown{
 
@@ -318,33 +204,22 @@ div.show-stimuli {
 
 /*'TOO SLOW' text property*/
 #warning {
-
+      font-family:Arial, Helvetica, sans-serif;
   display: block;
   /*color, size, font*/
-  font-size: 30pt;
+  font-size: 60pt;
+
   color: white;
   font: bolder;
    /*postion*/
   position: fixed;
-  top: 70%;
+  top: 50%;
   left: 50%;
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
 }
 
-#pool{
-  display: block;
-  /*color, size, font*/
-  font-size: 30pt;
-  color: white;
-  font: bolder;
-   /*postion*/
-  position: fixed;
-  top: 70%;
-  left: 50%;
-  /* bring your own prefixes */
-  transform: translate(-50%, -50%);
-}
+
 
 
 
@@ -356,136 +231,6 @@ div.show-stimuli {
 #error img {
   padding-right: 10px;
   padding-top: 15px;
-}
-
-#pairup_instruction {
-
-  font-size: 18pt;
-  color: white;
-  font: bolder;
-
-}
-
-#decider_1 {
-  color: white;
-  text-align:center;
-  font-size: 25pt;
-}
-
-
-#decider_2 {
-  color: white;
-  text-align:center;
-  font-size: 25pt;
-
-}
-#decider_3 {
-  color: white;
-  text-align:center;
-  font-size: 25pt;
-
-}
-#decider_4 {
-  color: white;
-  text-align:center;
-  font-size: 25pt;
-
-}
-
-
-#dec1 {
-  display: block;
-  position: fixed;
-    top: 40%;
-  left: 20%;
-  /* bring your own prefixes */
-  transform: translate(-10%, -50%);
-
-}
-#dec2 {
-  display: block;
-  position: fixed;
-    top: 40%;
-  left: 40%;
-  /* bring your own prefixes */
-  transform: translate(-30%, -50%);
-
-}
-#dec3 {
-  display: block;
- position: fixed;
-   top: 40%;
-  left: 60%;
-
-  /* bring your own prefixes */
-  transform: translate(-50%, -50%);
-
-}
-#dec4 {
-  display: block;
-  position: fixed;
-    top: 40%;
-  left: 80%;
-  /* bring your own prefixes */
-  transform: translate(-80%, -50%);
-
-}
-
-#pairup_result{
-
-  font-size: 18pt;
-  color: white;
-  font: bolder;
-  text-align:center;
-
-}
-
-#next_lobby{
-    display: block;
-  /*color, size, font*/
-
-  color: white;
-
-   /*postion*/
-  position: fixed;
-  top: 80%;
-  left: 50%;
-  /* bring your own prefixes */
-  transform: translate(-50%, -20%);
-
-}
-
-#ava1 {
-    width:60px;
-    height:60px;
-}
-
-#ava2 {
-     width:60px;
-    height:60px;
-}
-
-#ava3{
-     width:60px;
-    height:60px;
-}
-#ava4 {
-     width:60px;
-    height:60px;
-}
-
-#rec {
-color:white;
-font-size:40;
-font:boler;
-text-align: center;
-top: 55%;
-left: 70%;
-
-}
-#loading{
-    top: 60%;
-    text-align: center;
 }
 
 .grid-container {
