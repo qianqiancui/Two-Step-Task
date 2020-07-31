@@ -6,7 +6,8 @@ body {
 
     font-weight: 300; 
     font-size: 13pt;
-   
+    width:100%;
+   min-width: 100%;
 }
 
 
@@ -97,6 +98,9 @@ div.test_begin {
   width: 900px;
   text-align: center;
   background-color: black;
+      width:100%;
+   min-width: 100%;
+
 }
 
 
