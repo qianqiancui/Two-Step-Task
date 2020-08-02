@@ -27,6 +27,12 @@
 // Initalize psiturk object, do not delete
 var psiTurk = new PsiTurk(uniqueId, adServerLoc, mode);
 
+// lastest finding: delete will cause diability to record data
+var mycondition = condition;  // these two variables are passed by the psiturk server process
+var mycounterbalance = counterbalance;  // they tell you which condition you have been assigned to
+// they are not used in the stroop code but may be useful to you
+
+
 // load all the necessary pages before the experiment
 var pages = [
 
@@ -155,10 +161,10 @@ var stock1, stock2, // will randomly assign axiom/zephyr into the role of stock1
 var step_one_practice_trial_num = 16;
 
 //change # of main trials here
-var main_tirals_before_1st_break = 52; // # of trials before the first break
-    // per the request, in the first 52 trials, each agent should appear 13 times ob both sides of the screen
+var main_tirals_before_1st_break = 56; // # of trials before the first break
+    // per the request, in the first 52 trials, each agent should appear 13 times ob both sides of the screen (but this request is not possible to do)
                                        // see section trial for detailed info
-var main_tirals_after_1st_break = 104; // # of trials after the first break
+var main_tirals_after_1st_break = 0; // # of trials after the first break
 
 
 var break_session_length = 15; //(seconds); change the number if you want a longer/shorter break; see function break_session()
@@ -185,6 +191,11 @@ var phase, // record current phase (5 in total, refer to task structure)
 
 var trial_id; // reset to one and trial_id ++ after entering a new phase (or restart a phase in the step_one_practice)
 var timer_step1, timer_step2, timer_break; // (1), (2) → timer for "too slow" warning in step 1 & step; (3) → timer for break session;
+
+
+// below are varibles used in debugging process
+// purpose: check if one image appear on each side of the screen with the exact same frequencies 
+var a1_left, a1_right, a2_right, a2_left, a3_left, a3_right, a4_right, a4_left;
 
 
 
@@ -409,20 +420,21 @@ var load_trial = function () {
 
         // The shift() method removes the first item of an array. https://www.w3schools.com/jsref/jsref_shift.asp
         // that's how i get the trial information one by one
-
         current_trial = trials.shift();
 
         //for debug purpose; 
         //console.log(trials, 'trials', trial_id);
-        console.log(current_trial, 'current', trial_id);
+        console.log(current_trial, 'trial_id', trial_id);
 
-
+            // reminder: a current_trial element goes like this:
+            // ["axiom.jpg", "1.jpg", "axiom", "agent1", "zephyr.jpg", "2.jpg", "zephyr", "agent2"]
         //find images for left / right agent
         stim1_img = current_trial[1];
         stim2_img = current_trial[5];
 
 
         // get agents' names in this trial and pass to respones_handler() function
+
         stim1_name = current_trial[3];
         stim2_name = current_trial[7];
         // display two agents image
@@ -433,7 +445,43 @@ var load_trial = function () {
         right_target = stim2_name;
 
         // set current step
-        current_step = "one";
+            current_step = "one";
+
+
+
+        //debug, record the position (left/right side of the screen) of the image each time
+            switch (stim1_name) {
+                case "agent1":
+                    a1_left++;
+                    break;
+                case "agent2":
+                    a2_left++;
+                    break;
+                case "agent3":
+                    a3_left++;
+                    break;
+                case "agent4":
+                    a4_left++;
+                    break;
+            }
+
+            switch (stim2_name) {
+                case "agent1":
+                    a1_right++;
+                    break;
+                case "agent2":
+                    a2_right++;
+                    break;
+                case "agent3":
+                    a3_right++;
+                    break;
+                case "agent4":
+                    a4_right++;
+                    break;
+            }
+            console.log("a1 left:", a1_left, "a1 right:", a1_right, "a2 left", a2_left, "a2 right", a2_right, "a3 left", a3_left, "a3 right", a3_right, "a4 left", a4_left, "a4 right", a4_right);
+         // debug part for recording stim position ends here
+
         }
 
     /*◢◤◢◤◢◤◢◤ record trial id ◢◤◢◤◢◤◢◤*/
@@ -990,6 +1038,7 @@ var step_two_practice_stock1 = function () {
     trial_id = 1;
 
 
+
     trials = stock1_list;
     // Load the stage.html snippet into the body of the page
     psiTurk.showPage('stage.html');
@@ -1030,9 +1079,12 @@ var step_one_practice_stock1 = function () {
     phase = "step_one_practice_stock1";
     trials = balanced_trials(essential_trials, step_one_practice_trial_num);
 
-    correct_num = 0;
-    //record trial id; 
-    trial_id = 1;
+    correct_num = 0; // reset accuracy calculation
+   
+    trial_id = 1;  //reset trial id in this phase
+
+    //debuging, check if images appear on the both of the screen on the same frequencies;
+    a1_left = a1_right = a2_right = a2_left = a3_left = a3_right = a4_right = a4_left = 0; 
 
     // Load the stage.html snippet into the body of the page
     psiTurk.showPage('stage.html');
@@ -1051,8 +1103,12 @@ var step_one_practice_stock2 = function () {
     phase = "step_one_practice_stock2";
     trials = balanced_trials(essential_trials, step_one_practice_trial_num);
 
-    correct_num = 0;
-    trial_id = 1;
+    correct_num = 0;// reset accuracy calculation
+
+    trial_id = 1; //reset trial id in this phase
+
+    //debuging, check if images appear on the both of the screen on the same frequencies;
+    a1_left = a1_right = a2_right = a2_left = a3_left = a3_right = a4_right = a4_left = 0;
 
     /*◢◤◢◤◢◤◢◤ prepare the page for practice phase B ◢◤◢◤◢◤◢◤*/
     // Load the stage.html snippet into the body of the page
@@ -1072,8 +1128,8 @@ var step_one_practice_stock2 = function () {
 
 var main_trials = function () {
     phase = "main_trials";
-    //record trial id;
-    trial_id = 1;
+
+    trial_id = 1; //reset trial id in this phase
     // per the request, in the first 52 trials, each agent should appear 13 times ob both sides of the screen
     var pre_1st_break_trials = balanced_trials(essential_trials, main_tirals_before_1st_break);
 
@@ -1081,9 +1137,12 @@ var main_trials = function () {
 
     trials = pre_1st_break_trials.concat(post_1st_break_trials);
 
-    console.log(pre_1st_break_trials, post_1st_break_trials, trials);
+    console.log("trials:", trials);
 
-   
+
+    //debuging, check if images appear on the both of the screen on the same frequencies;
+    a1_left = a1_right = a2_right = a2_left = a3_left = a3_right = a4_right = a4_left = 0;
+
     /*◢◤◢◤◢◤◢◤ prepare the page for practice phase B ◢◤◢◤◢◤◢◤*/
     // Load the stage.html snippet into the body of the page
     psiTurk.showPage('stage.html');
@@ -1146,8 +1205,8 @@ var Questionnaire1 = function () {
         });
     };
     // Load the questionnaire snippet 
-    psiTurk.showPage('postquestionnaire.html');
-    psiTurk.recordTrialData({ 'phase': 'postquestionnaire', 'status': 'begin' });
+    psiTurk.showPage('postquestionnaire1.html');
+    psiTurk.recordTrialData({ 'phase': 'postquestionnaire1', 'status': 'begin' });
 
     $("#next").click(function () {
         record_responses();
@@ -1174,7 +1233,7 @@ var currentview;
  * Run Task *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 
-//by deault, this phase starts first
+/*** by deault, this phase starts first ***/
 //$(window).load(function () {
 //    psiTurk.doInstructions(
 //        step_two_prac_stock1_pages, // a list of pages you want to display in sequence
@@ -1183,8 +1242,8 @@ var currentview;
 //    );
 //});
 
-// * If you want to skip the other phases and test how the step_two_practice_stock2 phase works, comment out the lines above and uncomment the lines below
-// ***/
+/*** If you want to skip the other phases and test how the step_two_practice_stock2 phase works, comment out the lines above and uncomment the lines below
+***/
 //$(window).load(function () {
 //    psiTurk.doInstructions(
 //        step_two_prac_stock2_pages, // a list of pages you want to display in sequence
@@ -1194,8 +1253,8 @@ var currentview;
 //});
 
 
-// * If you want to skip the other phases and test how the step_one_practice_stock1 phase works, comment out the lines above and uncomment the lines below
-// ***/
+/*** If you want to skip the other phases and test how the step_one_practice_stock1 phase works, comment out the lines above and uncomment the lines below
+ ***/
 //$(window).load( function(){
 //    psiTurk.doInstructions(
 //        step_one_prac_stock1_pages, // a list of pages you want to display in sequence
@@ -1204,7 +1263,7 @@ var currentview;
 //    );
 //});
 
-// * If you want to skip the other phases and test how the step_one_practice_stock2 phase works, comment out the lines above and uncomment the lines below
+/*** If you want to skip the other phases and test how the step_one_practice_stock2 phase works, comment out the lines above and uncomment the lines below
 // ***/
 //$(window).load(function () {
 //    psiTurk.doInstructions(
@@ -1216,8 +1275,8 @@ var currentview;
 
 
 
-// * If you want to skip the other phases and test how the Questionnaire1 works, comment out the lines above and uncomment the lines below
-// ***/
+/*** If you want to skip the other phases and test how the Questionnaire1 works, comment out the lines above and uncomment the lines below
+***/
 //$(window).load(function () {
 //    psiTurk.doInstructions(
 //         main_trials_pages,// a list of pages you want to display in sequence
@@ -1228,8 +1287,8 @@ var currentview;
 
 
 
-// * If you want to skip the other phases and test how the main_trials phase works, comment out the lines above and uncomment the lines below
-// ***/
+/*** If you want to skip the other phases and test how the main_trials phase works, comment out the lines above and uncomment the lines below
+***/
 $(window).load(function () {
     psiTurk.doInstructions(
         main_trials_pages, // a list of pages you want to display in sequence
