@@ -257,11 +257,11 @@ var stock2_list = [[stock2_img, "+1", stock2], [stock2_img, "+0", stock2], [stoc
 
 // i don't know how to name following arrays properly in english. My idea is like this:
 // include all the possible combinations and put them altogether in two arrays.
-// like for 1.jpg, find out all the combinations that it would appear on the left screen like (1-2, 1-4), throw them into one array
-// then, find out all the combinations that it would appear on the right screen like (2-1, 4-1), throw them into the same array
+// like for 1.jpg, find out all the combinations that it would appear on the left screen like (1-2, 3-4), throw them into one array
+// then, find out all the combinations that it would appear on the right screen like (2-1, 4-3), throw them into the same array
 // each combinations (e.g., 1 on the left- 2 on the right) actually represents one trial
-// do the same thing for the other images and you will get 8 "essential trials"
-// Note: in the 8 "essential trials", 1.jpg appears on the left for 2 times and on the right for 2 times. so do other images. Quite balanced.
+// do the same thing for the other images and you will get 4 "essential trials"
+// Note: in the 4 "essential trials", 1.jpg appears on the left for 1 times and on the right for 1 times. so do other images. Quite balanced.
 // then go to the balanced_trials() function for further steps
 
 var essential_trials = [
@@ -274,8 +274,8 @@ var essential_trials = [
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 * prepare balanced trials for step one tasks (practice & main trials) *
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
-// for example, 16 trials are wanted. So far, we already have 8 "essential trials",
-// each "essential trial" x 2, and you will get 16 trials.
+// for example, 16 trials are wanted. So far, we already have 4 "essential trials",
+// each "essential trial" x 4, and you will get 16 trials.
 // 1.jpg appears on the left for 4 times and on the right for 4 times. so do other images.
 // balanced √
 
@@ -502,7 +502,7 @@ var response_handler = function (e) {
     else keyCode = e.keyCode;
 
 
-    console.log(current_step);  //check which step; for debugging purpose; ok to delete
+    console.log("current step:", current_step);  //check which step; for debugging purpose; ok to delete
 
 
     if (current_step === "one") { // check phase and only allow certain keys to be pressed during that phase
@@ -700,7 +700,7 @@ var response_handler = function (e) {
                     if (chosen_stock === "stock1") {
                         stock_value = stock1_reward.shift();
                     } else { stock_value = stock2_reward.shift(); }
-                    console.log(stock_value, "stock, value"); //for debugging, ok to delete
+                    console.log(stock_value, "current stock value"); //for debugging, ok to delete
                     setTimeout(function () {
                         d3.select('#stock_value').html("+" + stock_value);
                     }, 500);
