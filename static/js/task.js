@@ -27,7 +27,7 @@
 // Initalize psiturk object, do not delete
 var psiTurk = new PsiTurk(uniqueId, adServerLoc, mode);
 
-// lastest finding: delete will cause diability to record data
+// new finding: delete will cause diability to record data
 var mycondition = condition;  // these two variables are passed by the psiturk server process
 var mycounterbalance = counterbalance;  // they tell you which condition you have been assigned to
 // they are not used in the stroop code but may be useful to you
@@ -162,7 +162,7 @@ var step_one_practice_trial_num = 16;
 
 //change # of main trials here
 var main_tirals_before_1st_break = 52; // # of trials before the first break
-    // per the request, in the first 52 trials, each agent should appear 13 times ob both sides of the screen 
+    // per the request, in the first 52 trials, each agent should appear 13 times ob both sides of the screen
                                        // see section trial for detailed info
 var main_tirals_after_1st_break = 104; // # of trials after the first break
 
@@ -291,7 +291,7 @@ var balanced_trials = function (essentials, trial_num) {
 
     trial_container = _.shuffle(trial_container); // shuffle the elements in the array ( == shuffle the trial order)
 
-    console.log(trial_container, 'preview all trials'); // debugging purpose, ok to delete
+    console.log(trial_container, 'preview trials'); // debugging purpose, ok to delete
 
     return trial_container;  // will pass the trial_container to the global variable trials. See each phase function for more info
 
@@ -881,7 +881,6 @@ var calculate_reward = function (start_min, start_max, std_dev, lower_bound, hig
         reward = Math.max(lower_bound, reward); reward = Math.min(reward, higher_bound); // check if the value is located in [0,9]
         reward_list.push(Math.floor(reward)); // make each reward value an integer and add to list
     };
-    console.log(reward_list); // for debugging, ok to delete
     return reward_list;
 };
 
@@ -898,6 +897,8 @@ stock1_reward = calculate_reward(0, 4, 2, 0, 9, 156);
 //list_length = 156 
 stock2_reward = calculate_reward(5, 9, 2, 0, 9, 156);
 
+console.log(stock1_reward, "stock1 reward"); //for debugging, ok to delete
+console.log(stock2_reward, "stock2 reward"); //for debugging, ok to delete
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
  ◢◤                                                                                                                                           ◢◤
  ◢◤                                                   * "Central Executive" *                                                                 ◢◤
@@ -1133,7 +1134,6 @@ var main_trials = function () {
 
     trials = pre_1st_break_trials.concat(post_1st_break_trials);
 
-    console.log("trials:", trials);
 
 
     //debuging, check if images appear on the both of the screen on the same frequencies;
