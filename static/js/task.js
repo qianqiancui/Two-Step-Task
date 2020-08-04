@@ -161,10 +161,10 @@ var stock1, stock2, // will randomly assign axiom/zephyr into the role of stock1
 var step_one_practice_trial_num = 16;
 
 //change # of main trials here
-var main_tirals_before_1st_break = 56; // # of trials before the first break
-    // per the request, in the first 52 trials, each agent should appear 13 times ob both sides of the screen (but this request is not possible to do)
+var main_tirals_before_1st_break = 52; // # of trials before the first break
+    // per the request, in the first 52 trials, each agent should appear 13 times ob both sides of the screen 
                                        // see section trial for detailed info
-var main_tirals_after_1st_break = 0; // # of trials after the first break
+var main_tirals_after_1st_break = 104; // # of trials after the first break
 
 
 var break_session_length = 15; //(seconds); change the number if you want a longer/shorter break; see function break_session()
@@ -266,12 +266,8 @@ var stock2_list = [[stock2_img, "+1", stock2], [stock2_img, "+0", stock2], [stoc
 
 var essential_trials = [
     [[stock1_img, "1.jpg", stock1, "agent1", stock2_img, "2.jpg", stock2, "agent2"]],
-    [[stock1_img, "1.jpg", stock1, "agent1", stock2_img, "4.jpg", stock2, "agent4"]],
-    [[stock1_img, "3.jpg", stock1, "agent3", stock2_img, "2.jpg", stock2, "agent2"]],
     [[stock1_img, "3.jpg", stock1, "agent3", stock2_img, "4.jpg", stock2, "agent4"]],
     [[stock2_img, "2.jpg", stock2, "agent2", stock1_img, "1.jpg", stock1, "agent1"]],
-    [[stock2_img, "4.jpg", stock2, "agent4", stock1_img, "1.jpg", stock1, "agent1"]],
-    [[stock2_img, "2.jpg", stock2, "agent2", stock1_img, "3.jpg", stock1, "agent3"]],
     [[stock2_img, "4.jpg", stock2, "agent4", stock1_img, "3.jpg", stock1, "agent3"]]
 ];
 
@@ -290,7 +286,7 @@ var balanced_trials = function (essentials, trial_num) {
     var trial_container = []; // create an empty array to store all trials
     // put all trials (containing stimuli information) into trial_container array based on desired number of trials
     for (var x = 0; x < trial_num; x++) {
-        trial_container = trial_container.concat(essentials[x % 8]);
+        trial_container = trial_container.concat(essentials[x % 4]);
     };
 
     trial_container = _.shuffle(trial_container); // shuffle the elements in the array ( == shuffle the trial order)
