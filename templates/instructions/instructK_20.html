@@ -1,0 +1,33 @@
+<script>
+
+setTimeout(function(){ $('div#nextButton').css('visibility','visible'); }, INST_WAIT_TIME);
+
+</script>
+
+
+<div class="instruct" id="main">
+
+<!-- <h1>fractals -> fractals </h1> -->
+
+<p>The Advisors will always stay on screen for 1.5 seconds, even after you already made a decision. Because of this, you will not be able to finish the experiment faster by making your decisions more quickly.</p>
+	<p>Every MTurk worker will complete the HIT in exactly the same time, so use the time you have for each decision to your advantage and earn as many points as possible!</p>
+
+
+<div id="nextButton" style="visibility: hidden;">
+When you're ready to continue, click <strong>Next</strong>.	
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            	<!-- no previous button on first screen -->
+            </div>
+            <div class="col-xs-8">
+            </div>
+            <div class="col-xs-2">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

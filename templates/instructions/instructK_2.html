@@ -1,0 +1,46 @@
+<script>
+
+setTimeout(function(){ $('div#nextButton').css('visibility','visible'); }, INST_WAIT_TIME);
+
+</script>
+
+
+<div class="instruct" id="main">
+
+<!-- <h1>fractals -> fractals </h1> -->
+
+ <p>In this game, you will be learning about the choices made by four other Amazon Mechanical Turk workers who participated before you.</p>
+    
+    <p>Each of the four previous MTurk workers were randomly assigned to one of four avatars, which you can see below.</p>
+  
+    <p></p>
+    
+    <img src="static/images/1.jpg" alt="Investor1" style="width:150px;height:150px;" hspace="15">
+    <img src="static/images/2.jpg" alt="Investor2" style="width:150px;height:150px;" hspace="15">
+    <img src="static/images/3.jpg" alt="Investor3" style="width:150px;height:150px;" hspace="15">
+    <img src="static/images/4.jpg" alt="Investor4" style="width:150px;height:150px;" hspace="15">
+    
+    <p></p>
+    
+    <p>This is a standard procedure in this kind of interactive game.</p>
+    
+    <p></p>
+    
+<div id="nextButton" style="visibility: hidden;">
+When you're ready to continue, click <strong>Next</strong>.	
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            	<!-- no previous button on first screen -->
+            </div>
+            <div class="col-xs-8">
+            </div>
+            <div class="col-xs-2">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

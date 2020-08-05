@@ -3,14 +3,18 @@ body {
     padding:0px;
     margin: 0px;
     background-color: black;
-
+        color: white;
     font-weight: 300; 
     font-size: 13pt;
     width:100%;
    min-width: 100%;
+
+       width: 680px;
 }
 
-
+a {
+    color: #FFCC90;
+}
 /* text styling */
 strong {
   font-weight: 600;         
@@ -256,4 +260,181 @@ div.show-stimuli {
 
 output {
   display: block;
+}
+
+
+/*the following content was stolen from the old two step version*/
+#main {
+	margin: 0 auto;
+	width: 800px;
+	font-size: 100%;
+}
+.continue  {
+    width: auto;
+}
+
+.instruct p {
+    text-align: justify;
+}
+
+.instruct .continue {
+    margin: 20px 20px;
+    width: 120px;
+    height: 40px;
+    font-size: 13pt;
+    float: right;
+}
+
+.instruct .legal {
+    font-size: 13px;
+}
+
+.instruct .header {
+    text-align: justify;
+    font-style: italic;
+}
+
+.instruct .instructions {
+    text-align: center;
+    font-style: italic;
+    font-size: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 500px;
+}
+
+#featuretable {
+    margin: 0 auto;
+}
+
+.instruct table .cell {
+    width: 140px;
+}
+
+.instruct table img {
+    display: inline-block;
+}
+.instruct table h3 {
+    margin: 0;
+    margin-top: 6px;
+}
+.instruct table h4 {
+    margin: 0;
+    margin-top: 6px;
+}
+
+.instruct .subbox {
+    text-align: justify;
+    width: 500px;
+    margin: 20px auto;
+}
+.instruct .subbox p {
+    padding: 15px 20px;
+    border: 1px solid white;
+}
+
+.instruct table {
+    margin: 0 0 10px;
+}
+
+.instruct .outerbox {
+    border: 1px dashed #A54;
+    border: 1px solid gray;
+    border: 2px solid #ddd;
+}
+
+.instruct .innerbox {
+    width: 250px;
+}
+.instruct .innerbox img {
+    margin: 0 10px;
+}
+
+.instruct hr {
+    border: .5px solid gray;
+}
+
+/* Questionnaire style */
+
+#questionnaire p {
+    font-size: 150%;
+    color:white;
+}
+
+#questionnaire {
+    font-size: 70%;
+    text-align: left;
+}
+#questionnaire h1 {
+    text-align: center;
+}
+#questionnaire .question {
+    position: relative;
+    clear: both;
+    height: 150px;
+    margin: 20px;
+}
+#questionnaire .questiontext {
+    float: left;
+    width: 280px;
+    color: #bbbbff;
+    margin: 0;
+    margin-right: 10px;
+}
+.questiontext em {
+    font-size: 70%;
+}
+#questionnaire textarea {
+    display: inline;
+    float: right;
+    width: 320px;
+    height: 130px;
+}
+#questionnaire form {
+    text-align: right;
+}
+
+#debriefing {
+    width: 640px;
+}
+
+#debriefingtext {
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-size: 80%;
+    text-align: justify;
+    border: 1px solid white;
+}
+#affirmationbox {
+    position: relative;
+    margin:  0 auto;
+    border: 1px dotted white; 
+    padding: 10px 20px;
+    vertical-align: middle;
+}
+#affirmationbox p {
+    text-align: left;
+    font-style: italic;
+    margin-bottom: 0;
+}
+#affirmationbox  table {
+    border-spacing: 20px;
+}
+#affirmationbox  td {
+    vertical-align: middle;
+    font-size: 100%;
+    color: black;
+    height: 50px;
+    cursor: pointer;
+}
+#affirmative {
+    background: white;
+    overflow: hidden;
+    font-weight: bold;
+    width: 10em;
+}
+#negative {
+    background: white;
+    font-size: 100%;
+    width: 25em;
 }

@@ -1,0 +1,64 @@
+<script type="text/javascript">
+  keydownfun = function() {}; // Should unbind keys.
+</script>
+
+<div id="container-questionnaire">
+    <h1>Ratings, Part 2</h1>
+
+    <hr>
+
+    
+    <div class="instructions well">
+
+        <form id="postquiz" action="debrief" method="post">
+
+
+            <!-- beginning of a question -->
+            <div class="row question">
+                <div class="col-md-8">
+                Think back to all of the times you hired an Advisor that invested in the stock pictured below, and you saw how well the stock below performed. On an AVERAGE round, how many points do you think the stock below was worth? In other words, what was the AVERAGE PAYOUT of the stock below?
+                </div>
+                <p></p>
+                  <img src="static/images/axiom.jpg" alt="axiom" style="width:200px;height:200px;">
+                <p></p>
+                <div class="col-md-4">
+                    <select id="Stock1_pointjudgment" name="Stock1_pointjudgment">
+                        <option value="-99" selected="">(SELECT ONE)</option>
+                        <option value="0">0 points</option>
+                        <option value="1">1 point</option>
+                        <option value="2">2 points</option>
+                        <option value="3">3 points</option>
+                        <option value="4">4 points</option>
+                        <option value="5">5 points</option>
+                        <option value="6">6 points</option>
+                        <option value="7">7 points</option>
+                        <option value="8">8 points</option>
+                        <option value="9">9 points</option>
+                        <option value="10">10 points</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- end of a question -->
+
+<p></p>
+            <p></p>
+            <p></p>
+
+
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-7">
+            </div>
+            <div class="col-xs-3">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                    Continue <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</div>

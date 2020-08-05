@@ -1,0 +1,38 @@
+<script>
+
+setTimeout(function(){ $('div#nextButton').css('visibility','visible'); }, INST_WAIT_TIME);
+
+</script>
+
+
+<div class="instruct" id="main">
+
+<!-- <h1>fractals -> fractals </h1> -->
+
+ <p>Hint #1: Remember which stocks are performing well. Changes in stock performance happen slowly, so a stock performing well right now will probably still be performing well in the near future.</p>
+	 
+    <p>Hint #2: The Advisor you choose is important because often one stock is performing better than the other stock. So you will want to try to choose the Advisor who invested in the better stock at that time. You will earn more points, and receive a larger cash bonus, by hiring the Advisor that invested in the right stock.</p>
+	 
+    <p>Hint 3: Remember, each stock went up or down on its own accord. Just because one stock becomes bad doesn't mean another stock is good. Also, there are no funny patterns in how well a stock is performing (how much it is paying in dividends). The stocks are not tricking you.</p>
+    
+    <!-- include a note about the changing reward rates? -->
+  
+
+<div id="nextButton" style="visibility: hidden;">
+When you're ready to continue, click <strong>Next</strong>.	
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            	<!-- no previous button on first screen -->
+            </div>
+            <div class="col-xs-8">
+            </div>
+            <div class="col-xs-2">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

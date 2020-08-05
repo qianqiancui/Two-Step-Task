@@ -1,0 +1,38 @@
+<script>
+
+setTimeout(function(){ $('div#nextButton').css('visibility','visible'); }, INST_WAIT_TIME);
+
+</script>
+
+
+<div class="instruct" id="main">
+
+<!-- <h1>fractals -> fractals </h1> -->
+
+ <p>Now let's practice choosing Advisors to get to certain stocks. First, try to pick the Advisors that invested in the Axiom stock.</p>
+    <p>(Remember: You can choose the left Advisor by pressing the 'F' key and the right Advisor by pressing the 'J' key.)</p>
+    
+    <p></p>
+ 
+  <img src="static/images/axiom.jpg" alt="AxiomStock" style="width:250px;height:250px;"> 
+
+    <p></p>
+   
+<div id="nextButton" style="visibility: hidden;">
+When you're ready to begin the practice rounds, click <strong>Next</strong>.	
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            	<!-- no previous button on first screen -->
+            </div>
+            <div class="col-xs-8">
+            </div>
+            <div class="col-xs-2">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

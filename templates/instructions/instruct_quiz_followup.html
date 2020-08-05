@@ -1,0 +1,38 @@
+<script>
+
+setTimeout(function(){ $('div#nextButton').css('visibility','visible'); }, INST_WAIT_TIME);
+
+</script>
+
+<div class="instruct" id="main">
+<p> Here are the answers: 
+
+<p> 1) If a pair of people usually goes to a coffee shop, will they ever be found at a library?</p>
+<p> <strong> No. Some pairs of people will be at coffee shops, and some pairs will be at libraries. <strong> </p>
+
+
+ <p>2) If a pair of people usually goes to Blue's Coffee Shop, will they ever be found at Green's Coffee Shop?</p>
+<p> <strong> Yes; pairs will occasionally be at their less preferred location.<strong> </p>
+
+<p>3) If a pair of people usually goes to Blue's Coffee Shop and occasionally visits Green's Coffee Shop, does the chance they will be found at each change over time?</p>
+<p> <strong> No, there will always be the same chance of finding the pair at their preferred on non-preferred coffee shop.<strong> <p>
+	<br/> 
+
+<div id="nextButton" style="visibility: hidden;">
+When you're ready to continue, press <strong>Next</strong>.	
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            	<!-- no previous button on first screen -->
+            </div>
+            <div class="col-xs-8">
+            </div>
+            <div class="col-xs-2">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

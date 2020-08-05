@@ -1,0 +1,105 @@
+<script>
+
+setTimeout(function(){ $('div#nextButton').css('visibility','visible'); }, INST_WAIT_TIME);
+
+</script>
+
+<div class="instruct" id="main">
+
+    <p>Here is a short quiz to test if you understood the instructions correctly.</p>
+      <div id="container-questionnaire">
+      
+        <form id="postquiz" action="debrief" method="post">
+        <table>
+        
+            <!-- beginning of a question -->
+            <div class="row question">
+                <div class="col-md-8">
+                    If a pair of people usually goes to coffee shops, will they ever be found at a library?
+                </div>
+                <div class="col-md-4">
+                    <select id="engagement" name="engagement">
+                        <option value="2">Yes. People can be found anywhere, anytime.</option>
+                        <option value="1">No. Some pairs of people will be at coffee shops, and some pairs will be at libraries.</option>
+                        <option value="0" SELECTED>I don't know</option>
+                    </select>
+                </div>
+            </div>
+            <!-- end of a question -->
+        <br><br>
+        
+        <!-- beginning of a question -->
+            <div class="row question">
+                <div class="col-md-8">
+                    If a pair of coffee drinkers usually goes to Blue's Coffee Shop, will they ever be found at Green's Coffee Shop?
+                </div>
+                <div class="col-md-4">
+                    <select id="engagement" name="engagement">
+                        <option value="2">Yes; pairs will occasionally visit their less preferred location.</option>
+                        <option value="1">No, pairs will never visit the other location.</option>
+                        <option value="0" SELECTED>I don't know</option>
+                    </select>
+                </div>
+            </div>
+            <!-- end of a question -->
+        <br><br>
+        
+            <!-- beginning of a question -->
+            <div class="row question">
+                <div class="col-md-8">
+                    Will the chance of finding a pair of coffee drinkers at their preferred coffee shop change over time?
+                </div>
+                <div class="col-md-4">
+                    <select id="engagement" name="engagement">
+                        <option value="2">Yes, the chance is constantly changing.</option>
+                        <option value="1">No, there will always be the same chance of finding the pair at their preferred on non-preferred coffee shop.</option>
+                        <option value="0" SELECTED>I don't know</option>
+                    </select>
+                </div>
+            </div>
+            <!-- end of a question -->
+        <br><br>
+            
+            <!-- beginning of a question -->
+            <div class="row question">
+                <div class="col-md-8">
+                    How much bonus money you win will depend on...
+                </div>
+                <div class="col-md-4">
+                    <select id="engagement" name="engagement">
+                        <option value="3">At the second stage, how much money we gave to each Player A and how much they chose to share with you.</option>
+                        <option value="2">At the first stage, learning which locations lead to different Player A pairs</option>
+                        <option value="1">Both of the above.</option>
+                        <option value="0" SELECTED>I don't know</option>
+                    </select>
+                </div>
+            </div>
+            <!-- end of a question -->
+        
+            <br><br>
+    
+
+            
+            
+            
+            
+<div id="nextButton" style="visibility: hidden;">
+When you're ready to continue, press <strong>Next</strong>.	
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            	<!-- no previous button on first screen -->
+            </div>
+            <div class="col-xs-8">
+            </div>
+            <div class="col-xs-2">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,151 @@
+<script type="text/javascript">
+  keydownfun = function() {}; // Should unbind keys.
+</script>
+
+<div id="container-questionnaire">
+    <h1>Demographics</h1>
+           
+    <hr>
+    <div class="instructions well">
+    <p>Almost finished! Just a few more questions and you are done.</p>
+    
+    <p></p>
+        <form id="postquiz" action="debrief" method="post">
+
+
+            <!-- beginning of a question -->
+            <div class="row question">
+                <div class="col-md-8">
+                    On a scale of 1-10 (where 10 is the most engaged), please rate how <b>ENGAGING</b> you found the learning task:
+                </div>
+                <div class="col-md-4">
+                    <select id="engagement" name="engagement">
+                        <option value="10">10 - Very engaging</option>
+                        <option value="9">9</option>
+                        <option value="8">8</option>
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5" SELECTED>5 - Moderately engaging</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                        <option value="0">0 - Not engaging at all</option>
+                    </select>
+                </div>
+            </div>
+            <!-- end of a question -->
+
+ <p></p>
+            <!-- beginning of a question -->
+            <div class="row question">
+                <div class="col-md-8">
+                    On a scale of 1-10 (where 10 is the most difficult), please rate how <b>DIFFICULT</b> you found the learning task:
+                </div>
+                <div class="col-md-4">
+                    <select id="difficulty" name="difficulty">
+                        <option value="10">10 - Very difficult</option>
+                        <option value="9">9</option>
+                        <option value="8">8</option>
+                        <option value="7">7</option>
+                        <option value="6">6</option>
+                        <option value="5" SELECTED>5 - Moderately difficult</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                        <option value="0">0 - Not difficult at all</option>
+                    </select>
+                </div>
+            </div>
+            <!-- end of a question -->
+
+
+
+ <p></p>
+            <div class="row question">
+                <div class="col-md-8">
+                   For statistical purposes, please select your age bracket
+		</div>
+                <div class="col-md-4">
+                    <select id="age" name="age">
+                        <option value="-99" selected="">(SELECT ONE)</option>
+                        <option value="60">50+</option>
+                        <option value="45">40 to 49</option>
+                        <option value="35">30 to 39</option>
+                        <option value="24">18 to 29</option>
+                        <option value="0">1-17</option>
+                    </select>
+		</div>
+	    </div>
+		
+ <p></p>
+            <div class="row question">
+                <div class="col-md-8">
+                   For statistical purposes, please select the gender with which you identify
+		</div>
+                <div class="col-md-4">
+                    <select id="gender" name="gender">
+                        <option value="-99" selected="">(SELECT ONE)</option>
+                        <option value="other">Other</option>
+                        <option value="woman">Female</option>
+                        <option value="man">Male</option>
+                    </select>
+		</div>
+	    </div>
+     <p></p>
+         <div class="row question">
+                <div class="col-md-8">
+                   For statistical purposes, please select the race/ethnicity with which you most identify
+		</div>
+                <div class="col-md-4">
+                    <select id="race" name="race">
+                        <option value="-99" selected="">(SELECT ONE)</option>
+                        <option value="white">white/caucasian/european american</option>
+                        <option value="black">black/african american</option>
+                        <option value="hispanic">hispanic/hispanic american</option>
+                        <option value="asian">asian/asian american</option>
+                        <option value="nativeamerican">native american</option>
+                        <option value="pacificislander">pacific islander</option>
+                        <option value="other">other</option>
+                    </select>
+		</div>
+	    </div>
+     <p></p>
+             <div class="row question">
+                <div class="col-md-8">
+                   For statistical purposes, how would you describe your political opinions, generally speaking?
+		</div>
+                <div class="col-md-4">
+                    <select id="ideology" name="ideology">
+                        <option value="-99" selected="">(SELECT ONE)</option>
+                        <option value="1">very liberal</option>
+                        <option value="2">liberal</option>
+                        <option value="3">somewhat liberal</option>
+                        <option value="4">moderate</option>
+                        <option value="5">somewhat conservative</option>
+                        <option value="6">conservative</option>
+                        <option value="7">very conservative</option>
+                    </select>
+		</div>
+	    </div>
+ <p></p>
+
+        </form>
+    </div>
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-7">
+            </div>
+            <div class="col-xs-3">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                    Continue <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</div>

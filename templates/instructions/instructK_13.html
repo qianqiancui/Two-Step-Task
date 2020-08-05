@@ -1,0 +1,35 @@
+<script>
+
+setTimeout(function(){ $('div#nextButton').css('visibility','visible'); }, INST_WAIT_TIME);
+
+</script>
+
+
+<div class="instruct" id="main">
+
+<!-- <h1>fractals -> fractals </h1> -->
+
+ <p>You now know how to reveal a stock's performance, as well as which Advisors invested in which stocks, so let's put them together.</p>
+	<p>Each time, you will (1) pick an Advisor to hire, (2) see the stock that they invested in, and (3) reveal the stock's performance.</p>
+	<p>Your goal is to earn as many points as possible by choosing Advisors who invested in stocks that are performing well.</p>
+	<p>Remember that each Advisor only picked ONE stock at the beginning of their study. They DID NOT change their chosen stocks at any point. Therefore, choosing an Advisor will always lead to the same stock.</p>
+ 
+  
+<div id="nextButton" style="visibility: hidden;">
+When you're ready to continue, click <strong>Next</strong>.	
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            	<!-- no previous button on first screen -->
+            </div>
+            <div class="col-xs-8">
+            </div>
+            <div class="col-xs-2">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

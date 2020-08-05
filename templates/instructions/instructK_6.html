@@ -1,0 +1,40 @@
+<script>
+
+setTimeout(function(){ $('div#nextButton').css('visibility','visible'); }, INST_WAIT_TIME);
+
+</script>
+
+
+<div class="instruct" id="main">
+
+<!-- <h1>fractals -> fractals </h1> -->
+
+<p>If your chosen Advisor's stock performs very well, you will earn a lot of points:</p>
+<p><center>+9</center></p>
+	<p>However, sometimes an Advisor's stock doesn't perform well, and you only earn a few points:</p>
+    <p><center>+1</center></p>
+    <p></p>
+    <p>The quality of each stock will change during the game. A stock that was bad at the beginning of the game might start performing well, and a stock that initially pays well might perform poorly later on.</p>
+	<p>Fluctuations in a stock's performance will happen slowly. So, you have to focus to earn as many points as possible by hiring the Advisor with the best stock at each point in time.</p>
+    
+    <p></p>
+
+                                
+<div id="nextButton" style="visibility: hidden;">
+When you're ready to continue, click <strong>Next</strong>.	
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            	<!-- no previous button on first screen -->
+            </div>
+            <div class="col-xs-8">
+            </div>
+            <div class="col-xs-2">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -34,55 +34,145 @@ var mycounterbalance = counterbalance;  // they tell you which condition you hav
 
 
 // load all the necessary pages before the experiment
+//var pages = [
+
+//    "stage.html", // the page that displays the experiment
+
+//    //instruction pages for different phases
+//    "instructions/step_two_prac_stock1.html",
+//    "instructions/step_two_prac_stock2.html",
+//    "instructions/step_one_prac_stock1_reminder.html",
+//    "instructions/step_one_prac_stock2_reminder.html",
+//    "instructions/step_one_prac_stock1.html",
+//    "instructions/step_one_prac_stock2.html",
+//    "instructions/main_trials.html",
+
+//    //postquestionnaire pages. 
+//    "postquestionnaire1.html"
+//];
+
+
 var pages = [
-
-    "stage.html", // the page that displays the experiment
-
-    //instruction pages for different phases
-    "instructions/step_two_prac_stock1.html",
-    "instructions/step_two_prac_stock2.html",
-    "instructions/step_one_prac_stock1_reminder.html",
-    "instructions/step_one_prac_stock2_reminder.html",
-    "instructions/step_one_prac_stock1.html",
-    "instructions/step_one_prac_stock2.html",
-    "instructions/main_trials.html",
-
-    //postquestionnaire pages. 
-    "postquestionnaire1.html"
+    "instructions/instructK_1.html",
+    "instructions/instructK_2.html",
+    "instructions/instructK_3.html",
+    "instructions/instructK_4.html",
+    "instructions/instructK_5.html",
+    "instructions/instructK_6.html",
+    "instructions/instructK_7.html",
+    "instructions/instructK_8.html",
+    "instructions/instructK_9.html",
+    "instructions/instructK_10.html",
+    "instructions/instructK_12_axiom.html",
+    "instructions/instructK_12_axiomReminder.html",
+    "instructions/instructK_12_zephyr.html",
+    "instructions/instructK_12_zephyrReminder.html",
+    "instructions/instructK_13.html",
+    "instructions/instructK_14.html",
+    "instructions/instructK_15.html",
+    "instructions/instructK_20.html",
+    "instructions/instructK_21.html",
+    "instructions/instruct_break.html",
+    "stage.html",
+    "postquestionnaire1.html",
+    "postquestionnaire2.html",
+    "postquestionnaire3.html",
+    "postquestionnaire4.html",
+    "postquestionnaire5.html",
+    "postquestionnaire6.html",
+    "postquestionnaire7.html",
+    "postquestionnaire8.html",
+    "postquestionnaire_final.html",
+    "debriefing.html"
 ];
+
 
 
 psiTurk.preloadPages(pages);
 
+
+
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+◢◤                                                                                                                                ◢◤
+◢◤                                                     * assigning stocks *                                                       ◢◤
+◢◤                                                                                                                                ◢◤
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+* decide which stock should be stock1/stock2 randomly *
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+// 50% of chance axiom - stock1; zephyr - stock2
+// 50% of chance axiom - stock2; zephyr - stock1
+// will pass the variables; function response_handler() will record which is which
+var decider = Math.random();
+if (decider <= 0.5) {
+    stock1 = "axiom";
+    stock1_img = "axiom.jpg";
+    stock2 = "zephyr";
+    stock2_img = "zephyr.jpg";
+} else {
+    stock2 = "axiom";
+    stock2_img = "axiom.jpg";
+    stock1 = "zephyr";
+    stock1_img = "zephyr.jpg";
+}
+console.log("stock1", stock1, "stock2", stock2);
+
+
+
+
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+◢◤                                                                                                                                ◢◤
+◢◤                                                  * prepare pages for instruction part*                                         ◢◤
+◢◤                                                                                                                                ◢◤
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
+
+
+
 var step_two_prac_stock1_pages = [ // add as a list as many pages as you like
-    "instructions/step_two_prac_stock1.html"
+    "instructions/instructK_1.html",
+    "instructions/instructK_2.html",
+    "instructions/instructK_3.html",
+    "instructions/instructK_4.html",
+    "instructions/instructK_5.html",
+    "instructions/instructK_6.html",
+    "instructions/instructK_7.html",
+    "instructions/instructK_8.html",
+
 ];
 var step_two_prac_stock2_pages = [ // add as a list as many pages as you like
 
-    "instructions/step_two_prac_stock2.html"
+    "instructions/instructK_9.html"
+
+];
+
+var step_one_prac_stock1_pages = [ // add as a list as many pages as you like
+    'instructions/instructK_10.html',
+    "instructions/instructK_12_" + stock1 + ".html", //load page dynamically, based on the results from stock1/stock2 role assignment
+];
+var step_one_prac_stock2_pages = [ // add as a list as many pages as you like
+
+    "instructions/instructK_12_" + stock2 + ".html",
 ];
 
 var step_one_prac_stock1_reminder_pages = [ // add as a list as many pages as you like
 
-    "instructions/step_one_prac_stock1_reminder.html"
+    "instructions/instructK_12_" + stock1+ "Reminder.html",
 ];
 var step_one_prac_stock2_reminder_pages = [ // add as a list as many pages as you like
-
-    "instructions/step_one_prac_stock2_reminder.html"
+    "instructions/instructK_12_" + stock2 + "Reminder.html",
 ];
 
-var step_one_prac_stock1_pages = [ // add as a list as many pages as you like
 
-    "instructions/step_one_prac_stock1.html"
-];
-var step_one_prac_stock2_pages = [ // add as a list as many pages as you like
-
-    "instructions/step_one_prac_stock2.html"
-];
 
 var main_trials_pages = [ // add as a list as many pages as you like
 
-    "instructions/main_trials.html"
+    "instructions/instructK_13.html",
+    "instructions/instructK_14.html",
+    "instructions/instructK_15.html",
+    "instructions/instructK_20.html",
+    "instructions/instructK_21.html",
 ];
 
 
@@ -197,33 +287,6 @@ var timer_step1, timer_step2, timer_break; // (1), (2) → timer for "too slow" 
 // purpose: check if one image appear on each side of the screen with the exact same frequencies 
 var a1_left, a1_right, a2_right, a2_left, a3_left, a3_right, a4_right, a4_left;
 
-
-
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-◢◤                                                                                                                                ◢◤
-◢◤                                                     * assigning stocks *                                                       ◢◤
-◢◤                                                                                                                                ◢◤
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
-
-/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
-* decide which stock should be stock1/stock2 randomly *
-◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
-// 50% of chance axiom - stock1; zephyr - stock2
-// 50% of chance axiom - stock2; zephyr - stock1
-// will pass the variables; function response_handler() will record which is which
-var decider = Math.random();
-if (decider <= 0.5) {
-    stock1 = "axiom";
-    stock1_img = "axiom.jpg";
-    stock2 = "zephyr";
-    stock2_img = "zephyr.jpg";
-} else {
-    stock2 = "axiom";
-    stock2_img = "axiom.jpg";
-    stock1 = "zephyr";
-    stock1_img = "zephyr.jpg";
-}
-console.log("stock1", stock1, "stock2", stock2);
 
 
 
@@ -738,7 +801,7 @@ var response_handler = function (e) {
     }; //switch (phase){} func ends here
 
 
-    console.log(response_1step, response_2step, rt);
+    console.log("step 1 response:", response_1step, "step 2 response:", response_2step, "chosen target:", chosen_target, "rt:", rt, "# correct", correct_num);
 
 };
 
@@ -1162,6 +1225,11 @@ var finish = function () {
 };
 
 
+/*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+ ◢◤                                                                                                                                           ◢◤
+ ◢◤                                     * Post-task Questionnaire (stole from the old twostep task*                                           ◢◤
+ ◢◤                                                                                                                                           ◢◤
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 /****************
 * Questionnaire 1 *
 ****************/
@@ -1174,7 +1242,7 @@ var Questionnaire1 = function () {
 
         //psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
 
-        $('input').each(function (i, val) {
+        $('textarea').each(function (i, val) {
             psiTurk.recordUnstructuredData(this.id, this.value);
         });
         $('select').each(function (i, val) {
@@ -1200,17 +1268,494 @@ var Questionnaire1 = function () {
             error: prompt_resubmit
         });
     };
+
     // Load the questionnaire snippet 
     psiTurk.showPage('postquestionnaire1.html');
-    psiTurk.recordTrialData({ 'phase': 'postquestionnaire1', 'status': 'begin' });
+    psiTurk.recordTrialData({ 'phase': 'postquestionnaire', 'status': 'begin' });
+
+    $("#next").click(function () {
+        record_responses();
+        currentview = new Questionnaire2();
+
+    });
+
+
+};
+
+/****************
+* Questionnaire 2 *
+****************/
+
+var Questionnaire2 = function () {
+
+    var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
+
+    record_responses = function () {
+
+        //psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
+
+        $('textarea').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+        $('select').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+
+    };
+
+    prompt_resubmit = function () {
+        replaceBody(error_message);
+        $("#resubmit").click(resubmit);
+    };
+
+    resubmit = function () {
+        replaceBody("<h1>Trying to resubmit...</h1>");
+        reprompt = setTimeout(prompt_resubmit, 10000);
+
+        psiTurk.saveData({
+            success: function () {
+                clearInterval(reprompt);
+
+            },
+            error: prompt_resubmit
+        });
+    };
+
+    // Load the questionnaire snippet 
+    psiTurk.showPage('postquestionnaire2.html');
+    psiTurk.recordTrialData({ 'phase': 'postquestionnaire', 'status': 'begin' });
+
+    $("#next").click(function () {
+        record_responses();
+        currentview = new Questionnaire3();
+
+    });
+
+
+};
+
+
+/****************
+* Questionnaire 3 *
+****************/
+
+var Questionnaire3 = function () {
+
+    var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
+
+    record_responses = function () {
+
+        //psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
+
+        $('textarea').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+        $('select').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+
+    };
+
+    prompt_resubmit = function () {
+        replaceBody(error_message);
+        $("#resubmit").click(resubmit);
+    };
+
+    resubmit = function () {
+        replaceBody("<h1>Trying to resubmit...</h1>");
+        reprompt = setTimeout(prompt_resubmit, 10000);
+
+        psiTurk.saveData({
+            success: function () {
+                clearInterval(reprompt);
+
+            },
+            error: prompt_resubmit
+        });
+    };
+
+    // Load the questionnaire snippet 
+    psiTurk.showPage('postquestionnaire3.html');
+    psiTurk.recordTrialData({ 'phase': 'postquestionnaire', 'status': 'begin' });
+
+    $("#next").click(function () {
+        record_responses();
+        currentview = new Questionnaire4();
+
+    });
+
+
+};
+
+
+/****************
+* Questionnaire 4 *
+****************/
+
+var Questionnaire4 = function () {
+
+    var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
+
+    record_responses = function () {
+
+        //psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
+
+        $('textarea').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+        $('select').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+
+    };
+
+    prompt_resubmit = function () {
+        replaceBody(error_message);
+        $("#resubmit").click(resubmit);
+    };
+
+    resubmit = function () {
+        replaceBody("<h1>Trying to resubmit...</h1>");
+        reprompt = setTimeout(prompt_resubmit, 10000);
+
+        psiTurk.saveData({
+            success: function () {
+                clearInterval(reprompt);
+
+            },
+            error: prompt_resubmit
+        });
+    };
+
+    // Load the questionnaire snippet 
+    psiTurk.showPage('postquestionnaire4.html');
+    psiTurk.recordTrialData({ 'phase': 'postquestionnaire', 'status': 'begin' });
+
+    $("#next").click(function () {
+        record_responses();
+        currentview = new Questionnaire5();
+
+    });
+
+
+};
+
+
+
+/****************
+* Questionnaire 5 *
+****************/
+
+var Questionnaire5 = function () {
+
+    var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
+
+    record_responses = function () {
+
+        //psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
+
+        $('textarea').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+        $('select').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+
+    };
+
+    prompt_resubmit = function () {
+        replaceBody(error_message);
+        $("#resubmit").click(resubmit);
+    };
+
+    resubmit = function () {
+        replaceBody("<h1>Trying to resubmit...</h1>");
+        reprompt = setTimeout(prompt_resubmit, 10000);
+
+        psiTurk.saveData({
+            success: function () {
+                clearInterval(reprompt);
+
+            },
+            error: prompt_resubmit
+        });
+    };
+
+    // Load the questionnaire snippet 
+    psiTurk.showPage('postquestionnaire5.html');
+    psiTurk.recordTrialData({ 'phase': 'postquestionnaire', 'status': 'begin' });
+
+    $("#next").click(function () {
+        record_responses();
+        currentview = new Questionnaire6();
+
+    });
+
+
+};
+
+
+
+/****************
+* Questionnaire 6 *
+****************/
+
+var Questionnaire6 = function () {
+
+    var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
+
+    record_responses = function () {
+
+        //psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
+
+        $('textarea').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+        $('select').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+
+    };
+
+    prompt_resubmit = function () {
+        replaceBody(error_message);
+        $("#resubmit").click(resubmit);
+    };
+
+    resubmit = function () {
+        replaceBody("<h1>Trying to resubmit...</h1>");
+        reprompt = setTimeout(prompt_resubmit, 10000);
+
+        psiTurk.saveData({
+            success: function () {
+                clearInterval(reprompt);
+
+            },
+            error: prompt_resubmit
+        });
+    };
+
+    // Load the questionnaire snippet 
+    psiTurk.showPage('postquestionnaire6.html');
+    psiTurk.recordTrialData({ 'phase': 'postquestionnaire', 'status': 'begin' });
+
+    $("#next").click(function () {
+        record_responses();
+        currentview = new Questionnaire7();
+
+    });
+
+
+};
+
+
+/****************
+* Questionnaire 7*
+****************/
+
+var Questionnaire7 = function () {
+
+    var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
+
+    record_responses = function () {
+
+        //psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
+
+        $('textarea').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+        $('select').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+
+    };
+
+    prompt_resubmit = function () {
+        replaceBody(error_message);
+        $("#resubmit").click(resubmit);
+    };
+
+    resubmit = function () {
+        replaceBody("<h1>Trying to resubmit...</h1>");
+        reprompt = setTimeout(prompt_resubmit, 10000);
+
+        psiTurk.saveData({
+            success: function () {
+                clearInterval(reprompt);
+
+            },
+            error: prompt_resubmit
+        });
+    };
+
+    // Load the questionnaire snippet 
+    psiTurk.showPage('postquestionnaire7.html');
+    psiTurk.recordTrialData({ 'phase': 'postquestionnaire', 'status': 'begin' });
+
+    $("#next").click(function () {
+        record_responses();
+        currentview = new Questionnaire8();
+
+    });
+
+
+};
+
+/****************
+* Questionnaire 8*
+****************/
+
+var Questionnaire8 = function () {
+
+    var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
+
+    record_responses = function () {
+
+        //psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
+
+        $('textarea').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+        $('select').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+
+    };
+
+    prompt_resubmit = function () {
+        replaceBody(error_message);
+        $("#resubmit").click(resubmit);
+    };
+
+    resubmit = function () {
+        replaceBody("<h1>Trying to resubmit...</h1>");
+        reprompt = setTimeout(prompt_resubmit, 10000);
+
+        psiTurk.saveData({
+            success: function () {
+                clearInterval(reprompt);
+
+            },
+            error: prompt_resubmit
+        });
+    };
+
+    // Load the questionnaire snippet 
+    psiTurk.showPage('postquestionnaire8.html');
+    psiTurk.recordTrialData({ 'phase': 'postquestionnaire', 'status': 'begin' });
+
+    $("#next").click(function () {
+        record_responses();
+        currentview = new Questionnaire_Final();
+
+    });
+
+
+};
+
+
+/****************
+* Questionnaire FINAL*
+****************/
+
+var Questionnaire_Final = function () {
+
+    var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
+
+    record_responses = function () {
+
+        //psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'submit'});
+
+        $('textarea').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+        $('select').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+
+    };
+
+    prompt_resubmit = function () {
+        replaceBody(error_message);
+        $("#resubmit").click(resubmit);
+    };
+
+    resubmit = function () {
+        replaceBody("<h1>Trying to resubmit...</h1>");
+        reprompt = setTimeout(prompt_resubmit, 10000);
+
+        psiTurk.saveData({
+            success: function () {
+                clearInterval(reprompt);
+
+            },
+            error: prompt_resubmit
+        });
+    };
+
+    // Load the questionnaire snippet 
+    psiTurk.showPage('postquestionnaire_final.html');
+    psiTurk.recordTrialData({ 'phase': 'postquestionnaire', 'status': 'begin' });
+
+    $("#next").click(function () {
+        record_responses();
+        currentview = new Debriefing();
+
+    });
+
+
+};
+
+
+
+/****************
+* Debriefing  *
+****************/
+
+var Debriefing = function () {
+
+    var error_message = "<h1>Oops!</h1><p>Something went wrong submitting your HIT. This might happen if you lose your internet connection. Press the button to resubmit.</p><button id='resubmit'>Resubmit</button>";
+
+    record_responses = function () {
+
+        psiTurk.recordTrialData({ 'phase': 'postquestionnaire', 'status': 'submit' });
+
+        $('textarea').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+        $('select').each(function (i, val) {
+            psiTurk.recordUnstructuredData(this.id, this.value);
+        });
+
+    };
+
+    prompt_resubmit = function () {
+        replaceBody(error_message);
+        $("#resubmit").click(resubmit);
+    };
+
+    resubmit = function () {
+        replaceBody("<h1>Trying to resubmit...</h1>");
+        reprompt = setTimeout(prompt_resubmit, 10000);
+
+        psiTurk.saveData({
+            success: function () {
+                clearInterval(reprompt);
+                psiTurk.computeBonus('compute_bonus', function () { finish() });
+            },
+            error: prompt_resubmit
+        });
+    };
+
+    // Load the questionnaire snippet 
+    psiTurk.showPage('debriefing.html');
+    psiTurk.recordTrialData({ 'phase': 'postquestionnaire', 'status': 'begin' });
 
     $("#next").click(function () {
         record_responses();
         psiTurk.saveData({
             success: function () {
-                psiTurk.computeBonus('compute_bonus', function () {
-                    psiTurk.completeHIT(); // when finished saving compute bonus, the quit
-                });
+                psiTurk.completeHIT();
             },
             error: prompt_resubmit
         });
@@ -1231,12 +1776,12 @@ var currentview;
 
 /*** by deault, this phase starts first ***/
 //$(window).load(function () {
-//    psiTurk.doInstructions(
-//        step_two_prac_stock1_pages, // a list of pages you want to display in sequence
+    psiTurk.doInstructions(
+        step_two_prac_stock1_pages, // a list of pages you want to display in sequence
 
-//        function () { currentview = new step_two_practice_stock1(); } // what you want to do when you are done with instructions
-//    );
-//});
+        function () { currentview = new step_two_practice_stock1(); } // what you want to do when you are done with instructions
+    );
+});
 
 /*** If you want to skip the other phases and test how the step_two_practice_stock2 phase works, comment out the lines above and uncomment the lines below
 ***/
@@ -1270,24 +1815,21 @@ var currentview;
 //});
 
 
-
-/*** If you want to skip the other phases and test how the Questionnaire1 works, comment out the lines above and uncomment the lines below
-***/
+///*** If you want to skip the other phases and test how the main_trials phase works, comment out the lines above and uncomment the lines below
+//***/
 //$(window).load(function () {
 //    psiTurk.doInstructions(
-//         main_trials_pages,// a list of pages you want to display in sequence
-//        function () { currentview = new Questionnaire1(); } // what you want to do when you are done with instructions
+//        main_trials_pages, // a list of pages you want to display in sequence
+//        function () { currentview = new main_trials(); } // what you want to do when you are done with instructions
 //    );
 //});
 
 
+///*** If you want to skip the other phases and test how the Questionnaire1 works, comment out the lines above and uncomment the lines below
+//***/
+//$(window).load(function () {
+//    pcurrentview = new Questionnaire1();  // what you want to do when you are done with instructions
+
+//});
 
 
-/*** If you want to skip the other phases and test how the main_trials phase works, comment out the lines above and uncomment the lines below
-***/
-$(window).load(function () {
-    psiTurk.doInstructions(
-        main_trials_pages, // a list of pages you want to display in sequence
-        function () { currentview = new main_trials(); } // what you want to do when you are done with instructions
-    );
-});

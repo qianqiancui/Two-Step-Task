@@ -1,0 +1,38 @@
+<script>
+
+setTimeout(function(){ $('div#nextButton').css('visibility','visible'); }, INST_WAIT_TIME);
+
+</script>
+
+
+<div class="instruct" id="main">
+
+<!-- <h1>fractals -> fractals </h1> -->
+
+ <p>When they played the game, the four previous MTurk workers were assigned to the role of ADVISOR. As Advisors, they were given details about two different STOCKS and had to choose ONE to invest in. Each advisor chose only one stock, and they invested in that stock throughout the entire game. They then earned money based on how well each stock performed. You can see images of the two stocks below.</p>
+    <p></p>
+  
+  <img src="static/images/axiom.jpg" alt="Stock1" style="width:200px;height:200px;" hspace="15">
+    
+    <img src="static/images/zephyr.jpg" alt="Stock2" style="width:200px;height:200px;" hspace="15">
+        
+    <p></p>
+    
+<div id="nextButton" style="visibility: hidden;">
+When you're ready to continue, click <strong>Next</strong>.	
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            	<!-- no previous button on first screen -->
+            </div>
+            <div class="col-xs-8">
+            </div>
+            <div class="col-xs-2">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

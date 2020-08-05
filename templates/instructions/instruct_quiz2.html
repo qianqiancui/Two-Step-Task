@@ -1,0 +1,89 @@
+<script>
+    
+        
+    </script>
+
+<div class="instruct" id="main">
+    
+    <p><strong>Here is a short quiz to test if you understood the instructions correctly.</p>
+        <p>If you missed any important things, we will bring you back through the instructions again.</strong></p>
+    
+    
+    <form id="postquiz" action="done" method="post">
+        <table>
+            
+            <tr class="question">
+                <td class="questiontext">
+                    <strong>1. If a pair of people usually goes to coffee shops, will they ever be found at a library?</strong>
+                </td>
+                <td class="answer">
+                    <select id="BetweenLocations" name="BetweenLocations">
+                        <option value="3">Yes. People can be found anywhere, anytime.</option>
+                        <option value="2">No. Some pairs of people will be at coffee shops, and some pairs will be at libraries.</option>
+                        <option value="1" SELECTED>I don't know</option>
+                    </select>
+                </td>
+            </tr>
+            
+            <tr class="question">
+                <td class="questiontext">
+                   2. If a pair of coffee drinkers usually goes to Blue's Coffee Shop, will they ever be found at Green's Coffee Shop?
+                </td>
+                <td class="answer">
+                    <select id="WithinLocations" name="WithinLocations">
+                        <option value="3">Yes. Coffee drinkers will occasionally visit their less preferred coffee shop.</option>
+                        <option value="2">No, pairs will never visit the other coffee shop.</option>
+                        <option value="1" SELECTED>I don't know</option>
+                    </select>
+                </td>
+            </tr>
+            
+            
+            <tr class="question">
+                <td class="questiontext">
+                    <strong>3. Will the chance of finding a pair of coffee drinkers at their preferred coffee shop change over time?</strong>
+                </td>
+                <td class="answer">
+                    <select id="StableProb" name="StableProb">
+                        <option value="3">Yes, the chance is constantly changing.</option>
+                        <option value="2">No, there will always be a 70% chance of finding them at their preferred coffee shop.</option>
+                        <option value="1" SELECTED>I don't know</option>
+                    </select>
+                </td>
+            </tr>
+            
+            <tr class="question">
+                <td class="questiontext">
+                    4. How much bonus money you win will depend on...
+                </td>
+                <td class="answer">
+                    <select id="Bonus" name="Bonus">
+                        <option value="4">Your second stage choices about players.</option>
+                        <option value="3">Your first stage choices about locations leading to different Player A pairs.</option>
+                        <option value="2" SELECTED>Both of the above.</option>
+                        <option value="1" SELECTED>I don't know</option>
+                    </select>
+                </td>
+            </tr>
+            
+            
+            
+            
+<div id="nextButton" style="visibility: hidden;">
+When you're ready to continue, press <strong>Next</strong>.	
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            	<!-- no previous button on first screen -->
+            </div>
+            <div class="col-xs-8">
+            </div>
+            <div class="col-xs-2">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,59 @@
+<script type="text/javascript">
+  keydownfun = function() {}; // Should unbind keys.
+</script>
+
+<div id="container-questionnaire">
+    <h1>Ratings, Part 1</h1>
+
+    <hr>
+
+    
+    <div class="instructions well">
+
+        <form id="postquiz" action="debrief" method="post">
+
+
+            <!-- beginning of a question -->
+            <div class="row question">
+                <div class="col-md-8">
+                How much do you LIKE or DISLIKE the Advisor pictured below, from DO NOT LIKE THEM AT ALL to LIKE THEM A LOT?
+                </div>
+                <p></p>
+                <img src="static/images/1.jpg" alt="Investor1_Fractal37" style="width:150px;height:150px;">
+                <p></p>
+                <div class="col-md-4">
+                    <select id="Advisor1_liking" name="Advisor1_liking">
+                        <option value="-99" selected="">(SELECT ONE)</option>
+                        <option value="1">1 - Do not like them at all</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7 - Like them a lot</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- end of a question -->
+
+<p></p>
+            <p></p>
+            <p></p>
+
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-7">
+            </div>
+            <div class="col-xs-3">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                    Continue <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</div>

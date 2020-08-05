@@ -1,0 +1,49 @@
+<script>
+
+setTimeout(function(){ $('div#nextButton').css('visibility','visible'); }, INST_WAIT_TIME);
+
+</script>
+
+
+<div class="instruct" id="main">
+
+<!-- <h1>fractals -> fractals </h1> -->
+
+<p>Now that you know how reveal a stock's performance, you can learn how to choose Advisors and what stocks they invested in. On each round, you will be choosing between two different Advisors:</p>
+    
+    <img src="static/images/1.jpg" alt="Investor1" style="width:150px;height:150px;">
+    <img src="static/images/2.jpg" alt="Investor2" style="width:150px;height:150px;">
+
+    <p></p>
+    
+    <p><center>OR</center></p>
+  
+    <p></p>
+    
+    <img src="static/images/3.jpg" alt="Investor3" style="width:150px;height:150px;">
+    <img src="static/images/4.jpg" alt="Investor4" style="width:150px;height:150px;">
+	
+    <p>Sometimes, you'll be choosing between the two Advisors on the top, and sometimes you'll be choosing between the two Advisors on the bottom. You can choose the left Advisor by pressing the 'F' key and the right Advisor by pressing the 'J' key.</p>
+    <p>Please note that the Advisors might switch sides of screen. So pay close attention to the Advisor that you are choosing.</p>
+    <p>For each pair, one Advisor will have invested in one stock and the other Advisor will have invested in the other stock. Try to choose the Advisor in each pair that you think invested in the stock that is performing better during that round.</p>
+  
+    <p></p>
+   
+<div id="nextButton" style="visibility: hidden;">
+When you're ready to continue, click <strong>Next</strong>.	
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+            	<!-- no previous button on first screen -->
+            </div>
+            <div class="col-xs-8">
+            </div>
+            <div class="col-xs-2">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
