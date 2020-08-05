@@ -34,24 +34,6 @@ var mycounterbalance = counterbalance;  // they tell you which condition you hav
 
 
 // load all the necessary pages before the experiment
-//var pages = [
-
-//    "stage.html", // the page that displays the experiment
-
-//    //instruction pages for different phases
-//    "instructions/step_two_prac_stock1.html",
-//    "instructions/step_two_prac_stock2.html",
-//    "instructions/step_one_prac_stock1_reminder.html",
-//    "instructions/step_one_prac_stock2_reminder.html",
-//    "instructions/step_one_prac_stock1.html",
-//    "instructions/step_one_prac_stock2.html",
-//    "instructions/main_trials.html",
-
-//    //postquestionnaire pages. 
-//    "postquestionnaire1.html"
-//];
-
-
 var pages = [
     "instructions/instructK_1.html",
     "instructions/instructK_2.html",
@@ -141,32 +123,29 @@ var step_two_prac_stock1_pages = [ // add as a list as many pages as you like
     "instructions/instructK_8.html",
 
 ];
-var step_two_prac_stock2_pages = [ // add as a list as many pages as you like
+var step_two_prac_stock2_pages = [ 
 
     "instructions/instructK_9.html"
 
 ];
 
-var step_one_prac_stock1_pages = [ // add as a list as many pages as you like
+var step_one_prac_stock1_pages = [ 
     'instructions/instructK_10.html',
     "instructions/instructK_12_" + stock1 + ".html", //load page dynamically, based on the results from stock1/stock2 role assignment
 ];
-var step_one_prac_stock2_pages = [ // add as a list as many pages as you like
+var step_one_prac_stock2_pages = [ 
 
     "instructions/instructK_12_" + stock2 + ".html",
 ];
 
-var step_one_prac_stock1_reminder_pages = [ // add as a list as many pages as you like
-
+var step_one_prac_stock1_reminder_pages = [ 
     "instructions/instructK_12_" + stock1+ "Reminder.html",
 ];
-var step_one_prac_stock2_reminder_pages = [ // add as a list as many pages as you like
+var step_one_prac_stock2_reminder_pages = [ 
     "instructions/instructK_12_" + stock2 + "Reminder.html",
 ];
 
-
-
-var main_trials_pages = [ // add as a list as many pages as you like
+var main_trials_pages = [ 
 
     "instructions/instructK_13.html",
     "instructions/instructK_14.html",
