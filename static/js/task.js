@@ -1775,7 +1775,7 @@ var currentview;
 ◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤*/
 
 /*** by deault, this phase starts first ***/
-//$(window).load(function () {
+$(window).load(function () {
     psiTurk.doInstructions(
         step_two_prac_stock1_pages, // a list of pages you want to display in sequence
 
