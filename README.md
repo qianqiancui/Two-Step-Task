@@ -1,17 +1,12 @@
-# Progress
-Step Two Practice &nbsp; &nbsp; Step One Practice B&nbsp; &nbsp; Main Trial\
-|◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤------| 70%
 
 
-### Features:
-* example of animation effect after options being selected
-![two step practice](https://raw.githubusercontent.com/qianqiancui/Two-Step-Task/master/new_animation.gif)
-* example of break session & "too slow" warning
-![break & too slow](https://raw.githubusercontent.com/qianqiancui/Two-Step-Task/master/break&too_slow.gif)
-
-The code looks pretty missy, but it works... Will make them better to read & modify later.
-### Big Updates:
-
+### Updates:
 * Fixed the bug in Step One Practice. Right now Step One Practice can be completed for infinite times if the accuracy is below 13/16 (update on Jul 25, 2020)
 * Now the images are able to "jump" to the top in an elegant way after being selected (update on Jul 26, 2020)
-* Finished coding the main trial part partially (basic task structure, warning, recording and break sessions) update on Jul 27, 2020)
+* Finished coding the main trial part partially (basic task structure, warning, recording and break sessions (update on Jul 27, 2020)
+* Fixed the bugs in main trials. Too slow warning in both steps can be displayed soothly and next trial can be shown after pressing space bar (update on Jul 31, 2020)
+* Corrected the pairs displayed for each trial (update on Aug 4, 2020)
+* Fixed a data recording issue (update on Aug 10, 2020)
+
+### A guide
+![task structure ](https://github.com/qianqiancui/Two-Step-Task/blob/master/structure.jpg)

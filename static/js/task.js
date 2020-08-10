@@ -68,12 +68,7 @@ var pages = [
     "debriefing.html"
 ];
 
-
-
 psiTurk.preloadPages(pages);
-
-
-
 
 /*◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
 ◢◤                                                                                                                                ◢◤
@@ -460,10 +455,6 @@ var load_trial = function () {
         // that's how i get the trial information one by one
         current_trial = trials.shift();
 
-        //for debug purpose; 
-        //console.log(trials, 'trials', trial_id);
-        console.log(current_trial, 'trial_id', trial_id);
-
             // reminder: a current_trial element goes like this:
             // ["axiom.jpg", "1.jpg", "axiom", "agent1", "zephyr.jpg", "2.jpg", "zephyr", "agent2"]
         //find images for left / right agent
@@ -522,9 +513,12 @@ var load_trial = function () {
 
         }
 
-    /*◢◤◢◤◢◤◢◤ record trial id ◢◤◢◤◢◤◢◤*/
-        console.log("trial id", trial_id);
-        trial_id++;
+
+        trial_id++;//count trials
+
+        //for debug purpose; 
+        //console.log(trials, 'trials', trial_id);
+        console.log(current_trial, 'trial_id', trial_id);
 
     }, 500);
 };
@@ -636,21 +630,7 @@ var response_handler = function (e) {
 
                 var rt = new Date().getTime() - stim_on; // calculate response time
                 //psiturk record all the data
-                psiTurk.recordTrialData({
-                    'phase': phase,
-                    'current_step': current_step,
-                    'trial': trial_id,
-                    'stock_name': stock_name,
-                    'stock_value': stock_value,
-                    'left_target': left_target,
-                    'right_target': right_target,
-                    'chosen_target': chosen_target,
-                    'chosen_stock': chosen_stock,
-                    'rt': rt,
-                    'stock1_name': stock1,
-                    'stock2_name': stock2,
-                    'correct_num': correct_num
-                });
+
 
 
 
@@ -723,6 +703,24 @@ var response_handler = function (e) {
                             next(); // go to next trial 
                         }, 500);
 
+
+                        psiTurk.recordTrialData({ // if the subject chooses an agent but fails to press the space bar before response deadline
+                            // let psiturk record step one choice & other requred information
+                            'phase': phase,
+                            'current_step': current_step,
+                            'trial': trial_id,
+                            'stock_name': stock_name,
+                            'stock_value': stock_value,
+                            'left_target': left_target,
+                            'right_target': right_target,
+                            'chosen_target': chosen_target,
+                            'chosen_stock': 'NA',
+                            'rt': rt,
+                            'stock1_name': stock1,
+                            'stock2_name': stock2,
+                            'correct_num': correct_num
+                        });
+
                     }, response_deadline); // too slow timer for step 2 will appear after deadline
                 };
 
@@ -751,7 +749,7 @@ var response_handler = function (e) {
 
                     var rt = new Date().getTime() - stim_on; // calculate response time
                     //psiturk record all the data
-                    psiTurk.recordTrialData({
+                    psiTurk.recordTrialData({ // record if subject selects an agent and views the stock value
                         'phase': phase,
                         'current_step': current_step,
                         'trial': trial_id,
@@ -1050,6 +1048,30 @@ var next = function () {
 
                     warning = true;
                 /*◢◤◢◤◢◤◢◤ go to next trial after "too slow" warning ◢◤◢◤◢◤◢◤*/
+
+                    if (warning) { // if warning, let psiturk record data
+
+                        if (current_step === 'one') { // if the subject does not choose any agent & runs ou of time,
+                            // psiturk will mark both 'chosen_target' & 'chosen_stock' as 'NA'
+                            psiTurk.recordTrialData({
+                                'phase': phase,
+                                'current_step': current_step,
+                                'trial': trial_id,
+                                'stock_name': stock_name,
+                                'stock_value': stock_value,
+                                'left_target': left_target,
+                                'right_target': right_target,
+                                'chosen_target': 'NA',
+                                'chosen_stock': 'NA',
+                                'rt': 'time-out',
+                                'stock1_name': stock1,
+                                'stock2_name': stock2,
+                                'correct_num': 'null'
+                            });
+                        } 
+    
+                    };
+
                     listening = false;
                     setTimeout(function () {
                         remove_stim();
@@ -1074,7 +1096,7 @@ var next = function () {
 var step_two_practice_stock1 = function () {
 
     phase = "step_two_practice_stock1";
-    trial_id = 1;
+    trial_id = 0;
 
 
 
@@ -1096,7 +1118,7 @@ var step_two_practice_stock1 = function () {
 var step_two_practice_stock2 = function () {
 
     phase = "step_two_practice_stock2";
-    trial_id = 1;
+    trial_id = 0;
 
 
     trials = stock2_list;
@@ -1120,7 +1142,7 @@ var step_one_practice_stock1 = function () {
 
     correct_num = 0; // reset accuracy calculation
    
-    trial_id = 1;  //reset trial id in this phase
+    trial_id = 0;  //reset trial id in this phase
 
     //debuging, check if images appear on the both of the screen on the same frequencies;
     a1_left = a1_right = a2_right = a2_left = a3_left = a3_right = a4_right = a4_left = 0; 
@@ -1144,7 +1166,7 @@ var step_one_practice_stock2 = function () {
 
     correct_num = 0;// reset accuracy calculation
 
-    trial_id = 1; //reset trial id in this phase
+    trial_id = 0; //reset trial id in this phase
 
     //debuging, check if images appear on the both of the screen on the same frequencies;
     a1_left = a1_right = a2_right = a2_left = a3_left = a3_right = a4_right = a4_left = 0;
@@ -1168,7 +1190,7 @@ var step_one_practice_stock2 = function () {
 var main_trials = function () {
     phase = "main_trials";
 
-    trial_id = 1; //reset trial id in this phase
+    trial_id = 0; //reset trial id in this phase
     // per the request, in the first 52 trials, each agent should appear 13 times ob both sides of the screen
     var pre_1st_break_trials = balanced_trials(essential_trials, main_tirals_before_1st_break);
 
@@ -1734,7 +1756,9 @@ var Debriefing = function () {
         record_responses();
         psiTurk.saveData({
             success: function () {
-                psiTurk.completeHIT();
+                psiTurk.computeBonus('compute_bonus', function () { 
+                    psiTurk.completeHIT();
+                }); 
             },
             error: prompt_resubmit
         });
