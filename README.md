@@ -8,5 +8,5 @@
 * Corrected the pairs displayed for each trial (update on Aug 4, 2020)
 * Fixed a data recording issue (update on Aug 10, 2020)
 
-### A guide
+### A guide:
 ![task structure ](https://github.com/qianqiancui/Two-Step-Task/blob/master/guide.jpg)
