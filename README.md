@@ -9,4 +9,4 @@
 * Fixed a data recording issue (update on Aug 10, 2020)
 
 ### A guide
-![task structure ](https://github.com/qianqiancui/Two-Step-Task/blob/master/structure.jpg)
+![task structure ](https://github.com/qianqiancui/Two-Step-Task/blob/master/guide.jpg)
