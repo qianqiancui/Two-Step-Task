@@ -631,7 +631,23 @@ var response_handler = function (e) {
                 var rt = new Date().getTime() - stim_on; // calculate response time
                 //psiturk record all the data
 
-
+                var rt = new Date().getTime() - stim_on; // calculate response time
+                //psiturk record all the data
+                psiTurk.recordTrialData({
+                    'phase': phase,
+                    'current_step': current_step,
+                    'trial': trial_id,
+                    'stock_name': stock_name,
+                    'stock_value': stock_value,
+                    'left_target': 'null',
+                    'right_target': 'null',
+                    'chosen_target': 'null',
+                    'chosen_stock': chosen_stock,
+                    'rt': rt,
+                    'stock1_name': stock1,
+                    'stock2_name': stock2,
+                    'correct_num': 'null'
+                });
 
 
                 setTimeout(function () {
@@ -710,7 +726,7 @@ var response_handler = function (e) {
                             'current_step': current_step,
                             'trial': trial_id,
                             'stock_name': stock_name,
-                            'stock_value': stock_value,
+                            'stock_value': 'null',
                             'left_target': left_target,
                             'right_target': right_target,
                             'chosen_target': chosen_target,
@@ -754,7 +770,7 @@ var response_handler = function (e) {
                         'current_step': current_step,
                         'trial': trial_id,
                         'stock_name': stock_name,
-                        'stock_value': stock_value,
+                        'stock_value': 'NA',
                         'left_target': left_target,
                         'right_target': right_target,
                         'chosen_target': chosen_target,
