@@ -9,8 +9,4 @@
 * Fixed a data recording issue (update on Aug 10, 2020)
 
 ### A guide:
-<<<<<<< HEAD
 ![task structure ](https://github.com/qianqiancui/Two-Step-Task/blob/master/guide.jpg)
-=======
-![task structure ](https://github.com/qianqiancui/Two-Step-Task/blob/master/guide.jpg)
->>>>>>> 11ab9d018027f5d1c3cd5478486b11ad6ca05e86
